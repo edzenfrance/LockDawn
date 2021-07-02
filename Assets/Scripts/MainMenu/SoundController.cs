@@ -32,7 +32,7 @@ public class SoundController : MonoBehaviour
     void Start()
     {
         ObjectMusic = GameObject.FindWithTag("MenuBackgroundMusic");
-        //AmbientAudio = ObjectMusic.GetComponent<AudioSource>();
+        AmbientAudio = ObjectMusic.GetComponent<AudioSource>();
         MusicVolume = PlayerPrefs.GetFloat("mVolume");
         musicVolumeSlider.value = MusicVolume;
         AmbientAudio.volume = MusicVolume;
