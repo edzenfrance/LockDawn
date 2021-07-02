@@ -6,26 +6,38 @@ using UnityEngine.SceneManagement;
 
 public class SoundController : MonoBehaviour
 {
+    [SerializeField]
     public Slider musicVolumeSlider;
     public GameObject ObjectMusic;
-
     public AudioSource AmbientAudio;
     private float MusicVolume = 1f;
-
+    public int IsFirstRun;
     bool restartMusic = false;
 
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        IsFirstRun = PlayerPrefs.GetInt("IsFirstRun");
+        if (IsFirstRun == 0)
+        {
+            //Do stuff on the first time
+            PlayerPrefs.SetInt("IsFirstRun", 1);
+            PlayerPrefs.SetFloat("mVolume", 1);
+        }
+        else
+        {
+            //Do stuff other times
+            //Debug.Log("welcome again!");
+        }
     }
 
     void Start()
     {
-        Debug.Log("MUSIC VOLUME: " + MusicVolume);
+        //Debug.Log("MUSIC VOLUME: " + MusicVolume);
         ObjectMusic = GameObject.FindWithTag("MenuBackgroundMusic");
-        AmbientAudio = ObjectMusic.GetComponent<AudioSource>();
+        //AmbientAudio = ObjectMusic.GetComponent<AudioSource>();
         MusicVolume = PlayerPrefs.GetFloat("mVolume");
-        Debug.Log("VOLUME CHECK START: " + MusicVolume);
+        //Debug.Log("VOLUME CHECK START: " + MusicVolume);
         musicVolumeSlider.value = MusicVolume;
         AmbientAudio.volume = MusicVolume;
     }
