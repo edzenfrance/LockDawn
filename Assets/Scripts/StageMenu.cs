@@ -25,22 +25,22 @@ public class StageMenu : MonoBehaviour
 
     public void GotoStage2()
     {
-        SceneManager.LoadScene("Stage2");
+        //SceneManager.LoadScene("Stage2");
     }
 
     public void GotoStage3()
     {
-        SceneManager.LoadScene("Stage3");
+        //SceneManager.LoadScene("Stage3");
     }
 
     public void GotoStage4()
     {
-        SceneManager.LoadScene("Stage4");
+        //SceneManager.LoadScene("Stage4");
     }
 
     public void GotoStage5()
     {
-        SceneManager.LoadScene("Stage5");
+        //SceneManager.LoadScene("Stage5");
     }
 
 }
