@@ -20,24 +20,20 @@ public class SoundController : MonoBehaviour
         IsFirstRun = PlayerPrefs.GetInt("IsFirstRun");
         if (IsFirstRun == 0)
         {
-            //Do stuff on the first time
             PlayerPrefs.SetInt("IsFirstRun", 1);
             PlayerPrefs.SetFloat("mVolume", 1);
         }
         else
         {
-            //Do stuff other times
             //Debug.Log("welcome again!");
         }
     }
 
     void Start()
     {
-        //Debug.Log("MUSIC VOLUME: " + MusicVolume);
         ObjectMusic = GameObject.FindWithTag("MenuBackgroundMusic");
         //AmbientAudio = ObjectMusic.GetComponent<AudioSource>();
         MusicVolume = PlayerPrefs.GetFloat("mVolume");
-        //Debug.Log("VOLUME CHECK START: " + MusicVolume);
         musicVolumeSlider.value = MusicVolume;
         AmbientAudio.volume = MusicVolume;
     }
