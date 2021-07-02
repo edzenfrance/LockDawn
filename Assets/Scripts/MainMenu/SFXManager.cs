@@ -5,7 +5,9 @@ using UnityEngine.Events;
 
 public class SFXManager : MonoBehaviour
 {
+
     public static SFXManager sfxInstance;
+    [Header("Music and Sounds")]
     public AudioSource Audio;
     public AudioClip Click;
 
