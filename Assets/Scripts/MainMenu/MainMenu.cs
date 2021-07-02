@@ -32,6 +32,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void GotoCollectorsHall()
+    {
+        SceneManager.LoadScene("CollectorsHall");
+    }
+
     public void GotoCredits()
     {
         SceneManager.LoadScene("Credits");

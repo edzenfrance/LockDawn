@@ -4,5 +4,33 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 836a04885931ef94d9d535681c189130
+  - enabled: 1
+    path: Assets/Scenes/Achievements.unity
+    guid: af889ad5cc5d5ca48baf138f44979f47
+  - enabled: 1
+    path: Assets/Scenes/CollectorsHall.unity
+    guid: 9ac4033b65e03204a851ccfb107a9c1c
+  - enabled: 1
+    path: Assets/Scenes/StageSelect.unity
+    guid: 9ff2d93e5cc58594ab85e42ef27e2f23
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage1.unity
+    guid: c1f8f1069e9ee7d4a872041b005ed1c3
+  - enabled: 1
+    path: Assets/Scenes/Stage2.unity
+    guid: 38f74f0fb819fbf448475979970a24eb
+  - enabled: 1
+    path: Assets/Scenes/Stage3.unity
+    guid: 5f5206136014447479a81a7ef659c587
+  - enabled: 1
+    path: Assets/Scenes/Stage4.unity
+    guid: dcf54ffdd16226f4d9822cd805f5c68b
+  - enabled: 1
+    path: Assets/Scenes/Stage5.unity
+    guid: ae12a859e915d814dbd701744292c535
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
