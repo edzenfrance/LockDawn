@@ -12,7 +12,6 @@ public class HealthBarTester : MonoBehaviour
 
     void Update()
     {
-        /*
         if (Input.GetKeyDown(KeyCode.E))
         {
             healthBar.changeHP(1);
@@ -21,6 +20,5 @@ public class HealthBarTester : MonoBehaviour
         {
             healthBar.changeHP(-1);
         }
-        */
     }
 }
