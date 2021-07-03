@@ -8,9 +8,17 @@ public class SoundController : MonoBehaviour
 {
     [SerializeField]
     public Slider musicVolumeSlider;
-    public GameObject ObjectMusic;
-    public AudioSource AmbientAudio;
+    public Slider soundVolumeSlider;
+
+    public AudioSource MusicAudio;
+    public AudioSource SoundAudio;
+
     private float MusicVolume = 1f;
+    private float SoundVolume = 1f;
+
+    public GameObject ObjectMusic;
+    public GameObject ObjectSound;
+
     public int IsFirstRun;
     bool restartMusic = false;
 
@@ -22,9 +30,12 @@ public class SoundController : MonoBehaviour
         {
             PlayerPrefs.SetInt("IsFirstRun", 1);
             PlayerPrefs.SetFloat("mVolume", 1);
+            PlayerPrefs.SetFloat("sVolume", 1);
         }
         else
         {
+            PlayerPrefs.SetFloat("mVolume", 1);
+            PlayerPrefs.SetFloat("sVolume", 1);
             //Debug.Log("welcome again!");
         }
     }
@@ -32,25 +43,33 @@ public class SoundController : MonoBehaviour
     void Start()
     {
         ObjectMusic = GameObject.FindWithTag("MenuBackgroundMusic");
-        AmbientAudio = ObjectMusic.GetComponent<AudioSource>();
+        MusicAudio = ObjectMusic.GetComponent<AudioSource>();
         MusicVolume = PlayerPrefs.GetFloat("mVolume");
         musicVolumeSlider.value = MusicVolume;
-        AmbientAudio.volume = MusicVolume;
+        MusicAudio.volume = MusicVolume;
+
+        ObjectSound = GameObject.FindWithTag("MenuSFXManager");
+        SoundAudio = ObjectSound.GetComponent<AudioSource>();
+        SoundVolume = PlayerPrefs.GetFloat("sVolume");
+        soundVolumeSlider.value = MusicVolume;
+        SoundAudio.volume = SoundVolume;
     }
 
     void Update()
     {
         PlayerPrefs.SetFloat("mVolume", MusicVolume);
-        AmbientAudio.volume = MusicVolume;
+        PlayerPrefs.SetFloat("sVolume", SoundVolume);
+        MusicAudio.volume = MusicVolume;
+        SoundAudio.volume = SoundVolume;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log("OnSceneLoaded: " + scene.buildIndex + " Audio Volume: " + AmbientAudio.volume);
+        //Debug.Log("OnSceneLoaded: " + scene.buildIndex + " Audio Volume: " + MusicAudio.volume);
         if (restartMusic)
         {
             Debug.Log("RESTART MUSIC");
-            AmbientAudio.Play();
+            MusicAudio.Play();
             restartMusic = false;
         }
         if ((scene.buildIndex != 0) && (scene.buildIndex != 1))
@@ -60,13 +79,19 @@ public class SoundController : MonoBehaviour
             // Fix for click artifact when stoping the music when not using streaming
             //Audio.volume = 0.0f;
             //if (Audio.timeSamples > Audio.clip.samples - 300) Audio.Stop();
-            AmbientAudio.Stop();
+            MusicAudio.Stop();
         }
     }
 
-    public void UpdateVolume(float volume)
+    public void UpdateSoundVolume(float volume)
+    {
+        SoundVolume = volume;
+        Debug.Log("UPDATED VOLUME: " + SoundAudio.volume);
+    }
+
+    public void UpdateMusicVolume(float volume)
     {
         MusicVolume = volume;
-        Debug.Log("UPDATED VOLUME: " + AmbientAudio.volume);
+        Debug.Log("UPDATED VOLUME: " + MusicAudio.volume);
     }
 }
