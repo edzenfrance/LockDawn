@@ -49,6 +49,6 @@ public class MainMenu : MonoBehaviour
 
     public void MenuSoundClick()
     {
-        SFXManager.sfxInstance.Audio.PlayOneShot(SFXManager.sfxInstance.Click);
+        SFXManager.sfxInstance.Audio.PlayOneShot(SFXManager.sfxInstance.UIClick);
     }
 }
