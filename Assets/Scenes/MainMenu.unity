@@ -5552,7 +5552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Audio: {fileID: 1324783413}
-  UIClick: {fileID: 0}
+  UIClick: {fileID: 8300000, guid: f56c02d508543274eae91ad8b65c7576, type: 3}
 --- !u!4 &1324783415
 Transform:
   m_ObjectHideFlags: 0
