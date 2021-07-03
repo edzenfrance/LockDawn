@@ -46,20 +46,20 @@ public class PauseScreen : MonoBehaviour
         GamePaused = true;
     }
 
-    public void OnResumeGame()
+    public void OnResume()
     {
         GamePaused = false;
         background.LeanAlpha(0, 0.5f);
-        box.LeanMoveLocalY(-Screen.height, 0.5f).setEaseInExpo().setOnComplete(OnComplete);
+        box.LeanMoveLocalY(-Screen.height, 0.5f).setEaseInExpo().setOnComplete(OnResumeComplete);
     }
 
-    void OnComplete()
+    void OnResumeComplete()
     {
         PauseButton.SetActive(true);
         gameObject.SetActive(false);
     }
 
-    public void OnStageSelect()
+    public void OnStage()
     {
         GamePaused = false;
         Debug.Log("Previous Scene: Stage 1");
@@ -67,13 +67,14 @@ public class PauseScreen : MonoBehaviour
         SceneManager.LoadScene("StageSelect");
     }
 
-    public void OnRestartStage()
+    public void OnRestart()
     {
         ButtonsDialog.SetActive(false);
+        Debug.Log("RESTART SCENE: " + SceneManager.GetActiveScene().buildIndex);
         RestartDialog.SetActive(true);
     }
 
-    public void RestartYes()
+    public void OnRestartYes()
     {
 
         Debug.Log("RESTART SCENE: " + SceneManager.GetActiveScene().buildIndex);
@@ -81,14 +82,15 @@ public class PauseScreen : MonoBehaviour
         GamePaused = false;
     }
 
-    public void RestartNo()
+    public void OnRestartNo()
     {
         ButtonsDialog.SetActive(true);
         RestartDialog.SetActive(false);
     }
 
-    public void OnSettingsSelect()
+    public void OnSettings()
     {
+        Debug.Log("OnSettingSelect");
         ButtonsDialog.SetActive(false);
         SettingDialog.SetActive(true);
     }
@@ -99,19 +101,19 @@ public class PauseScreen : MonoBehaviour
         SettingDialog.SetActive(false);
     }
 
-    public void ExitAsk()
+    public void OnExit()
     {
         PauseButton.SetActive(false);
         ButtonsDialog.SetActive(false);
         ExitDialog.SetActive(true);
     }
 
-    public void ExitYes()
+    public void OnExitYes()
     {
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void ExitNo()
+    public void OnExitNo()
     {
         PauseButton.SetActive(true);
         ButtonsDialog.SetActive(true);
