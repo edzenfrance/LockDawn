@@ -34,8 +34,6 @@ public class SoundController : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetFloat("mVolume", 1);
-            PlayerPrefs.SetFloat("sVolume", 1);
             //Debug.Log("welcome again!");
         }
     }
