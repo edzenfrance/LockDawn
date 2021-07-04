@@ -22,12 +22,12 @@ public class PauseScreen : MonoBehaviour
         if (GamePaused)
         {
             Time.timeScale = 0;
-            // Debug.Log("Game Paused: " + GamePaused);
+            Debug.Log("PauseScreen - GAME PAUSED: " + GamePaused);
         }
         else
         {
             Time.timeScale = 1;
-            // Debug.Log("Game Paused: " + GamePaused);
+            Debug.Log("PauseScreen - GAME PAUSED: " + GamePaused);
         }
     }
 
@@ -90,7 +90,6 @@ public class PauseScreen : MonoBehaviour
 
     public void OnSettings()
     {
-        Debug.Log("OnSettingSelect");
         ButtonsDialog.SetActive(false);
         SettingDialog.SetActive(true);
     }
@@ -110,6 +109,7 @@ public class PauseScreen : MonoBehaviour
 
     public void OnExitYes()
     {
+        GamePaused = false;
         SceneManager.LoadScene("MainMenu");
     }
 
