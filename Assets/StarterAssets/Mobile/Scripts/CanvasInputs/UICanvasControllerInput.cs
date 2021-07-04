@@ -7,6 +7,11 @@ namespace StarterAssets
 
         [Header("Output")]
         public StarterAssetsInputs starterAssetsInputs;
+        void Start()
+        {
+            // Automatically add Player GameObject
+            starterAssetsInputs = GameObject.FindGameObjectWithTag("Player").GetComponent<StarterAssetsInputs>();
+        }
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)
         {
