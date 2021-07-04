@@ -22,7 +22,7 @@ public class AnimationController : MonoBehaviour
             buttonCheck.SetActive(false);
             buttonUncheck.SetActive(true);
         }
-        if (LightAnimEnabled == 1)
+        else
         {
             Debug.Log("AnimationController - PLAYERPREFS LIGHT: DISABLED [" + LightAnimEnabled + "]");
             lightAnimation.enabled = false;
@@ -30,10 +30,5 @@ public class AnimationController : MonoBehaviour
             buttonCheck.SetActive(true);
             buttonUncheck.SetActive(false);
         }
-    }
-
-    void Update()
-    {
-        
     }
 }
