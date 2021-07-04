@@ -11,12 +11,17 @@ public class MainMenu : MonoBehaviour
     {
         //Set Cursor to not be visible
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;   
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void GotoAchievements()
     {
         SceneManager.LoadScene("Achievements");
+    }
+
+    public void GotoCharacterSelection()
+    {
+        SceneManager.LoadScene("CharacterSelection");
     }
 
     public void GotoStageSelection()

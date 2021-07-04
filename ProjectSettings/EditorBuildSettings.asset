@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/StageSelect.unity
     guid: 9ff2d93e5cc58594ab85e42ef27e2f23
   - enabled: 1
+    path: Assets/Scenes/CharacterSelection.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: a9c961ed8f918aa48a71d61740795bdf
+  - enabled: 1
     path: Assets/Scenes/Stages/Stage1.unity
     guid: c1f8f1069e9ee7d4a872041b005ed1c3
   m_configObjects:
