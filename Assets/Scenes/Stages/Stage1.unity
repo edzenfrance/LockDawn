@@ -1100,7 +1100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 397775596}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Characters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2552,7 +2552,7 @@ GameObject:
   - component: {fileID: 698192052}
   - component: {fileID: 698192051}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6297,7 +6297,7 @@ GameObject:
   - component: {fileID: 1283473603}
   - component: {fileID: 1283473602}
   m_Layer: 5
-  m_Name: CanvasSettings
+  m_Name: Canvas Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
