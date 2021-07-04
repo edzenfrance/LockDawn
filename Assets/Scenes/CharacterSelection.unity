@@ -1279,6 +1279,7 @@ MonoBehaviour:
   - {fileID: 1051573867}
   - {fileID: 727610747}
   selectedCharacter: 0
+  characterName: {fileID: 274481675}
 --- !u!1 &1551854786
 GameObject:
   m_ObjectHideFlags: 0
