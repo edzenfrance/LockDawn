@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
+
     void Start()
     {
         //Set Cursor to not be visible
@@ -12,14 +14,14 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;   
     }
 
-    public void PlayGame()
-    {
-        PlayerPrefs.SetString("Scene", "MainMenu");
-        SceneManager.LoadScene("StageSelect");
-    }
     public void GotoAchievements()
     {
         SceneManager.LoadScene("Achievements");
+    }
+
+    public void GotoStageSelection()
+    {
+        SceneManager.LoadScene("StageSelect");
     }
 
     public void GotoMainMenu()

@@ -15,7 +15,7 @@ public class LightController : MonoBehaviour
         buttonCheck.SetActive(false);
         buttonUncheck.SetActive(true);
         PlayerPrefs.SetInt("animEnabled", 0);
-        Debug.Log("PLAYERPREFS LIGHT: 0");
+        Debug.Log("PLAYERPREFS LIGHT: ENABLED");
     }
 
     public void LightsOff()
@@ -25,7 +25,7 @@ public class LightController : MonoBehaviour
         buttonCheck.SetActive(true);
         buttonUncheck.SetActive(false);
         PlayerPrefs.SetInt("animEnabled", 1);
-        Debug.Log("PLAYERPREFS LIGHT: 1");
+        Debug.Log("PLAYERPREFS LIGHT: DISABLED");
     }
 
 }
