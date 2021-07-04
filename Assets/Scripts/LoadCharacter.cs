@@ -1,19 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+﻿using UnityEngine;
 
 public class LoadCharacter : MonoBehaviour
 {
-	public GameObject[] characterPrefabs;
-	public Transform spawnPoint;
-	public TMP_Text label;
+	public GameObject[] characters;
+	public int selectedCharacter = 0;
 
-	void Start()
-	{
-		int selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
-		GameObject prefab = characterPrefabs[selectedCharacter];
-		GameObject clone = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
-		label.text = prefab.name;
-	}
+    void Awake()
+    {
+        int selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
+        characters[selectedCharacter].SetActive(true);
+        Debug.Log("LoadCharacter - ENABLED CHARACTER: " + characters[selectedCharacter]);
+    }
 }
