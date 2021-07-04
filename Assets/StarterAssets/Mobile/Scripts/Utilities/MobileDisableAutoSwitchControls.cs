@@ -22,6 +22,8 @@ public class MobileDisableAutoSwitchControls : MonoBehaviour
 
     void Start()
     {
+        // Automatically add Player GameObject
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         DisableAutoSwitchControls();
     }
 
