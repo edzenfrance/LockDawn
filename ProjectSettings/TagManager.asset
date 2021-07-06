@@ -8,11 +8,12 @@ TagManager:
   - MenuBackgroundMusic
   - AchievementsText
   - MenuSFXManager
+  - AI
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Controlled Character
   - Water
   - UI
   - 

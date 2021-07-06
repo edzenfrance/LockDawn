@@ -674,7 +674,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: STARTER_ASSETS_PACKAGES_CHECKED
-    7: STARTER_ASSETS_PACKAGES_CHECKED
+    7: STARTER_ASSETS_PACKAGES_CHECKED;EMERALD_AI_PRESENT
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
