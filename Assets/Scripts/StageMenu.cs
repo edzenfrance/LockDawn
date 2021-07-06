@@ -14,7 +14,8 @@ public class StageMenu : MonoBehaviour
 
     public void BackToPreviousScene()
     {
-        SceneManager.LoadScene("MainMenu");
+        Debug.Log("Stage Selection: Back");
+        SceneManager.LoadScene(PlayerPrefs.GetString("Scene"));
     }
 
     public void GotoStage1()
