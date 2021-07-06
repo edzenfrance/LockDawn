@@ -2,24 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
+
     void Start()
     {
         //Set Cursor to not be visible
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;   
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    public void PlayGame()
-    {
-        PlayerPrefs.SetString("Scene", "MainMenu");
-        SceneManager.LoadScene("StageSelect");
-    }
     public void GotoAchievements()
     {
         SceneManager.LoadScene("Achievements");
+    }
+
+    public void GotoCharacterSelection()
+    {
+        SceneManager.LoadScene("CharacterSelection");
+    }
+
+    public void GotoStageSelection()
+    {
+        PlayerPrefs.SetString("Scene", "MainMenu");
+        SceneManager.LoadScene("StageSelect");
     }
 
     public void GotoMainMenu()
@@ -49,6 +57,6 @@ public class MainMenu : MonoBehaviour
 
     public void MenuSoundClick()
     {
-        SFXManager.sfxInstance.Audio.PlayOneShot(SFXManager.sfxInstance.Click);
+        SFXManager.sfxInstance.Audio.PlayOneShot(SFXManager.sfxInstance.UIClick);
     }
 }

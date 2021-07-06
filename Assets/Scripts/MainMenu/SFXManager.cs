@@ -7,9 +7,10 @@ public class SFXManager : MonoBehaviour
 {
 
     public static SFXManager sfxInstance;
-    [Header("Music and Sounds")]
+    [Header("SFX Manager")]
     public AudioSource Audio;
-    public AudioClip Click;
+    [Header("Sound Click")]
+    public AudioClip UIClick;
 
     private void Awake()
     {

@@ -6,8 +6,8 @@ using TMPro;
 
 public class FPSCounter : MonoBehaviour
 {
-    public float refreshTime;
     public TMP_Text FPSText;
+    public float refreshTime;
 
     float fpsCounter;
     bool refresh;

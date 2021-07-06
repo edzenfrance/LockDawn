@@ -14,27 +14,21 @@ public class AnimationController : MonoBehaviour
     void Start()
     {
         LightAnimEnabled = PlayerPrefs.GetInt("animEnabled");
-        Debug.Log("PLAYERPREFS LIGHTS: " + LightAnimEnabled);
 
         if (LightAnimEnabled == 0)
         {
-            Debug.Log("LIGHTS IS ENABLED: " + LightAnimEnabled + " TRUE");
+            Debug.Log("AnimationController - PLAYERPREFS LIGHT: ENABLED [" + LightAnimEnabled + "]");
             lightAnimation.enabled = true;
             buttonCheck.SetActive(false);
             buttonUncheck.SetActive(true);
         }
-        if (LightAnimEnabled == 1)
+        else
         {
-            Debug.Log("LIGHTS ENABLED: " + LightAnimEnabled + " FALSE");
+            Debug.Log("AnimationController - PLAYERPREFS LIGHT: DISABLED [" + LightAnimEnabled + "]");
             lightAnimation.enabled = false;
             canvasGroup.GetComponent<CanvasGroup>().alpha = 1.0f;
             buttonCheck.SetActive(true);
             buttonUncheck.SetActive(false);
         }
-    }
-
-    void Update()
-    {
-        
     }
 }
