@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
 
     public void GotoStageSelection()
     {
+        PlayerPrefs.SetString("Scene", "MainMenu");
         SceneManager.LoadScene("StageSelect");
     }
 
