@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 18497ea98e8bd274c8c4e4a88defcca2
+timeCreated: 1573081234
+licenseType: Store
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Petite France
+  fontNames:
+  - Petite France
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 566044d185fac124893f1dc0d4262716
+timeCreated: 1573070554
+licenseType: Store
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Aire Exterior
+  fontNames:
+  - Aire Exterior
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

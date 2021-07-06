@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 371995fffcbf845439bc992d0597edda
+timeCreated: 1573070554
+licenseType: Store
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Bimbo JVE
+  fontNames:
+  - Bimbo JVE
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

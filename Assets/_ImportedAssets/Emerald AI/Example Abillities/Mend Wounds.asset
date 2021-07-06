@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1a975727f99e04bbef5ff4da983d6e, type: 3}
+  m_Name: Mend Wounds
+  m_EditorClassIdentifier: 
+  AbilityName: Mend Wounds
+  AbilityDescription: Surround yourself with a healing magic that heals 3 pts of health
+    per second for 10 seconds. Requires a 20 second cooldown.
+  AbilityDamage: 5
+  AbilityDamagePerIncrement: 5
+  CriticalHitOdds: 6.25
+  CriticalHitMultiplierMin: 1.1
+  CriticalHitMultiplierMax: 1.3
+  AbilityImpactDamage: 5
+  AbilitySupportAmount: 3
+  AbilityDamageIncrement: 1
+  AbilityCooldown: 20
+  AbilityLength: 10
+  SummonRadius: 10
+  ProjectileSpeed: 30
+  ProjectileTimeoutSeconds: 6
+  ColliderRadius: 0.05
+  TimeoutTime: 4.5
+  CollisionTime: 0
+  HeatSeekingSeconds: 1
+  CastEffectTimeoutSeconds: 1
+  AbilityEffectTimeoutSeconds: 2
+  SummonEffectTimeoutSeconds: 3
+  CollisionTimeout: 3
+  DamageOvertimeTimeout: 2
+  AbilityIcon: {fileID: 0}
+  AbilityEffect: {fileID: 1418244562541644, guid: 7433f25e5a746d2478b8c4f3dea1c693,
+    type: 2}
+  CastEffect: {fileID: 0}
+  SummonEffect: {fileID: 0}
+  SummonObject: {fileID: 0}
+  DamageOverTimeEffect: {fileID: 1418244562541644, guid: 7433f25e5a746d2478b8c4f3dea1c693,
+    type: 2}
+  DamageOverTimeSound: {fileID: 8300000, guid: d0fcf3ec109a3c242887c6e1edee8033, type: 3}
+  CollisionEffect: {fileID: 0}
+  ImpactSound: {fileID: 0}
+  SummonSound: {fileID: 0}
+  CastSound: {fileID: 8300000, guid: d0fcf3ec109a3c242887c6e1edee8033, type: 3}
+  EffectOnCollisionRef: 0
+  SoundOnCollisionRef: 0
+  HeatSeekingRef: 0
+  AbilityType: 1
+  DamageType: 1
+  SupportType: 1
+  AbilityStacksRef: 0
+  UseDamageOverTimeEffectRef: 1
+  UseDamageOverTimeSoundRef: 1
+  UseCastSound: 1
+  UseCriticalHits: 0
+  UseCustomAbilityIcon: 0
+  UseCastEffect: 0
+  ArrowProjectileRef: 0
+  AbilityEditorTabs: 1
