@@ -55,8 +55,6 @@ public class SoundController : MonoBehaviour
 
     void Update()
     {
-        PlayerPrefs.SetFloat("mVolume", MusicVolume);
-        PlayerPrefs.SetFloat("sVolume", SoundVolume);
         MusicAudio.volume = MusicVolume;
         SoundAudio.volume = SoundVolume;
     }
@@ -84,12 +82,14 @@ public class SoundController : MonoBehaviour
     public void UpdateSoundVolume(float volume)
     {
         SoundVolume = volume;
+        PlayerPrefs.SetFloat("sVolume", SoundVolume);
         Debug.Log("UPDATED VOLUME: " + SoundAudio.volume);
     }
 
     public void UpdateMusicVolume(float volume)
     {
         MusicVolume = volume;
+        PlayerPrefs.SetFloat("mVolume", MusicVolume);
         Debug.Log("UPDATED VOLUME: " + MusicAudio.volume);
     }
 }
