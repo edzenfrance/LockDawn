@@ -3731,6 +3731,7 @@ GameObject:
   - component: {fileID: 698192053}
   - component: {fileID: 698192052}
   - component: {fileID: 698192051}
+  - component: {fileID: 698192056}
   m_Layer: 5
   m_Name: Canvas UI
   m_TagString: Untagged
@@ -3830,6 +3831,7 @@ RectTransform:
   - {fileID: 875933374}
   - {fileID: 60861733}
   - {fileID: 731855182}
+  - {fileID: 1950126761}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3838,6 +3840,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &698192056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698192050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc23cb3347c9b442b3c6a158b37893b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vcam: {fileID: 0}
+  vcamThirdPersonFollow: {fileID: 0}
+  cameraDistanceSlider: {fileID: 0}
+  cameraDistanceValue: 0
+  CameraDistance: 0
+  isFirstRunOnStage: 0
 --- !u!1 &729392503
 GameObject:
   m_ObjectHideFlags: 0
@@ -6323,10 +6343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855a2c0df1e1f954c8428744180e30a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tPlayer: {fileID: 0}
-  tFollowTarget: {fileID: 0}
   vcam: {fileID: 0}
   vcamThirdPersonFollow: {fileID: 0}
+  vcamPlayerCameraRoot: {fileID: 0}
+  vcamFollow: {fileID: 0}
 --- !u!1 &873963680
 GameObject:
   m_ObjectHideFlags: 0
@@ -9672,7 +9692,6 @@ GameObject:
   - component: {fileID: 1283473604}
   - component: {fileID: 1283473603}
   - component: {fileID: 1283473602}
-  - component: {fileID: 1283473606}
   m_Layer: 5
   m_Name: Canvas Settings
   m_TagString: Untagged
@@ -9754,7 +9773,6 @@ RectTransform:
   m_Children:
   - {fileID: 896110011}
   - {fileID: 1264870479}
-  - {fileID: 1950126761}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9763,24 +9781,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1283473606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1283473601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fc23cb3347c9b442b3c6a158b37893b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vcam: {fileID: 0}
-  vcamThirdPersonFollow: {fileID: 0}
-  cameraDistanceSlider: {fileID: 0}
-  cameraDistanceValue: 0
-  CameraDistance: 0
-  isFirstRunOnStage: 0
 --- !u!1 &1291455475
 GameObject:
   m_ObjectHideFlags: 0
@@ -10637,7 +10637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: CameraDistance
-      value: 1.5
+      value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
@@ -11155,7 +11155,7 @@ GameObject:
   - component: {fileID: 1504321956}
   - component: {fileID: 1504321955}
   m_Layer: 5
-  m_Name: FPS Counter
+  m_Name: FPSCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14809,15 +14809,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950126760}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1825752282}
   - {fileID: 531337467}
   - {fileID: 598248471}
-  m_Father: {fileID: 1283473605}
-  m_RootOrder: 2
+  m_Father: {fileID: 698192055}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -14868,14 +14868,14 @@ MonoBehaviour:
   m_FillRect: {fileID: 393434214}
   m_HandleRect: {fileID: 1199963614}
   m_Direction: 0
-  m_MinValue: 1.8
+  m_MinValue: 1.7
   m_MaxValue: 3
   m_WholeNumbers: 0
   m_Value: 1.8
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1283473606}
+      - m_Target: {fileID: 698192056}
         m_TargetAssemblyTypeName: ThirdPersonCameraSettings, Assembly-CSharp
         m_MethodName: TPFCameraDistance
         m_Mode: 0
@@ -19499,6 +19499,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7ab977a21c92388468ee65ad1c0e5a78, type: 2}
+    - target: {fileID: 7982690787071284510, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8268551067277165611, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
