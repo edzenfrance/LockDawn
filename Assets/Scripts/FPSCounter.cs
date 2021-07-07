@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,12 +7,16 @@ public class FPSCounter : MonoBehaviour
 {
     public TMP_Text FPSText;
     public float refreshTime;
+    public float refreshTimeNew;
+    public Slider fpsCounterSlider;
 
     float fpsCounter;
     bool refresh;
 
     void Start()
     {
+        refreshTime = PlayerPrefs.GetFloat("FPSCounterRefreshTime");
+        fpsCounterSlider.value = refreshTime;
         refresh = true;
     }
 
@@ -27,16 +30,24 @@ public class FPSCounter : MonoBehaviour
 
     IEnumerator refreshDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        refreshTime = refreshTimeNew;
+        yield return new WaitForSeconds(refreshTime);
         refresh = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (refresh)
         {
             getFrameRate();
         }
+    }
+
+    public void refreshTimeChangeValue(float refreshTime)
+    {
+        refreshTime = Mathf.Round(refreshTime * 10f) * 0.1f;
+        fpsCounterSlider.value = refreshTime;
+        refreshTimeNew = refreshTime;
+        PlayerPrefs.SetFloat("FPSCounterRefreshTime", refreshTime);
     }
 }

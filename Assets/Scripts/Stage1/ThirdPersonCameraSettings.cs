@@ -8,7 +8,7 @@ public class ThirdPersonCameraSettings : MonoBehaviour
     [SerializeField] private Cinemachine3rdPersonFollow vcamThirdPersonFollow;
 
     [Header("Slider Settings")]
-    [SerializeField] Slider cameraDistanceSlider;
+    [SerializeField] private Slider cameraDistanceSlider;
     [SerializeField] private float cameraDistanceValue;
     [SerializeField] private float CameraDistance;
     [SerializeField] private int isFirstRunOnStage;
@@ -35,7 +35,9 @@ public class ThirdPersonCameraSettings : MonoBehaviour
 
     public void TPFCameraDistance(float distance)
     {
+        distance = Mathf.Round(distance * 10f) * 0.1f;
         vcamThirdPersonFollow.CameraDistance = distance;
+        cameraDistanceSlider.value = distance;
         PlayerPrefs.SetFloat("CameraDistance", distance);
     }
 }
