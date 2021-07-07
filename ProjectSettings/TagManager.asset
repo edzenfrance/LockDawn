@@ -7,7 +7,6 @@ TagManager:
   - CinemachineTarget
   - MenuBackgroundMusic
   - AchievementsText
-  - MenuSFXManager
   - AI
   layers:
   - Default

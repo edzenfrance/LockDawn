@@ -854,12 +854,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6382d794c44e1464283aa82080bbd77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MusicAudio: {fileID: 0}
+  SoundAudio: {fileID: 0}
   musicVolumeSlider: {fileID: 1073656696}
   soundVolumeSlider: {fileID: 1427488906}
-  MusicAudio: {fileID: 991108601}
-  SoundAudio: {fileID: 1324783413}
-  ObjectMusic: {fileID: 0}
-  ObjectSound: {fileID: 0}
+  MusicVolume: 1
+  SoundVolume: 1
   IsFirstRun: 0
 --- !u!4 &178173290
 Transform:
@@ -6479,7 +6479,7 @@ GameObject:
   - component: {fileID: 1324783413}
   m_Layer: 0
   m_Name: SFXManager
-  m_TagString: MenuSFXManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
