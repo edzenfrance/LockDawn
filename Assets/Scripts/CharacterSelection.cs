@@ -31,12 +31,13 @@ public class CharacterSelection : MonoBehaviour
 
 		GameObject charName = characters[selectedCharacter];
 		characterName.text = "Select " + charName.name;
-		PlayerPrefs.SetString("CharSel", charName.name);
-
 	}
 
 	public void StartGame()
 	{
+		GameObject charName = characters[selectedCharacter];
+		characterName.text = "Select " + charName.name;
+		PlayerPrefs.SetString("CharSel", charName.name);
 		PlayerPrefs.SetInt("selectedCharacter", selectedCharacter);
 		SceneManager.LoadScene("Stage1", LoadSceneMode.Single);
 	}
