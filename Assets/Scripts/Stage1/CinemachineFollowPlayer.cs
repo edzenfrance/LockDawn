@@ -4,15 +4,10 @@ using Cinemachine;
 
 public class CinemachineFollowPlayer : MonoBehaviour
 {
-    [SerializeField]
-    private CinemachineVirtualCamera vcam;
-    [SerializeField]
-    private Cinemachine3rdPersonFollow vcamThirdPersonFollow;
-
-    public GameObject vcamPlayerCameraRoot;
-    public Transform vcamFollow;
-
-
+    [SerializeField] private CinemachineVirtualCamera vcam;
+    [SerializeField] private Cinemachine3rdPersonFollow vcamThirdPersonFollow;
+    [SerializeField] private GameObject vcamPlayerCameraRoot;
+    [SerializeField] private Transform vcamFollow;
 
     private void Awake()
     {
