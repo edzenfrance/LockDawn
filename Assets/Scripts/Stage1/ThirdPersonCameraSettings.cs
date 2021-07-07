@@ -35,7 +35,7 @@ public class ThirdPersonCameraSettings : MonoBehaviour
 
     public void TPFCameraDistance(float distance)
     {
-        distance = Mathf.Round(distance * 10f) * 0.1f;
+        //distance = Mathf.Round(distance * 10f) * 0.1f;
         vcamThirdPersonFollow.CameraDistance = distance;
         cameraDistanceSlider.value = distance;
         PlayerPrefs.SetFloat("CameraDistance", distance);
