@@ -10,7 +10,6 @@ public class PauseScreen : MonoBehaviour
     public GameObject RestartDialog;
     public GameObject SettingDialog;
     public GameObject ExitDialog;
-    public GameObject PauseButton;
 
     public Transform box;
     public CanvasGroup background;
@@ -22,19 +21,18 @@ public class PauseScreen : MonoBehaviour
         if (GamePaused)
         {
             Time.timeScale = 0;
-            Debug.Log("PauseScreen - GAME PAUSED: " + GamePaused);
+            //Debug.Log("PauseScreen - GAME PAUSED: " + GamePaused);
         }
         else
         {
             Time.timeScale = 1;
-            Debug.Log("PauseScreen - GAME PAUSED: " + GamePaused);
+            //Debug.Log("PauseScreen - GAME PAUSED: " + GamePaused);
         }
     }
 
     public void OnEnable()
     {
-        Debug.Log("OnEnable");
-        PauseButton.SetActive(false);
+        Debug.Log("PauseScreen - OnEnable");
         background.alpha = 0;
         background.LeanAlpha(1, 0.5f);
         box.localPosition = new Vector2(0, -Screen.height);
@@ -55,14 +53,13 @@ public class PauseScreen : MonoBehaviour
 
     void OnResumeComplete()
     {
-        PauseButton.SetActive(true);
         gameObject.SetActive(false);
     }
 
     public void OnStage()
     {
         GamePaused = false;
-        Debug.Log("Previous Scene: Stage 1");
+        Debug.Log("PauseScreen - Previous Scene: Stage 1");
         PlayerPrefs.SetString("Scene", "Stage1");
         SceneManager.LoadScene("StageSelect");
     }
@@ -70,14 +67,14 @@ public class PauseScreen : MonoBehaviour
     public void OnRestart()
     {
         ButtonsDialog.SetActive(false);
-        Debug.Log("RESTART SCENE: " + SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("PauseScreen - RESTART SCENE: " + SceneManager.GetActiveScene().buildIndex);
         RestartDialog.SetActive(true);
     }
 
     public void OnRestartYes()
     {
 
-        Debug.Log("RESTART SCENE: " + SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("PauseScreen - RESTART SCENE: " + SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         GamePaused = false;
     }
@@ -102,7 +99,6 @@ public class PauseScreen : MonoBehaviour
 
     public void OnExit()
     {
-        PauseButton.SetActive(false);
         ButtonsDialog.SetActive(false);
         ExitDialog.SetActive(true);
     }
@@ -115,7 +111,6 @@ public class PauseScreen : MonoBehaviour
 
     public void OnExitNo()
     {
-        PauseButton.SetActive(true);
         ButtonsDialog.SetActive(true);
         ExitDialog.SetActive(false);
     }

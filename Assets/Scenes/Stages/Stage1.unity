@@ -5547,7 +5547,7 @@ GameObject:
   - component: {fileID: 798891742}
   - component: {fileID: 798891741}
   m_Layer: 5
-  m_Name: Graphics Quality
+  m_Name: GraphicsQuality
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7827,7 +7827,6 @@ MonoBehaviour:
   RestartDialog: {fileID: 1357333530}
   SettingDialog: {fileID: 1584351857}
   ExitDialog: {fileID: 972375073}
-  PauseButton: {fileID: 1264870478}
   box: {fileID: 1818234929}
   background: {fileID: 1029215785}
 --- !u!224 &896110011
@@ -7844,7 +7843,7 @@ RectTransform:
   - {fileID: 1029215788}
   - {fileID: 1818234929}
   m_Father: {fileID: 1283473605}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -10745,7 +10744,7 @@ RectTransform:
   m_Children:
   - {fileID: 1219930490}
   m_Father: {fileID: 1283473605}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -10968,8 +10967,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 896110011}
   - {fileID: 1264870479}
+  - {fileID: 896110011}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
