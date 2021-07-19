@@ -6305,7 +6305,7 @@ GameObject:
   - component: {fileID: 798891742}
   - component: {fileID: 798891741}
   m_Layer: 5
-  m_Name: GraphicsQuality
+  m_Name: GraphicsQualityText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18410,7 +18410,7 @@ GameObject:
   - component: {fileID: 2015134619}
   - component: {fileID: 2015134617}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: GraphicsQualityDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
