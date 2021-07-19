@@ -16,10 +16,15 @@ public class AccessEmeraldAIExample : MonoBehaviour
     }
 
     //Changes the AI's current behavior to Aggressive
-    public void ChangeBehaviorTest()
+    public void ChangeBehaviorToAggressive()
     {
         EventsManager.ChangeBehavior(EmeraldAISystem.CurrentBehavior.Aggressive);
         Debug.Log("AI Becomes aggressive");
     }
 
+    public void ChangeBehaviorToPassive()
+    {
+        EventsManager.ChangeBehavior(EmeraldAISystem.CurrentBehavior.Passive);
+        Debug.Log("AI Becomes aggressive");
+    }
 }
