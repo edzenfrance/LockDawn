@@ -1061,10 +1061,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 698192057}
-        m_TargetAssemblyTypeName: GraphicSettings, Assembly-CSharp
-        m_MethodName: ChangeQualityLevel
-        m_Mode: 0
+      - m_Target: {fileID: 698192058}
+        m_TargetAssemblyTypeName: AIDifficultyTest, Assembly-CSharp
+        m_MethodName: DifficultySelector
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5133,6 +5133,7 @@ GameObject:
   - component: {fileID: 698192051}
   - component: {fileID: 698192056}
   - component: {fileID: 698192057}
+  - component: {fileID: 698192058}
   m_Layer: 5
   m_Name: Canvas UI
   m_TagString: Untagged
@@ -5283,6 +5284,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fc46342253236b641a6408fba524dfdc, type: 2}
   - {fileID: 11400000, guid: 2a907441d223d4e49910011e685ffe82, type: 2}
   qualityDropdown: {fileID: 2015134617}
+--- !u!114 &698192058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698192050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f526324e22d3744da11a95465c468c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NPC:
+  - {fileID: 5935435652063533835}
+  - {fileID: 843434987}
+  difficultyDropdown: {fileID: 184926585}
 --- !u!1 &729392503
 GameObject:
   m_ObjectHideFlags: 0
@@ -5516,7 +5533,7 @@ GameObject:
   - component: {fileID: 731855184}
   - component: {fileID: 731855183}
   m_Layer: 5
-  m_Name: CameraDistance
+  m_Name: CameraDistanceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13671,7 +13688,7 @@ GameObject:
   - component: {fileID: 1504321956}
   - component: {fileID: 1504321955}
   m_Layer: 5
-  m_Name: FPSCounter
+  m_Name: FPSCounterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21162,7 +21179,7 @@ MonoBehaviour:
   RotateTowardsTarget: 0
   m_AttackAnimationClipMissing: 0
   ProjectileCollisionPointY: 0.5
-  m_ProjectileCollisionPoint: {x: 2, y: 0.49999905, z: 10.51}
+  m_ProjectileCollisionPoint: {x: 2.019721, y: 0.5000005, z: 10.432322}
   ObstructionTimer: 0
   ObstructionSeconds: 4
   IdleVolume: 1
@@ -21518,8 +21535,8 @@ MonoBehaviour:
   CurrentDamageAmount: 5
   DamageAmountRun: 5
   WanderRadius: 25
-  TabNumber: 4
-  TemperamentTabNumber: 5
+  TabNumber: 0
+  TemperamentTabNumber: 1
   DetectionTagsTabNumber: 0
   AnimationTabNumber: 1
   SoundTabNumber: 0
