@@ -6506,8 +6506,8 @@ MonoBehaviour:
   ObstructionTimer: 0
   ObstructionSeconds: 4
   IdleVolume: 1
-  WalkFootstepVolume: 0.1
-  RunFootstepVolume: 0.1
+  WalkFootstepVolume: 1
+  RunFootstepVolume: 1
   BlockVolume: 0.65
   ImpactVolume: 1
   CriticalHitVolume: 1
@@ -6858,7 +6858,7 @@ MonoBehaviour:
   CurrentDamageAmount: 5
   DamageAmountRun: 5
   WanderRadius: 25
-  TabNumber: 1
+  TabNumber: 4
   TemperamentTabNumber: 3
   DetectionTagsTabNumber: 2
   AnimationTabNumber: 1
@@ -7107,7 +7107,8 @@ MonoBehaviour:
   InjuredSounds: []
   WarningSounds: []
   DeathSounds: []
-  FootStepSounds: []
+  FootStepSounds:
+  - {fileID: 8300000, guid: 5c9bdbce37b06a24fa6ea793bcfd1907, type: 3}
   BlockingSounds: []
   ImpactSounds: []
   CriticalHitSounds: []
@@ -11991,7 +11992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: CameraDistance
-      value: 2.599999
+      value: 2.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
@@ -12024,8 +12025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0947553511b8644bd88a1e7dc264c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EmeraldComponent: {fileID: 0}
-  EventsManager: {fileID: 0}
+  EmeraldComponent: {fileID: 5935435652063533835}
+  distanceFromTarget: 0
 --- !u!4 &1403292972
 Transform:
   m_ObjectHideFlags: 0
@@ -20106,8 +20107,8 @@ MonoBehaviour:
   ObstructionTimer: 0
   ObstructionSeconds: 4
   IdleVolume: 1
-  WalkFootstepVolume: 0.1
-  RunFootstepVolume: 0.1
+  WalkFootstepVolume: 1
+  RunFootstepVolume: 1
   BlockVolume: 0.65
   ImpactVolume: 1
   CriticalHitVolume: 1
@@ -20458,9 +20459,9 @@ MonoBehaviour:
   CurrentDamageAmount: 5
   DamageAmountRun: 5
   WanderRadius: 25
-  TabNumber: 6
+  TabNumber: 4
   TemperamentTabNumber: 5
-  DetectionTagsTabNumber: 2
+  DetectionTagsTabNumber: 0
   AnimationTabNumber: 1
   SoundTabNumber: 0
   MovementTabNumber: 0
@@ -20616,7 +20617,7 @@ MonoBehaviour:
   Renderer3: {fileID: 0}
   Renderer4: {fileID: 0}
   DeathTypeRef: 0
-  BehaviorRef: 0
+  BehaviorRef: 3
   DetectionTypeRef: 0
   MaxChaseDistanceTypeRef: 0
   ConfidenceRef: 1
@@ -20708,7 +20709,7 @@ MonoBehaviour:
   WarningSounds: []
   DeathSounds: []
   FootStepSounds:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 5c9bdbce37b06a24fa6ea793bcfd1907, type: 3}
   BlockingSounds: []
   ImpactSounds: []
   CriticalHitSounds: []
