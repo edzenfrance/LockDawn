@@ -13,12 +13,6 @@ public class GraphicSettings : MonoBehaviour
         qualityDropdown.value = QualitySettings.GetQualityLevel();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ChangeQualityLevel(int value)
     {
         QualitySettings.SetQualityLevel(value);
