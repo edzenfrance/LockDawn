@@ -42,8 +42,6 @@ public class SoundController : MonoBehaviour
     {
         MusicAudio = GameObject.Find("BackgroundMusic").GetComponent<AudioSource>();
         SoundAudio = GameObject.Find("SFXManager").GetComponent<AudioSource>();
-        musicToggle = GameObject.Find("Music Toggle").GetComponent<Toggle>();
-        soundToggle = GameObject.Find("Sound Toggle").GetComponent<Toggle>();
         musicVolumeSliderFill = musicVolumeSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
         soundVolumeSliderFill = soundVolumeSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
 

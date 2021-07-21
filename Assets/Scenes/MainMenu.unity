@@ -862,8 +862,8 @@ MonoBehaviour:
   soundVolumeSliderFill: {fileID: 0}
   MusicVolume: 1
   SoundVolume: 1
-  musicToggle: {fileID: 0}
-  soundToggle: {fileID: 0}
+  musicToggle: {fileID: 915860895}
+  soundToggle: {fileID: 1244525086}
   musicToggleText: {fileID: 1575742667}
   soundToggleText: {fileID: 1701773417}
   IsFirstRun: 0
@@ -6914,6 +6914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1438241548}
+  - component: {fileID: 1438241549}
   m_Layer: 5
   m_Name: Light
   m_TagString: Untagged
@@ -6942,6 +6943,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1438241549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438241547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30fe1ec62e4da684d9cf7b3d60a4efa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightAnimation: {fileID: 0}
+  canvasGroup: {fileID: 0}
+  lightToggle: {fileID: 0}
+  lightAnimationEnabled: 1
 --- !u!1 &1448671378
 GameObject:
   m_ObjectHideFlags: 0
