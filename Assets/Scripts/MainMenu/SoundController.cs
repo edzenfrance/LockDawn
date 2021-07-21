@@ -11,8 +11,8 @@ public class SoundController : MonoBehaviour
     [SerializeField] private AudioSource SoundAudio;
 
     [Header("AudioSource Volume Slider")]
-    public Slider musicVolumeSlider;
-    public Slider soundVolumeSlider;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider soundVolumeSlider;
 
     [SerializeField] private Image musicVolumeSliderFill;
     [SerializeField] private Image soundVolumeSliderFill;
@@ -25,8 +25,8 @@ public class SoundController : MonoBehaviour
     [SerializeField] private Toggle musicToggle;
     [SerializeField] private Toggle soundToggle;
 
-    public TMPro.TextMeshProUGUI musicToggleText;
-    public TMPro.TextMeshProUGUI soundToggleText;
+    [SerializeField] private TMPro.TextMeshProUGUI musicToggleText;
+    [SerializeField] private TMPro.TextMeshProUGUI soundToggleText;
 
     [Header("First Run")]
     [SerializeField] private int IsFirstRun;
