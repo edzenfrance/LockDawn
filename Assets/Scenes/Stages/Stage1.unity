@@ -403,7 +403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100202, guid: 04db7c1b098042441a5f3c39be27df2a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100202, guid: 04db7c1b098042441a5f3c39be27df2a, type: 3}
       propertyPath: m_TagString
