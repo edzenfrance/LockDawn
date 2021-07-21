@@ -14,19 +14,38 @@ public class SoundController : MonoBehaviour
     public Slider musicVolumeSlider;
     public Slider soundVolumeSlider;
 
+    [SerializeField] private Image musicVolumeSliderFill;
+    [SerializeField] private Image soundVolumeSliderFill;
+
     [Header("AudioSource Volume")]
     [SerializeField] private float MusicVolume = 1f;
     [SerializeField] private float SoundVolume = 1f;
 
+    [Header("Audio Toggle Checkbox")]
+    [SerializeField] private Toggle musicToggle;
+    [SerializeField] private Toggle soundToggle;
+
+    public TMPro.TextMeshProUGUI musicToggleText;
+    public TMPro.TextMeshProUGUI soundToggleText;
+
     [Header("First Run")]
     [SerializeField] private int IsFirstRun;
+    [SerializeField] private int IsMusicMuted;
+    [SerializeField] private int IsSoundMuted;
 
     bool restartMusic = false;
+
+    Color colorMute = new Color32(130, 0, 0, 255);
+    Color colorUnMute = new Color32(192, 10, 10, 255);
 
     private void Awake()
     {
         MusicAudio = GameObject.Find("BackgroundMusic").GetComponent<AudioSource>();
         SoundAudio = GameObject.Find("SFXManager").GetComponent<AudioSource>();
+        musicToggle = GameObject.Find("Music Toggle").GetComponent<Toggle>();
+        soundToggle = GameObject.Find("Sound Toggle").GetComponent<Toggle>();
+        musicVolumeSliderFill = musicVolumeSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
+        soundVolumeSliderFill = soundVolumeSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         IsFirstRun = PlayerPrefs.GetInt("IsFirstRun");
@@ -38,8 +57,33 @@ public class SoundController : MonoBehaviour
         }
         else
         {
-            MusicVolume = PlayerPrefs.GetFloat("mVolume");
-            SoundVolume = PlayerPrefs.GetFloat("sVolume");
+            IsMusicMuted = PlayerPrefs.GetInt("mVolumeMute");
+            IsSoundMuted = PlayerPrefs.GetInt("sVolumeMute");
+            if (IsMusicMuted == 1)
+            {
+                musicVolumeSlider.enabled = false;
+                musicVolumeSliderFill.color = colorMute;
+                musicToggleText.text = "OFF";
+                musicToggle.isOn = false;
+                MusicVolume = 0f;
+            }
+            else
+            {
+                MusicVolume = PlayerPrefs.GetFloat("mVolume");
+            }
+
+            if (IsSoundMuted == 1)
+            {
+                soundVolumeSlider.enabled = false;
+                soundVolumeSliderFill.color = colorMute;
+                soundToggleText.text = "OFF";
+                soundToggle.isOn = false;
+                SoundVolume = 0f;
+            }
+            else
+            {
+                SoundVolume = PlayerPrefs.GetFloat("sVolume");
+            }
         }
     }
 
@@ -89,5 +133,48 @@ public class SoundController : MonoBehaviour
         MusicVolume = volume;
         PlayerPrefs.SetFloat("mVolume", MusicVolume);
         Debug.Log("SoundController - MUSIC VOLUME: " + MusicAudio.volume);
+    }
+
+    public void MusicToggleControl()
+    {
+        bool MusicToggleSwitch = musicToggle.isOn;
+        if (MusicToggleSwitch)
+        {
+            PlayerPrefs.SetInt("mVolumeMute", 0);
+            musicVolumeSlider.enabled = true;
+            musicVolumeSliderFill.color = colorUnMute;
+            musicToggleText.text = "ON";
+            MusicVolume = PlayerPrefs.GetFloat("mVolume");
+        }
+        else
+        {
+            PlayerPrefs.SetInt("mVolumeMute", 1);
+            musicVolumeSlider.enabled = false;
+            musicVolumeSliderFill.color = colorMute;
+            musicToggleText.text = "OFF";
+            MusicVolume = 0f;
+        }
+    }
+
+    public void soundToggleControl()
+    {
+        bool soundToggleSwitch = soundToggle.isOn;
+        if (soundToggleSwitch)
+        {
+            PlayerPrefs.SetInt("sVolumeMute", 0);
+            soundVolumeSlider.enabled = true;
+            soundVolumeSliderFill.color = colorUnMute;
+            soundToggleText.text = "ON";
+            SoundVolume = PlayerPrefs.GetFloat("sVolume");
+
+        }
+        else
+        {
+            PlayerPrefs.SetInt("sVolumeMute", 1);
+            soundVolumeSlider.enabled = false;
+            soundVolumeSliderFill.color = colorMute;
+            soundToggleText.text = "OFF";
+            SoundVolume = 0f;
+        }
     }
 }
