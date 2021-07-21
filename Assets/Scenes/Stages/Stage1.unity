@@ -398,8 +398,12 @@ PrefabInstance:
       value: RacingMiki
       objectReference: {fileID: 0}
     - target: {fileID: 100202, guid: 04db7c1b098042441a5f3c39be27df2a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100202, guid: 04db7c1b098042441a5f3c39be27df2a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100202, guid: 04db7c1b098042441a5f3c39be27df2a, type: 3}
       propertyPath: m_TagString
@@ -407,7 +411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400202, guid: 04db7c1b098042441a5f3c39be27df2a, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400202, guid: 04db7c1b098042441a5f3c39be27df2a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1027,7 +1031,7 @@ MonoBehaviour:
   SprintSpeed: 5.335
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
-  JumpHeight: 0.1
+  JumpHeight: 0.5
   Gravity: -15
   JumpTimeout: 0.5
   FallTimeout: 0.15
@@ -2053,7 +2057,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0d3a63c699925b04eb9534d2c1cf80a2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d3a63c699925b04eb9534d2c1cf80a2, type: 3}
       propertyPath: m_LocalScale.x
@@ -3174,10 +3178,10 @@ Transform:
   m_LocalPosition: {x: 1.4717368, y: 0.886271, z: 0.14361453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 179655878}
   - {fileID: 802441221}
   - {fileID: 543450652931600204}
   - {fileID: 1923217978}
+  - {fileID: 179655878}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3197,6 +3201,7 @@ MonoBehaviour:
   - {fileID: 802441220}
   - {fileID: 919132148722660854}
   - {fileID: 1923217979}
+  - {fileID: 179655877}
   selectedCharacter: 0
   charSelected: {fileID: 0}
 --- !u!1 &414296198
@@ -3716,7 +3721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &455338313
 Transform:
   m_ObjectHideFlags: 0
@@ -6038,7 +6043,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 03ecfd877ae0c704f8c2062237869e85, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 03ecfd877ae0c704f8c2062237869e85, type: 3}
       propertyPath: m_LocalScale.x
@@ -13249,7 +13254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2070925442191277752, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
       propertyPath: CameraDistance
-      value: 2.3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
@@ -13651,7 +13656,7 @@ GameObject:
   - component: {fileID: 1466166194}
   m_Layer: 0
   m_Name: PlayerCameraRoot
-  m_TagString: Untagged
+  m_TagString: CinemachineTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13664,7 +13669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466166193}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.22745371, y: 0.54112804, z: -0.33352035}
+  m_LocalPosition: {x: 0.005, y: 1.269, z: 0.006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 179655878}
@@ -17886,7 +17891,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 29a26e87301ab274a93ca782bbbc06e9, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 29a26e87301ab274a93ca782bbbc06e9, type: 3}
       propertyPath: m_LocalScale.x
