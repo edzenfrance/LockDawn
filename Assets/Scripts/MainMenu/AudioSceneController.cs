@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SoundController : MonoBehaviour
+public class AudioSceneController : MonoBehaviour
 {
     [Header("AudioSource")]
     [SerializeField] private AudioSource MusicAudio;
