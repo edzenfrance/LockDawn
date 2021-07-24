@@ -8,6 +8,7 @@ public class ThirdPersonCameraSettings : MonoBehaviour
     [SerializeField] private Cinemachine3rdPersonFollow vcamThirdPersonFollow;
 
     [Header("Slider Settings")]
+    [SerializeField] private TMPro.TMP_Text cameraDistanceText;
     [SerializeField] private Slider cameraDistanceSlider;
     [SerializeField] private float cameraDistanceValue;
     [SerializeField] private float CameraDistance;
@@ -26,11 +27,13 @@ public class ThirdPersonCameraSettings : MonoBehaviour
             PlayerPrefs.SetInt("IsFirstRunOnStage", 1);
             PlayerPrefs.SetFloat("CameraDistance", 3);
             cameraDistanceSlider.value = 3f;
+            cameraDistanceText.text = "Camera Distance: " + 3.00f;
         }
         else
         {
             cameraDistanceValue = PlayerPrefs.GetFloat("CameraDistance");
             cameraDistanceSlider.value = cameraDistanceValue;
+            cameraDistanceText.text = "Camera Distance: " + cameraDistanceValue.ToString("f2");
         }
     }
 
@@ -40,5 +43,6 @@ public class ThirdPersonCameraSettings : MonoBehaviour
         vcamThirdPersonFollow.CameraDistance = distance;
         cameraDistanceSlider.value = distance;
         PlayerPrefs.SetFloat("CameraDistance", distance);
+        cameraDistanceText.text = "Camera Distance: " + distance.ToString("f2");
     }
 }
