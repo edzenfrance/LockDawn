@@ -6,6 +6,7 @@ using TMPro;
 public class FPSCounter : MonoBehaviour
 {
     public TMP_Text FPSText;
+    public TMP_Text FPSRefreshTime;
     public float refreshTime;
     public float refreshTimeNew;
     public Slider fpsCounterSlider;
@@ -17,6 +18,8 @@ public class FPSCounter : MonoBehaviour
     {
         refreshTime = PlayerPrefs.GetFloat("FPSCounterRefreshTime");
         fpsCounterSlider.value = refreshTime;
+        FPSRefreshTime.text = "Speed: " + refreshTime;
+        refreshTimeNew = refreshTime;
         refresh = true;
     }
 
@@ -48,6 +51,8 @@ public class FPSCounter : MonoBehaviour
         refreshTime = Mathf.Round(refreshTime * 10f) * 0.1f;
         fpsCounterSlider.value = refreshTime;
         refreshTimeNew = refreshTime;
-        PlayerPrefs.SetFloat("FPSCounterRefreshTime", refreshTime);
+        FPSRefreshTime.text = "Speed: " + refreshTimeNew;
+        PlayerPrefs.SetFloat("FPSCounterRefreshTime", refreshTimeNew);
+
     }
 }

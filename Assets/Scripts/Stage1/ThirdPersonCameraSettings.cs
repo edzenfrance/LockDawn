@@ -13,10 +13,11 @@ public class ThirdPersonCameraSettings : MonoBehaviour
     [SerializeField] private float CameraDistance;
     [SerializeField] private int isFirstRunOnStage;
 
-    private void Awake()
+    private void Start()
     {
-        cameraDistanceSlider = GameObject.Find("CameraDistanceSlider").GetComponent<Slider>();
-        vcam = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
+        //Commented because Camera Distance Slider is now disabled by default
+        //cameraDistanceSlider = GameObject.Find("CameraDistanceSlider").GetComponent<Slider>();
+        //vcam = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
         vcamThirdPersonFollow = vcam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
 
         isFirstRunOnStage = PlayerPrefs.GetInt("IsFirstRunOnStage");
