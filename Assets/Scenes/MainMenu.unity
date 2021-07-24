@@ -7734,7 +7734,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0f51177c9530d46b7e0af9e315d3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleGroup: {fileID: 0}
+  toggleGroup: {fileID: 1619457354}
+  toggleQualityLow: {fileID: 1990094237}
+  toggleQualityMedium: {fileID: 636735111}
+  toggleQualityHigh: {fileID: 436142430}
+  setGraphicsQuality: 0
 --- !u!114 &1619457356
 MonoBehaviour:
   m_ObjectHideFlags: 0
