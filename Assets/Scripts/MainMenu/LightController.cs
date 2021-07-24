@@ -5,25 +5,27 @@ using UnityEngine.UI;
 
 public class LightController : MonoBehaviour
 {
-    public Animator lightAnimation;
-    public CanvasGroup canvasGroup;
-    public Toggle lightToggle;
+    [SerializeField] private Animator lightAnimation;
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private Toggle lightToggle;
     [SerializeField] private float lightAnimationEnabled = 1;
 
     void Start()
     {
-        lightAnimationEnabled = PlayerPrefs.GetInt("animEnabled");
+        lightAnimationEnabled = PlayerPrefs.GetInt("LightFixed");
 
         if (lightAnimationEnabled == 0)
         {
-            Debug.Log("AnimationController - PLAYERPREFS LIGHT: ENABLED [" + lightAnimationEnabled + "]");
+            Debug.Log("<color=white>LightController</color> - Light Animation: Enabled");
             lightAnimation.enabled = true;
+            lightToggle.isOn = false;
         }
         else
         {
-            Debug.Log("AnimationController - PLAYERPREFS LIGHT: DISABLED [" + lightAnimationEnabled + "]");
+            Debug.Log("<color=white>LightController</color> - Light Animation: Disabled");
             lightAnimation.enabled = false;
             canvasGroup.GetComponent<CanvasGroup>().alpha = 1.0f;
+            lightToggle.isOn = true;
         }
     }
 
@@ -34,14 +36,14 @@ public class LightController : MonoBehaviour
         {
             lightAnimation.enabled = false;
             canvasGroup.GetComponent<CanvasGroup>().alpha = 1.0f;
-            PlayerPrefs.SetInt("animEnabled", 1);
-            Debug.Log("LightController - PLAYERPREFS LIGHT: DISABLED");
+            PlayerPrefs.SetInt("LightFixed", 1);
+            Debug.Log("<color=white>LightController</color> - Set Light Animation: <color=black>Disabled</color>");
         }
         else
         {
             lightAnimation.enabled = true;
-            PlayerPrefs.SetInt("animEnabled", 0);
-            Debug.Log("LightController - PLAYERPREFS LIGHT: ENABLED");
+            PlayerPrefs.SetInt("LightFixed", 0);
+            Debug.Log("<color=white>LightController</color> - Set Light Animation: <color=white>Enabled</color>");
         }
     }
 }
