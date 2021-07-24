@@ -9,6 +9,11 @@ public class Credits : MonoBehaviour
     public float Speed = 1.0f;
     public Animator CreditsAnimation;
 
+    void Start()
+    {
+        CreditsAnimation.speed = 0.6f;
+    }
+
     public void CreditsFastForward()
     {
         if (Speed == 1.0f)
