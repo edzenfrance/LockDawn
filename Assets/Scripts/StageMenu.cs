@@ -5,13 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class StageMenu : MonoBehaviour
 {
-    void Start()
-    {
-        //Set Cursor to not be visible
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
     public void BackToPreviousScene()
     {
         Debug.Log("Stage Selection: Back");
