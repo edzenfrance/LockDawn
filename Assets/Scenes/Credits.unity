@@ -743,9 +743,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889758396}
-        m_TargetAssemblyTypeName: Credits, Assembly-CSharp
-        m_MethodName: CreditsPause
+      - m_Target: {fileID: 890694617}
+        m_TargetAssemblyTypeName: CreditsController, Assembly-CSharp
+        m_MethodName: PauseAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -876,9 +876,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889758396}
-        m_TargetAssemblyTypeName: Credits, Assembly-CSharp
-        m_MethodName: CreditsFastForward
+      - m_Target: {fileID: 890694617}
+        m_TargetAssemblyTypeName: CreditsController, Assembly-CSharp
+        m_MethodName: FastForwardAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1791,10 +1791,10 @@ RectTransform:
   m_Father: {fileID: 889758395}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -114, y: 83}
-  m_SizeDelta: {x: 102.482, y: 97.2203}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -96.45288, y: -73.74402}
+  m_SizeDelta: {x: 95.3877, y: 90.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &853737953
 MonoBehaviour:
@@ -1840,8 +1840,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 889758396}
-        m_TargetAssemblyTypeName: Credits, Assembly-CSharp
+      - m_Target: {fileID: 890694617}
+        m_TargetAssemblyTypeName: CreditsController, Assembly-CSharp
         m_MethodName: CreditsBack
         m_Mode: 1
         m_Arguments:
@@ -1865,7 +1865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.43137255}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1899,7 +1899,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 889758395}
-  - component: {fileID: 889758396}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1929,20 +1928,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &889758396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889758394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b781a7e09a071740b9cdf1cbb1a4666, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 1
-  CreditsAnimation: {fileID: 1304447683}
 --- !u!1 &890694616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,7 +1939,7 @@ GameObject:
   - component: {fileID: 890694618}
   - component: {fileID: 890694617}
   m_Layer: 0
-  m_Name: CreditsVolume
+  m_Name: CreditsController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1969,10 +1954,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 890694616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6300c501c43eb224f9498a651242fff3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b781a7e09a071740b9cdf1cbb1a4666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creditsAudio: {fileID: 1642525776}
+  animator: {fileID: 1304447683}
+  animationSpeed: 0
+  AudioSource: {fileID: 1642525776}
+  BGMVolume: 0
 --- !u!4 &890694618
 Transform:
   m_ObjectHideFlags: 0
@@ -2571,7 +2559,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1304447682}
   - component: {fileID: 1304447683}
-  - component: {fileID: 1304447684}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -2623,26 +2610,12 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3432825c98d94bb4ea68c5040e5953fd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1304447684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304447681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b781a7e09a071740b9cdf1cbb1a4666, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 0.07
-  CreditsAnimation: {fileID: 1304447683}
 --- !u!1 &1334257564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2927,7 +2900,7 @@ GameObject:
   - component: {fileID: 1642525777}
   - component: {fileID: 1642525776}
   m_Layer: 0
-  m_Name: BackgroundMusic
+  m_Name: BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

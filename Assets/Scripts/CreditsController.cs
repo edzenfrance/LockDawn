@@ -5,36 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class CreditsController : MonoBehaviour
 {
-    [Range(0, 5)]
-    public float Speed = 1.0f;
-    public Animator CreditsAnimation;
+    [Header("Credits Animation")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private float animationSpeed;
+
+    [Header("Credits Audio")]
+    [SerializeField] private AudioSource AudioSource;
+    [SerializeField] private float BGMVolume;
+
 
     void Start()
     {
-        CreditsAnimation.speed = 0.6f;
+        animationSpeed = 0.6f;
+        animator.speed = animationSpeed;
+        BGMVolume = PlayerPrefs.GetFloat("mVolume", 1);
+        AudioSource.volume = BGMVolume;
     }
 
-    public void CreditsFastForward()
+    public void FastForwardAnimation()
     {
-        if (Speed == 1.0f)
+        if (animationSpeed == 1f)
         {
             Debug.Log("Fast Forward");
-            Speed = 2.0f;
-            CreditsAnimation.speed = 2.0f;
+            animationSpeed = 2f;
+            animator.speed = animationSpeed;
         }
         else
         {
             Debug.Log("Normal");
-            Speed = 1.0f;
-            CreditsAnimation.speed = 1.0f;
+            animationSpeed = 1f;
+            animator.speed = animationSpeed;
         }
     }
 
-    public void CreditsPause()
+    public void PauseAnimation()
     {
         Debug.Log("Pause");
-        Speed = 0.0f;
-        CreditsAnimation.speed = 0.0f;
+        animationSpeed = 0f;
+        animator.speed = animationSpeed;
     }
     
     public void CreditsBack()
