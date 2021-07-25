@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Credits : MonoBehaviour
+public class CreditsController : MonoBehaviour
 {
     [Range(0, 5)]
     public float Speed = 1.0f;
