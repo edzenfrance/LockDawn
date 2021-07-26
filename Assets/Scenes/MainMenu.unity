@@ -1063,13 +1063,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6382d794c44e1464283aa82080bbd77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicAudio: {fileID: 0}
-  SoundAudio: {fileID: 0}
-  MusicVolume: 1
-  SoundVolume: 1
-  IsFirstRun: 0
-  IsMusicMuted: 0
-  IsSoundMuted: 0
+  musicAudio: {fileID: 0}
+  soundAudio: {fileID: 0}
+  musicVolume: 0
+  soundVolume: 0
+  isMusicMuted: 0
+  isSoundMuted: 0
 --- !u!4 &178173290
 Transform:
   m_ObjectHideFlags: 0
@@ -1567,20 +1566,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e1b0ed937c8cd429e2f32497cb367a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicAudio: {fileID: 991108601}
-  SoundAudio: {fileID: 1324783413}
-  musicVolumeSlider: {fileID: 1073656696}
-  soundVolumeSlider: {fileID: 1427488906}
-  musicVolumeSliderFill: {fileID: 1575957440}
-  soundVolumeSliderFill: {fileID: 933927523}
-  MusicVolume: 1
-  SoundVolume: 1
+  musicAudio: {fileID: 0}
+  soundAudio: {fileID: 0}
+  musicVolume: 1
+  soundVolume: 1
+  musicSlider: {fileID: 1073656696}
+  soundSlider: {fileID: 1427488906}
+  musicSliderFill: {fileID: 1575957440}
+  soundSliderFill: {fileID: 933927523}
+  fillColorMute: {r: 0.50980395, g: 0, b: 0, a: 1}
+  fillColorUnmute: {r: 0.7529412, g: 0.039215688, b: 0.039215688, a: 1}
   musicToggle: {fileID: 915860895}
   soundToggle: {fileID: 1244525086}
   musicToggleText: {fileID: 1575742667}
   soundToggleText: {fileID: 1701773417}
-  IsMusicMuted: 0
-  IsSoundMuted: 0
+  isMusicMuted: 0
+  isSoundMuted: 0
 --- !u!1 &301982198
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,8 +4956,8 @@ GameObject:
   - component: {fileID: 991108601}
   - component: {fileID: 991108603}
   m_Layer: 0
-  m_Name: BackgroundMusic
-  m_TagString: MenuBackgroundMusic
+  m_Name: BGM
+  m_TagString: MainMenuBGM
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4972,7 +4973,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1fd146ba9ea0044b918a535fe9657be, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -5961,7 +5962,7 @@ GameObject:
   - component: {fileID: 1324783413}
   m_Layer: 0
   m_Name: SFXManager
-  m_TagString: Untagged
+  m_TagString: SFXManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6084,7 +6085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324783412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1122.1461, y: 521.6794, z: -1375.8429}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

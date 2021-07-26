@@ -2,88 +2,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class VolumeController : MonoBehaviour
 {
-    [Header("AudioSource")]
-    [SerializeField] private AudioSource MusicAudio;
-    [SerializeField] private AudioSource SoundAudio;
+    [Header("Audio Source")]
+    [SerializeField] private AudioSource musicAudio;
+    [SerializeField] private AudioSource soundAudio;
+
+    [Header("Audio Source Volume")]
+    [SerializeField] private float musicVolume;
+    [SerializeField] private float soundVolume;
 
     [Header("Volume Slider")]
-    [SerializeField] private Slider musicVolumeSlider;
-    [SerializeField] private Slider soundVolumeSlider;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider soundSlider;
 
-    [SerializeField] private Image musicVolumeSliderFill;
-    [SerializeField] private Image soundVolumeSliderFill;
+    [Header("Volume Slider Fill")]
+    [SerializeField] private Image musicSliderFill;
+    [SerializeField] private Image soundSliderFill;
 
-    [Header("AudioSource Volume")]
-    [SerializeField] private float MusicVolume = 1f;
-    [SerializeField] private float SoundVolume = 1f;
+    [Header("Volume Slider Fill Color")]
+    [SerializeField] private Color fillColorMute = new Color32(130, 0, 0, 255);
+    [SerializeField] private Color fillColorUnmute = new Color32(192, 10, 10, 255);
 
-    [Header("Audio Toggle Checkbox")]
+    [Header("Audio Toggle")]
     [SerializeField] private Toggle musicToggle;
     [SerializeField] private Toggle soundToggle;
 
-    [SerializeField] private TMPro.TextMeshProUGUI musicToggleText;
-    [SerializeField] private TMPro.TextMeshProUGUI soundToggleText;
+    [Header("Text Toggle")]
+    [SerializeField] private TextMeshProUGUI musicToggleText;
+    [SerializeField] private TextMeshProUGUI soundToggleText;
 
-    [SerializeField] private int IsMusicMuted;
-    [SerializeField] private int IsSoundMuted;
-
-    Color colorMute = new Color32(130, 0, 0, 255);
-    Color colorUnMute = new Color32(192, 10, 10, 255);
+    [Header("Volume Mute")]
+    [SerializeField] private int isMusicMuted;
+    [SerializeField] private int isSoundMuted;
 
     void Awake()
     {
-        //MusicAudio = GameObject.Find("BackgroundMusic").GetComponent<AudioSource>();
-        //SoundAudio = GameObject.Find("SFXManager").GetComponent<AudioSource>();
-        //musicVolumeSliderFill = musicVolumeSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
-        ///soundVolumeSliderFill = soundVolumeSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
+        // Use FindGameObjectWithTag because Audio Source is automatically destroyed in MainMenuBGM.cs
+        musicAudio = GameObject.FindGameObjectWithTag("MainMenuBGM").GetComponent<AudioSource>();
+        soundAudio = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<AudioSource>();
+        //musicSliderFill = musicSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
+        //soundSliderFill = soundSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
 
-        Debug.Log("VolumeController - Started");
-        IsMusicMuted = PlayerPrefs.GetInt("mVolumeMute");
-        IsSoundMuted = PlayerPrefs.GetInt("sVolumeMute");
-        MusicVolume = PlayerPrefs.GetFloat("mVolume");
-        SoundVolume = PlayerPrefs.GetFloat("sVolume");
+        isMusicMuted = PlayerPrefs.GetInt("mVolumeMute", 0);
+        isSoundMuted = PlayerPrefs.GetInt("sVolumeMute", 0);
+        musicVolume = PlayerPrefs.GetFloat("mVolume", 1);
+        soundVolume = PlayerPrefs.GetFloat("sVolume", 1);
 
-        if (IsMusicMuted == 1)
-        {
-            musicVolumeSlider.value = MusicVolume;
+        musicSlider.value = musicVolume;
+        soundSlider.value = soundVolume;
+
+        if (isMusicMuted == 1)
             musicToggle.isOn = false;
-        }
-        else
-        {
-            musicVolumeSlider.value = MusicVolume;
-        }
-
-        if (IsSoundMuted == 1)
-        {
-            soundVolumeSlider.value = SoundVolume;
+        if (isSoundMuted == 1)
             soundToggle.isOn = false;
-        }
-        else
-        {
-            soundVolumeSlider.value = SoundVolume;
-        }
-    }
-
-    void Update()
-    {
-        MusicAudio.volume = MusicVolume;
-        SoundAudio.volume = SoundVolume;
     }
 
     public void UpdateMusicVolume(float volume)
     {
-        MusicVolume = volume;
-        PlayerPrefs.SetFloat("mVolume", MusicVolume);
-        Debug.Log("VolumeController - Slider Music Volume: " + MusicAudio.volume);
+        musicAudio.volume = volume;
+        PlayerPrefs.SetFloat("mVolume", volume);
+        Debug.Log("<color=white>VolumeController</color> - Slider Music - Volume: " + musicAudio.volume);
     }
     public void UpdateSoundVolume(float volume)
     {
-        SoundVolume = volume;
-        PlayerPrefs.SetFloat("sVolume", SoundVolume);
-        Debug.Log("VolumeController - Slider Sound Volume: " + SoundAudio.volume);
+        soundAudio.volume = volume;
+        PlayerPrefs.SetFloat("sVolume", volume);
+        Debug.Log("<color=white>VolumeController</color> - Slider Sound - Volume: " + soundAudio.volume);
     }
 
     public void ToggleMusic()
@@ -92,22 +79,21 @@ public class VolumeController : MonoBehaviour
         if (MusicToggleSwitch)
         {
             PlayerPrefs.SetInt("mVolumeMute", 0);
-            musicVolumeSlider.enabled = true;
-            musicVolumeSliderFill.color = colorUnMute;
+            musicAudio.mute = false;
+            musicSlider.enabled = true;
+            musicSliderFill.color = fillColorUnmute;
             musicToggleText.text = "ON";
-            MusicVolume = PlayerPrefs.GetFloat("mVolume");
-            Debug.Log("VolumeController - ToggleMusic: ON - Volume: " + MusicVolume);
+            Debug.Log("<color=white>VolumeController</color> - Toggle Music: ON");
 
         }
         else
         {
             PlayerPrefs.SetInt("mVolumeMute", 1);
-            musicVolumeSlider.value = MusicVolume;
-            musicVolumeSlider.enabled = false;
-            musicVolumeSliderFill.color = colorMute;
+            musicAudio.mute = true;
+            musicSlider.enabled = false;
+            musicSliderFill.color = fillColorMute;
             musicToggleText.text = "OFF";
-            MusicVolume = 0f;
-            Debug.Log("VolumeController - ToggleMusic: OFF - Volume: " + MusicVolume);
+            Debug.Log("<color=white>VolumeController</color> - Toggle Music: OFF");
         }
     }
 
@@ -117,20 +103,20 @@ public class VolumeController : MonoBehaviour
         if (soundToggleSwitch)
         {
             PlayerPrefs.SetInt("sVolumeMute", 0);
-            soundVolumeSlider.enabled = true;
-            soundVolumeSliderFill.color = colorUnMute;
+            soundAudio.mute = false;
+            soundSlider.enabled = true;
+            soundSliderFill.color = fillColorUnmute;
             soundToggleText.text = "ON";
-            SoundVolume = PlayerPrefs.GetFloat("sVolume");
-            Debug.Log("VolumeController - ToggleSound: ON - Volume: " + SoundVolume);
+            Debug.Log("<color=white>VolumeController</color> - Toggle Sound: ON");
         }
         else
         {
             PlayerPrefs.SetInt("sVolumeMute", 1);
-            soundVolumeSlider.enabled = false;
-            soundVolumeSliderFill.color = colorMute;
+            soundAudio.mute = true;
+            soundSlider.enabled = false;
+            soundSliderFill.color = fillColorMute;
             soundToggleText.text = "OFF";
-            SoundVolume = 0f;
-            Debug.Log("VolumeController - ToggleSound: OFF - Volume: " + SoundVolume);
+            Debug.Log("<color=white>VolumeController</color> - Toggle Sound: OFF");
         }
     }
 

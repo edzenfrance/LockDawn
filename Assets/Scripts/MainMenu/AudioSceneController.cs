@@ -6,77 +6,67 @@ using UnityEngine.SceneManagement;
 
 public class AudioSceneController : MonoBehaviour
 {
-    [Header("AudioSource")]
-    [SerializeField] private AudioSource MusicAudio;
-    [SerializeField] private AudioSource SoundAudio;
+    [Header("Audio Source")]
+    [SerializeField] private AudioSource musicAudio;
+    [SerializeField] private AudioSource soundAudio;
 
-    [Header("AudioSource Volume")]
-    [SerializeField] private float MusicVolume;
-    [SerializeField] private float SoundVolume;
+    [Header("Audio Source Volume")]
+    [SerializeField] private float musicVolume;
+    [SerializeField] private float soundVolume;
 
-    [Header("First Run")]
-    [SerializeField] private int IsFirstRun;
-    [SerializeField] private int IsMusicMuted;
-    [SerializeField] private int IsSoundMuted;
-
-    bool restartMusic = false;
+    [Header("Volume Mute Check")]
+    [SerializeField] private int isMusicMuted;
+    [SerializeField] private int isSoundMuted;
 
     private void Awake()
     {
-        MusicAudio = GameObject.Find("BackgroundMusic").GetComponent<AudioSource>();
-        SoundAudio = GameObject.Find("SFXManager").GetComponent<AudioSource>();
+        // Use FindGameObjectWithTag because Audio Source is automatically destroyed in MainMenuBGM.cs
+        musicAudio = GameObject.FindGameObjectWithTag("MainMenuBGM").GetComponent<AudioSource>();
+        soundAudio = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<AudioSource>();
 
+        isMusicMuted = PlayerPrefs.GetInt("mVolumeMute", 0);
+        isSoundMuted = PlayerPrefs.GetInt("sVolumeMute", 0);
+        musicVolume = PlayerPrefs.GetFloat("mVolume", 1);
+        soundVolume = PlayerPrefs.GetFloat("sVolume", 1);
+
+        if (isMusicMuted == 1)
+            musicAudio.mute = true;
+        if (isSoundMuted == 1)
+            soundAudio.mute = true;
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("<color=white>AudioSceneController</color> - On Enabled");
         SceneManager.sceneLoaded += OnSceneLoaded;
-        IsFirstRun = PlayerPrefs.GetInt("IsFirstRun");
-        IsMusicMuted = PlayerPrefs.GetInt("mVolumeMute");
-        IsSoundMuted = PlayerPrefs.GetInt("sVolumeMute");
+    }
 
-        if (IsFirstRun == 0)
-        {
-            PlayerPrefs.SetInt("IsFirstRun", 1);
-            PlayerPrefs.SetFloat("mVolume", 1);
-            PlayerPrefs.SetFloat("sVolume", 1);
-            PlayerPrefs.SetFloat("mVolumeMute", 0);
-            PlayerPrefs.SetFloat("sVolumeMute", 0);
-        }
-        else
-        {
-            MusicVolume = PlayerPrefs.GetFloat("mVolume");
-            SoundVolume = PlayerPrefs.GetFloat("sVolume");
-        }
-        if (IsMusicMuted == 1)
-        {
-            MusicVolume = 0f;
-        }
-        if (IsSoundMuted == 1)
-        {
-            SoundVolume = 0f;
-        }
+    void OnDisable()
+    {
+        Debug.Log("<color=white>AudioSceneController</color> - On Disabled");
     }
 
     void Start()
     {
-        MusicAudio.volume = MusicVolume;
-        SoundAudio.volume = SoundVolume;
+        musicAudio.volume = musicVolume;
+        soundAudio.volume = soundVolume;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //Debug.Log("OnSceneLoaded: " + scene.buildIndex);
-        if (restartMusic)
+        if (scene.buildIndex == 0)
         {
-            MusicAudio.Play();
-            restartMusic = false;
-            Debug.Log("SoundController - RESTART MUSIC");
+            musicAudio.Play();
+            Debug.Log("<color=white>AudioSceneController</color> - Current Scene Index: " + scene.buildIndex + " - Audio Play");
         }
         // if ((scene.buildIndex != 0) && (scene.buildIndex != 1))
         if (scene.buildIndex > 4)
         {
-            restartMusic = true;
-            //MusicAudio.volume = 0.0f;
-            //if (MusicAudio.timeSamples > MusicAudio.clip.samples - 300) MusicAudio.Stop();  // Fix for click artifact when stoping the music when not using streaming
-            MusicAudio.Stop();
-            Debug.Log("SoundController - STOP MUSIC");
+            //musicAudio.volume = 0f;
+            //if (musicAudio.timeSamples > musicAudio.clip.samples - 300) musicAudio.Stop();  // Fix for pop/click artefact when stopping the music if not using Load Type: Streaming
+            musicAudio.Stop();
+            Debug.Log("<color=white>AudioSceneController</color> - Current Scene Index: " + scene.buildIndex + " - Audio Stop");
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

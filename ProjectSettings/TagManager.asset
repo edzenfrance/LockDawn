@@ -5,9 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
-  - MenuBackgroundMusic
   - AchievementsText
   - AI
+  - MainMenuBGM
+  - SFXManager
   layers:
   - Default
   - TransparentFX
