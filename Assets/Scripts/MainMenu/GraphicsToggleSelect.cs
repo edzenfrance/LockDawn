@@ -17,26 +17,21 @@ public class GraphicsToggleSelect : MonoBehaviour
 
     void Start()
     {
-        setGraphicsQuality = PlayerPrefs.GetInt("LDGraphicsQuality");
+        setGraphicsQuality = PlayerPrefs.GetInt("LDGraphicsQuality", 3);
         if (setGraphicsQuality == 1)
         {
-            Debug.Log("<color=white>GraphicsToggleSelect</color> - Set Quality: Low");
+            Debug.Log("<color=white>GraphicsToggleSelect</color> - Graphics Quality: Low");
             toggleQualityLow.isOn = true;
         }
         if (setGraphicsQuality == 2)
         {
-            Debug.Log("<color=white>GraphicsToggleSelect</color> - Set Quality: Medium");
+            Debug.Log("<color=white>GraphicsToggleSelect</color> - Graphics Quality: Medium");
             toggleQualityMedium.isOn = true;
         }
         if (setGraphicsQuality == 3)
         {
-            Debug.Log("<color=white>GraphicsToggleSelect</color> - Set Quality: High");
+            Debug.Log("<color=white>GraphicsToggleSelect</color> - Graphics Quality: High");
             toggleQualityHigh.isOn = true;
-        }
-        else
-        {
-            Debug.Log("<color=white>GraphicsToggleSelect</color> - No Set Quality, Auto Set Quality: Medium");
-            toggleQualityMedium.isOn = true;
         }
     }
 
