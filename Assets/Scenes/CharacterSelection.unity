@@ -252,9 +252,9 @@ RectTransform:
   m_Father: {fileID: 1002954435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180.37, y: -44.80545}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 180.37, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &274481675
@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 3161dac85e8537844bbf153f22d6175f, type: 2}
     - target: {fileID: 6784681748935456524, guid: e5d16356e27880c4dab68314ed7447a2, type: 3}
       propertyPath: m_Name
-      value: Lunox
+      value: Body
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5d16356e27880c4dab68314ed7447a2, type: 3}
