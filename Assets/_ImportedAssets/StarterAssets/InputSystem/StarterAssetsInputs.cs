@@ -52,6 +52,7 @@ namespace StarterAssets
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
+			sprint = newMoveDirection.sqrMagnitude > 0.75f;
 			move = newMoveDirection;
 		} 
 
