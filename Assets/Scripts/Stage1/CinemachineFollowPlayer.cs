@@ -9,7 +9,7 @@ public class CinemachineFollowPlayer : MonoBehaviour
     [SerializeField] private GameObject vcamPlayerCameraRoot;
     [SerializeField] private Transform vcamFollow;
 
-    private void Awake()
+    void Start()
     {
         vcam = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
         vcamThirdPersonFollow = vcam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
