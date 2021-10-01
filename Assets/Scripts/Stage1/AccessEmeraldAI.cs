@@ -21,6 +21,7 @@ public class AccessEmeraldAI : MonoBehaviour
         EmeraldComponent = GetComponent<EmeraldAISystem>();
         EventsManager = EmeraldComponent.EmeraldEventsManagerComponent;
         maxChaseDistance = EmeraldComponent.MaxChaseDistance;
+        PlayerPrefs.SetInt("GameDifficulty", 2);
         NPCDifficulty = PlayerPrefs.GetInt("GameDifficulty", 2);
         refresh = true;
     }
@@ -48,6 +49,7 @@ public class AccessEmeraldAI : MonoBehaviour
             }
             else
             {
+                Debug.Log("NPC: " + NPCDifficulty);
                 EmeraldComponent.WalkFootstepVolume = 0.015f;
                 EmeraldComponent.RunFootstepVolume = 0.015f;
                 if (NPCDifficulty == 1)
