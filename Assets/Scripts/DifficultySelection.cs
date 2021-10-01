@@ -21,6 +21,11 @@ public class DifficultySelection : MonoBehaviour
     [SerializeField] private GameObject textNormal;
     [SerializeField] private GameObject textHard;
 
+    void Start()
+    {
+        PlayerPrefs.SetInt("GameDifficulty", 2);
+    }
+
     public void DifficultyEasy()
     {
         DifficultyChange(1);
