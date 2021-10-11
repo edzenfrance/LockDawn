@@ -6527,12 +6527,12 @@ GameObject:
   - component: {fileID: 808117730}
   - component: {fileID: 808117729}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonTemp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &808117728
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14099,7 +14099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1515961960
 MonoBehaviour:
   m_ObjectHideFlags: 0
