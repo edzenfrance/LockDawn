@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public GameObject buttonsDialog;
-    public GameObject restartDialog;
-    public GameObject settingDialog;
-    public GameObject exitDialog;
-
+    public GameObject PauseScreen;
     public Transform box;
     public CanvasGroup background;
+
+    [Header("FrameRate")]
+    [SerializeField] private Toggle framerateToggle;
+    [SerializeField] private GameObject framerateCounter;
 
     bool GamePaused = false;
 
@@ -36,7 +36,7 @@ public class Settings : MonoBehaviour
         background.alpha = 0;
         background.LeanAlpha(1, 0.5f);
         box.localPosition = new Vector2(0, -Screen.height);
-        box.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().setOnComplete(OnEnableComplete).delay = 0.1f;
+        box.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().setOnComplete(OnEnableComplete).delay = 0f;
     }
 
     void OnEnableComplete()
@@ -54,5 +54,24 @@ public class Settings : MonoBehaviour
     void OnBackComplete()
     {
         gameObject.SetActive(false);
+        PauseScreen.SetActive(true);
+    }
+
+    public void ToggleFrameRate()
+    {
+        bool MusicToggleSwitch = framerateToggle.isOn;
+        if (MusicToggleSwitch)
+        {
+            PlayerPrefs.SetInt("ShowFPS", 0);
+            framerateCounter.SetActive(true);
+            Debug.Log("<color=white>VolumeController</color> - Show Frame Rate: ON");
+
+        }
+        else
+        {
+            PlayerPrefs.SetInt("ShowFPS", 1);
+            framerateCounter.SetActive(false);
+            Debug.Log("<color=white>VolumeController</color> - Show Frame Rate: OFF");
+        }
     }
 }

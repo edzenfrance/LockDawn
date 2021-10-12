@@ -37,7 +37,7 @@ public class PauseScreen : MonoBehaviour
         background.alpha = 0;
         background.LeanAlpha(1, 0.5f);
         box.localPosition = new Vector2(0, -Screen.height);
-        box.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().setOnComplete(OnEnableComplete).delay = 0.1f;
+        box.LeanMoveLocalY(0, 0.5f).setEaseOutExpo().setOnComplete(OnEnableComplete).delay = 0f; //.delay = 0.1f
     }
 
     void OnEnableComplete()
@@ -98,8 +98,6 @@ public class PauseScreen : MonoBehaviour
         gameObject.SetActive(false);
         settingDialog.SetActive(true);
     }
-
-
     public void OnExit()
     {
         buttonsDialog.SetActive(false);
