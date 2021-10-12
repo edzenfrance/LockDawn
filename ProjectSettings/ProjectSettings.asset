@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: ACDP
   productName: LockDawn
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ PlayerSettings:
   androidFullscreenMode: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 1
+  runInBackground: 0
   captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1.8.0
+  bundleVersion: 0.0.0.0
   preloadedAssets:
   - {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
   metroInputSource: 0
@@ -154,7 +154,8 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.DefaultCompany.LockDawn
+    Android: com.ACDP.LockDawn
+    Standalone: com.ACDP.LockDawn
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -247,7 +248,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: D:/Game Development/Unity Keystore/user.keystore
+  AndroidKeystoreName: D:/Game Development/Unity Keystore/edzen12psalmae.keystore
   AndroidKeyaliasName: edzenkey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
