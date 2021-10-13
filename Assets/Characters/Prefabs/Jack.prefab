@@ -1160,8 +1160,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   CinemachineCameraTarget: {fileID: 5550696137647414397}
-  TopClamp: 70
-  BottomClamp: -30
+  TopClamp: 10
+  BottomClamp: 0
   CameraAngleOverride: 0
   LockCameraPosition: 0
 --- !u!114 &5550696136509761184

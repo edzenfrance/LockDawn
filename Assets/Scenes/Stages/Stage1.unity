@@ -13480,7 +13480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &896110010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13919,10 +13919,7 @@ MonoBehaviour:
   characterPrefabs:
   - {fileID: 3944162846998844261, guid: d6c40dea4afd6324da4d6c450e114640, type: 3}
   - {fileID: 3633005488881322511, guid: d2f2bc70c93fab44f8a681737a311505, type: 3}
-  - {fileID: 927465331011142284, guid: 16d149d84f667e2418136d4db551cf2d, type: 3}
-  - {fileID: 3250604492978982948, guid: dd164b3826650c24fa627482d39f5a9d, type: 3}
   - {fileID: 7579520844337382581, guid: d5c0adb79a71cdb479ac41199d103f75, type: 3}
-  - {fileID: 7201042448192722542, guid: 29ff2b2cd4a774248ba303ba44c5b9c6, type: 3}
   spawnPoint: {fileID: 39468596}
   selectedCharacterText: {fileID: 875933375}
 --- !u!4 &911703626
@@ -24567,7 +24564,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 173804836}
   m_Direction: 0
   m_MinValue: 1.5
-  m_MaxValue: 2
+  m_MaxValue: 1.75
   m_WholeNumbers: 0
   m_Value: 1.5
   m_OnValueChanged:
