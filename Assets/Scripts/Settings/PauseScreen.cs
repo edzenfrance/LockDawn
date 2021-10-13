@@ -9,6 +9,7 @@ public class PauseScreen : MonoBehaviour
     public GameObject buttonsDialog;
     public GameObject restartDialog;
     public GameObject settingDialog;
+    public GameObject stageDialog;
     public GameObject exitDialog;
 
 
@@ -59,10 +60,21 @@ public class PauseScreen : MonoBehaviour
 
     public void OnStage()
     {
+        /*
         GamePaused = false;
         Debug.Log("PauseScreen - Previous Scene: Stage 1");
         PlayerPrefs.SetString("Scene", "Stage1");
         SceneManager.LoadScene("StageSelect");
+        */
+
+        GamePaused = false;
+        background.LeanAlpha(0, 0.5f);
+        box.LeanMoveLocalY(-Screen.height, 0.5f).setEaseInExpo().setOnComplete(OnStageComplete);
+    }
+    void OnStageComplete()
+    {
+        gameObject.SetActive(false);
+        stageDialog.SetActive(true);
     }
 
     public void OnRestart()
