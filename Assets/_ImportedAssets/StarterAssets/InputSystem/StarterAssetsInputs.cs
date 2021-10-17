@@ -52,6 +52,8 @@ namespace StarterAssets
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
+			// Sprint character using Joystick (Disable this if using UI_Virtual_TouchZone_Move
+			// UI_Canvas_StarterAssetsInputs_Joysticks >  UI_Virtual_Joystick_Move
 			sprint = newMoveDirection.sqrMagnitude > 0.75f;
 			move = newMoveDirection;
 		} 

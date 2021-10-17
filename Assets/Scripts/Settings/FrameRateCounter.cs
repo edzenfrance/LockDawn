@@ -16,15 +16,15 @@ public class FrameRateCounter : MonoBehaviour
         refresh = true;
     }
 
-    void getFrameRate()
+    void GetFrameRate()
     {
         fpsCounter = 1.0f / Time.unscaledDeltaTime;
         FPSText.text = "FPS: " + fpsCounter.ToString("f0");
         refresh = false;
-        StartCoroutine(refreshDelay());
+        StartCoroutine(RefreshDelay());
     }
 
-    IEnumerator refreshDelay()
+    IEnumerator RefreshDelay()
     {
         yield return new WaitForSeconds(refreshTime);
         refresh = true;
@@ -34,7 +34,7 @@ public class FrameRateCounter : MonoBehaviour
     {
         if (refresh)
         {
-            getFrameRate();
+            GetFrameRate();
         }
     }
 }
