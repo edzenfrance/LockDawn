@@ -1048,7 +1048,9 @@ GameObject:
   - component: {fileID: 5550696136509761185}
   - component: {fileID: 5550696136509761184}
   - component: {fileID: 5550696136509761198}
-  - component: {fileID: 7937732428731969494}
+  - component: {fileID: -872555346960314895}
+  - component: {fileID: 9216134374197050350}
+  - component: {fileID: 2337217069976873833}
   m_Layer: 3
   m_Name: Jack
   m_TagString: Player
@@ -1212,7 +1214,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7937732428731969494
+--- !u!114 &-872555346960314895
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1221,10 +1223,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 3944162846998844261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad709a3ca316d341876f1db853b118e, type: 3}
+  m_Script: {fileID: 11500000, guid: 51a0dcdfbc27846449700c6dc3142d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+--- !u!65 &9216134374197050350
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3944162846998844261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15, y: 20, z: 20}
+  m_Center: {x: 0, y: 32, z: 4}
+--- !u!114 &2337217069976873833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3944162846998844261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0a0a2ebb82f3143adac1e766aebbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInMap: {fileID: 0}
+  map2dEnd: {fileID: 0}
+  map3dParent: {fileID: 0}
+  map3dEnd: {fileID: 0}
 --- !u!1 &4000110471049970215
 GameObject:
   m_ObjectHideFlags: 0
