@@ -1,0 +1,11 @@
+Model Information:
+* title:	Medicine jar
+* source:	https://sketchfab.com/3d-models/medicine-jar-346a76c43d144f3fbd64a0af5dad9b5d
+* author:	Sector347 (https://sketchfab.com/sector347)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Medicine jar" (https://sketchfab.com/3d-models/medicine-jar-346a76c43d144f3fbd64a0af5dad9b5d) by Sector347 (https://sketchfab.com/sector347) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

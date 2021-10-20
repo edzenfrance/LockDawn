@@ -219,6 +219,17 @@ namespace StarterAssets
 			// move the player
 			_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
+
+
+			_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+			float rotationNew = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+			transform.rotation = Quaternion.Euler(0.0f, rotationNew, 0.0f);
+
+			// youtu.be/537B1kJp9YQ?t=249
+			// transform.rotation = Quaternion.Euler(0, CinemachineCameraTarget.transform.rotation.eulerAngles.y, 0);
+			// CinemachineCameraTarget.transform.localEulerAngles = new Vector3(0, -1000, 0);
+
+
 			// update animator if using character
 			if (_hasAnimator)
 			{
