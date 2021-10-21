@@ -195,7 +195,9 @@ namespace StarterAssets
 			}
 			else
 			{
-				_speed = targetSpeed;
+				// forum.unity.com/threads/say-hello-to-the-new-starter-asset-packages.1123051/page-3#post-7361528
+				_speed = targetSpeed * inputMagnitude; // FIX
+				_speed = Mathf.Round(_speed * 1000f) / 1000f; // round now as well
 			}
 			_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
 

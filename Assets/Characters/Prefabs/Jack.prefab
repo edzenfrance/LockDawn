@@ -1237,8 +1237,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15, y: 20, z: 20}
-  m_Center: {x: 0, y: 32, z: 4}
+  m_Size: {x: 30, y: 20, z: 25}
+  m_Center: {x: 0, y: 40, z: 0}
 --- !u!114 &2337217069976873833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1255,6 +1255,7 @@ MonoBehaviour:
   map2dEnd: {fileID: 0}
   map3dParent: {fileID: 0}
   map3dEnd: {fileID: 0}
+  mapViewObject: {fileID: 0}
 --- !u!1 &4000110471049970215
 GameObject:
   m_ObjectHideFlags: 0
