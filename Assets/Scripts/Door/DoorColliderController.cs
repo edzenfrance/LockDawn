@@ -6,6 +6,11 @@ public class DoorColliderController : MonoBehaviour
 {
     [SerializeField] public Animator myDoor = null;
 
+    void Start()
+    {
+        myDoor = transform.parent.GetComponent<Animator>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
