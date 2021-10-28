@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PauseScreen : MonoBehaviour
 {
+    public GameObject pauseButton;
+    public GameObject mapButton;
+    public GameObject inventoryButton;
+
     public GameObject buttonsDialog;
     public GameObject restartDialog;
     public GameObject settingDialog;
     public GameObject stageDialog;
     public GameObject exitDialog;
-
 
     public Transform box;
     public CanvasGroup background;
@@ -35,6 +35,9 @@ public class PauseScreen : MonoBehaviour
     public void OnEnable()
     {
         Debug.Log("<color=white>PauseScreen</color> - OnEnable");
+        pauseButton.SetActive(false);
+        mapButton.SetActive(false);
+        inventoryButton.SetActive(false);
         background.alpha = 0;
         background.LeanAlpha(1, 0.5f);
         box.localPosition = new Vector2(0, -Screen.height);
@@ -55,6 +58,9 @@ public class PauseScreen : MonoBehaviour
 
     void OnResumeComplete()
     {
+        pauseButton.SetActive(true);
+        mapButton.SetActive(true);
+        inventoryButton.SetActive(true);
         gameObject.SetActive(false);
     }
 

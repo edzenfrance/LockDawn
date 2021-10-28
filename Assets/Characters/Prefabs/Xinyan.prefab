@@ -4224,7 +4224,10 @@ GameObject:
   - component: {fileID: 7471341660043610398}
   - component: {fileID: 7471341660043610399}
   - component: {fileID: 7471341660043610397}
-  m_Layer: 0
+  - component: {fileID: 8844731749354114524}
+  - component: {fileID: -1281833107765910140}
+  - component: {fileID: 318067718162629104}
+  m_Layer: 3
   m_Name: Xinyan
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4331,8 +4334,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   CinemachineCameraTarget: {fileID: 7471341659947726386}
-  TopClamp: 70
-  BottomClamp: -30
+  TopClamp: 10
+  BottomClamp: 0
   CameraAngleOverride: 0
   LockCameraPosition: 0
 --- !u!114 &7471341660043610399
@@ -4382,6 +4385,48 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8844731749354114524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201042448192722542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a0dcdfbc27846449700c6dc3142d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &-1281833107765910140
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201042448192722542}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.8, z: 0.9}
+  m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &318067718162629104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201042448192722542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0a0a2ebb82f3143adac1e766aebbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInMap: {fileID: 0}
+  map2dEnd: {fileID: 0}
+  map3dParent: {fileID: 0}
+  map3dEnd: {fileID: 0}
+  mapViewObject: {fileID: 0}
 --- !u!1 &7251068405213636988
 GameObject:
   m_ObjectHideFlags: 0

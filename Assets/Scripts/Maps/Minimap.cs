@@ -13,15 +13,24 @@ public class Minimap : MonoBehaviour
 
     private Vector3 normalized, mapped;
 
+    string sceneName;
+
     private void Awake()
     {
-        playerInMap = GameObject.Find("Map2DPlayer").GetComponent<RectTransform>();
-        map2dEnd = GameObject.Find("Map2DEnd").GetComponent<RectTransform>();
-        map3dParent = GameObject.Find("Map3D").GetComponent<Transform>();
-        map3dEnd = GameObject.Find("Map3DEnd").GetComponent<Transform>();
+        // Create a temporary reference to the current scene.
+        Scene currentScene = SceneManager.GetActiveScene();
+        // Retrieve the name of this scene.
+        sceneName = currentScene.name;
+        if (sceneName == "Stage1")
+        {
+            playerInMap = GameObject.Find("Map2DPlayer").GetComponent<RectTransform>();
+            map2dEnd = GameObject.Find("Map2DEnd").GetComponent<RectTransform>();
+            map3dParent = GameObject.Find("Map3D").GetComponent<Transform>();
+            map3dEnd = GameObject.Find("Map3DEnd").GetComponent<Transform>();
 
-        mapViewObject = GameObject.Find("MapView");
-        mapViewObject.SetActive(false);
+            mapViewObject = GameObject.Find("MapView");
+            mapViewObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -29,7 +38,7 @@ public class Minimap : MonoBehaviour
         // Create a temporary reference to the current scene.
         Scene currentScene = SceneManager.GetActiveScene();
         // Retrieve the name of this scene.
-        string sceneName = currentScene.name;
+        sceneName = currentScene.name;
         if (sceneName == "Stage1")
         {
             normalized = Divide(

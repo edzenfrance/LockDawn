@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using EmeraldAI.Example;
 
 namespace EmeraldAI
@@ -12,6 +13,13 @@ namespace EmeraldAI
     public class EmeraldAIPlayerDamage : MonoBehaviour
     {
         public List<string> ActiveEffects = new List<string>();
+
+        [SerializeField] private HealthBarController healthBarController;
+
+        void Awake()
+        {
+            healthBarController = GameObject.Find("Health Bar").GetComponent<HealthBarController>();
+        }
 
         public void SendPlayerDamage(int DamageAmount, Transform Target, EmeraldAISystem EmeraldComponent, bool CriticalHit = false)
         {
@@ -35,11 +43,18 @@ namespace EmeraldAI
 
         void DamagePlayerStandard(int DamageAmount)
         {
+            Debug.Log("Damage Amount: " + DamageAmount);
+            healthBarController.ChangeHealthPoint(-DamageAmount);
+            PlayerPrefs.SetInt("PlayerIsPoison", 1);
+            healthBarController.PlayerDPS(5);
+            // IDK How to use this
+            /*
             if (GetComponent<EmeraldAIPlayerHealth>() != null)
             {
                 EmeraldAIPlayerHealth PlayerHealth = GetComponent<EmeraldAIPlayerHealth>();
                 PlayerHealth.DamagePlayer(DamageAmount);
             }
+            */
         }
 
         /*

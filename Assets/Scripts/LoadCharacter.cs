@@ -14,6 +14,5 @@ public class LoadCharacter : MonoBehaviour
         GameObject clone = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
         Debug.Log("<color=white>LoadCharacter</color> - Enabled Character: " + prefab.name);
         selectedCharacterText.text = "Player: " + prefab.name;
-        
     }
 }

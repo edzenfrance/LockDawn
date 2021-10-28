@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 5833923025577272655}
   - component: {fileID: 5833923025577272654}
   - component: {fileID: 5833923025577272652}
+  - component: {fileID: -3983449836454161385}
+  - component: {fileID: -2886375451825041577}
+  - component: {fileID: 8712547653454975390}
   m_Layer: 3
   m_Name: RacingMiki
   m_TagString: Player
@@ -122,8 +125,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   CinemachineCameraTarget: {fileID: 5833923026597960246}
-  TopClamp: 70
-  BottomClamp: -30
+  TopClamp: 10
+  BottomClamp: 0
   CameraAngleOverride: 0
   LockCameraPosition: 0
 --- !u!114 &5833923025577272654
@@ -173,6 +176,48 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &-3983449836454161385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250604492978982948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a0dcdfbc27846449700c6dc3142d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &-2886375451825041577
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250604492978982948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8712547653454975390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250604492978982948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0a0a2ebb82f3143adac1e766aebbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInMap: {fileID: 0}
+  map2dEnd: {fileID: 0}
+  map3dParent: {fileID: 0}
+  map3dEnd: {fileID: 0}
+  mapViewObject: {fileID: 0}
 --- !u!1 &5833923025728519681
 GameObject:
   m_ObjectHideFlags: 0

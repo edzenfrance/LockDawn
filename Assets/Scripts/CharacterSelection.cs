@@ -37,7 +37,7 @@ public class CharacterSelection : MonoBehaviour
     + "11. Create new Prefab in Prefabs folder\n"
 	+ "12. Drag the new character to the new Prefab and save\n"
 	+ "13. Click Hierarchy [TAB] > Characters [OBJECT]\n"
-	+ "14. Add new Element in Characters List (NOTE: Below this Instructions)\n"
+	+ "14. Add new Element [+] in Characters List (NOTE: Below this Instructions)\n"
 	+ "15. Drag the new character prefab in new Element of Characters List\n"
 	+ "16. Change the Animator component of new character prefab\n"
 	+ "     - Controller: Look Around-Nervous-A.controller (NOTE: This can be change to any controller)\n\n"
@@ -57,7 +57,8 @@ public class CharacterSelection : MonoBehaviour
 		characters[selectedCharacter].SetActive(false);
 		selectedCharacter = (selectedCharacter + 1) % characters.Length;
 		characters[selectedCharacter].SetActive(true);
-		Invoke("showCharName", 0f);
+		// Invoke("showCharName", 0f);
+		ShowCharName();
 	}
 
 	public void PreviousCharacter()
@@ -72,7 +73,7 @@ public class CharacterSelection : MonoBehaviour
 		Invoke("showCharName", 0f);
 	}
 
-	void showCharName()
+	void ShowCharName()
     {
 		GameObject charName = characters[selectedCharacter];
 		characterName.text = "Select " + charName.name;

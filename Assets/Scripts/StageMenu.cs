@@ -36,4 +36,9 @@ public class StageMenu : MonoBehaviour
         //SceneManager.LoadScene("Stage5");
     }
 
+    public void GotoMainMenuScene()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }

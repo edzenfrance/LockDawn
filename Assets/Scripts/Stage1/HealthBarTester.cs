@@ -3,24 +3,15 @@ using UnityEngine;
 
 public class HealthBarTester : MonoBehaviour
 {
-    private HealthBarController healthBar;
+    [SerializeField] private HealthBarController healthBar;
 
     void Awake()
     {
         healthBar = GameObject.Find("Health Bar").GetComponent<HealthBarController>();
     }
 
-    void Update()
+    public void TestHP()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            healthBar.changeHP(1);
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            healthBar.changeHP(-1);
-        }
-        */
+        healthBar.ChangeHealthPoint(-1);
     }
 }

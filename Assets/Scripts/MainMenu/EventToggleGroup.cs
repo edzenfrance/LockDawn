@@ -24,7 +24,6 @@ public class EventToggleGroup : MonoBehaviour
         _toggleGroup = GetComponent<ToggleGroup>();
     }
 
-    // Start is called before the first frame update
     void OnEnable()
     {
         foreach (Toggle toggle in _toggles)

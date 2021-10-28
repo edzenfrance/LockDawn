@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class DoorTriggerController : MonoBehaviour, IInteractable
@@ -27,22 +28,27 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     [SerializeField] private bool animeColliderEnabled = false;
 
     [Header("Door Button")]
-    [SerializeField] private GameObject doorAccessButton;
-    [SerializeField] private Sprite handImage;
-    [SerializeField] private Sprite keyImage;
-    
+    [SerializeField] private GameObject doorAccessObject;
+    [SerializeField] private Button doorAccessButton;
+    [SerializeField] public Sprite handImage;
+    [SerializeField] public Sprite keyImage;
 
     [Header("Key")]
     [SerializeField] private bool requireKeyA = false;
     [SerializeField] private GameObject keyNoteObject;
     [SerializeField] private TextMeshProUGUI keyNote;
-    [SerializeField] private string keyWarning;
 
-    int enDoorAccess;
+    string keyWarning = "This door requires <color=green>key.</color> The key must be around here, find it";
+
+    int enableDoorButton;
+    int needKeyLock;
 
     void Awake()
     {
         PlayerPrefs.DeleteKey("EnableDoorAccess");
+        PlayerPrefs.DeleteKey("KeyLock");
+        keyImage = Resources.Load<Sprite>("Art/Icons/KeyTwo");
+        handImage = Resources.Load<Sprite>("Art/Icons/hand_icon_white");
     }
 
     void Start()
@@ -58,25 +64,35 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         {
             // Save Door Name and Object Name
             PlayerPrefs.SetString("SaveDoorName", myDoor.name + "/" + gameObject.name);
-            enDoorAccess = PlayerPrefs.GetInt("EnableDoorAccess", 1);
-            Debug.Log("<color=white>TriggerDoorController</color> - DOOR CHECK: " + gameObject.name + " - <color=white>EnableDoorAccess:</color>  " + enDoorAccess);
-            if (enDoorAccess == 1)
+
+            // if Door Animation finish set the enDoorAccess to 1
+            enableDoorButton = PlayerPrefs.GetInt("EnableDoorAccess");
+            needKeyLock = PlayerPrefs.GetInt("KeyLock");
+
+            Debug.Log("<color=green>DoorTriggerController</color> - <color=white>Door Name:</color> " + gameObject.name);
+            Debug.Log("<color=green>DoorTriggerController</color> - <color=white>EnableDoorButton:</color>  " + enableDoorButton);
+
+            if (enableDoorButton == 1)
             {
-                doorAccessButton.SetActive(true);
+                doorAccessObject.SetActive(true);
             }
-            int keyLock = PlayerPrefs.GetInt("KeyLock");
+            if (needKeyLock == 1)
             {
-                //doorAccessButton.sprite
+
+                //doorAccessObject.sprite
             }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        enDoorAccess = PlayerPrefs.GetInt("EnableDoorAccess", 1);
-        if (enDoorAccess == 1)
+        if (other.CompareTag("Player"))
         {
-            doorAccessButton.SetActive(true);
+            enableDoorButton = PlayerPrefs.GetInt("EnableDoorAccess", 1);
+            if (enableDoorButton == 1)
+            {
+                doorAccessObject.SetActive(true);
+            }
         }
     }
 
@@ -85,7 +101,7 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             PlayerPrefs.DeleteKey("SaveDoorName");
-            doorAccessButton.SetActive(false);
+            doorAccessObject.SetActive(false);
             keyNote.text = "";
         }
     }
@@ -108,32 +124,32 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         // Open the door
         if (openOutsideT)
         {
-            Debug.Log("<color=white>TriggerDoorController</color> - Requiring Key: " + requireKeyA);
+            Debug.Log("<color=white>DoorTriggerController</color> - Requiring Key: " + requireKeyA);
             if (requireKeyA)
             {
                 int keyLock = PlayerPrefs.GetInt("KeyLock");
-                Debug.Log("<color=white>TriggerDoorController</color> - Key A: " + keyLock);
+                Debug.Log("<color=white>DoorTriggerController</color> - Key A: " + keyLock);
                 if (keyLock == 1)
                 {
-                    justFcknOpenTheDoor();
+                    JustOpenTheDoor();
                 }
                 else if (keyLock == 0)
                 {
-                    Debug.Log("<color=white>TriggerDoorController</color> - Key Required");
+                    Debug.Log("<color=white>DoorTriggerController</color> - Key Required");
                     keyNote.text = keyWarning;
                     keyNoteObject.SetActive(true);
-                    doorAccessButton.SetActive(false);
+                    doorAccessObject.SetActive(false);
                 }
             }
             else
             {
-                justFcknOpenTheDoor();
+                JustOpenTheDoor();
             }
         }
         else if (closeOutsideT)
         {
-            Debug.Log("<color=white>TriggerDoorController</color> - Close Outside");
-            doorAccessButton.SetActive(false);
+            Debug.Log("<color=white>DoorTriggerController</color> - Close Outside");
+            doorAccessObject.SetActive(false);
             gameObject.SetActive(false);
 
             openOutside.SetActive(true);
@@ -143,8 +159,8 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         }
         else if (openInsideT)
         {
-            Debug.Log("<color=white>TriggerDoorController</color> - Open Inside");
-            doorAccessButton.SetActive(false);
+            Debug.Log("<color=white>DoorTriggerController</color> - Open Inside");
+            doorAccessObject.SetActive(false);
             gameObject.SetActive(false);
             closeOutside.SetActive(true);
             closeInside.SetActive(true);
@@ -153,8 +169,8 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         }
         else if (closeInsideT)
         {
-            Debug.Log("<color=white>TriggerDoorController</color> - Close Inside");
-            doorAccessButton.SetActive(false);
+            Debug.Log("<color=white>DoorTriggerController</color> - Close Inside");
+            doorAccessObject.SetActive(false);
             gameObject.SetActive(false);
             openOutside.SetActive(true);
             openInside.SetActive(true);
@@ -163,10 +179,10 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         }
     }
 
-    void justFcknOpenTheDoor()
+    void JustOpenTheDoor()
     {
-        Debug.Log("<color=white>TriggerDoorController</color> - Open Outside");
-        doorAccessButton.SetActive(false);
+        Debug.Log("<color=white>DoorTriggerController</color> - Open Outside");
+        doorAccessObject.SetActive(false);
         gameObject.SetActive(false);
         closeOutside.SetActive(true);
         closeInside.SetActive(true);
