@@ -43,10 +43,8 @@ namespace EmeraldAI
 
         void DamagePlayerStandard(int DamageAmount)
         {
-            Debug.Log("Damage Amount: " + DamageAmount);
+            Debug.Log("<color=red>EmeraldAIPlayerDamage</color> - Damage: " + DamageAmount);
             healthBarController.ChangeHealthPoint(-DamageAmount);
-            PlayerPrefs.SetInt("PlayerIsPoison", 1);
-            healthBarController.PlayerDPS(5);
             // IDK How to use this
             /*
             if (GetComponent<EmeraldAIPlayerHealth>() != null)

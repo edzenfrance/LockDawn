@@ -70,7 +70,8 @@ public class CharacterSelection : MonoBehaviour
 			selectedCharacter += characters.Length;
 		}
 		characters[selectedCharacter].SetActive(true);
-		Invoke("showCharName", 0f);
+		//Invoke("showCharName", 0f);
+		ShowCharName();
 	}
 
 	void ShowCharName()

@@ -34,11 +34,15 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     [SerializeField] public Sprite keyImage;
 
     [Header("Key")]
+    [SerializeField] private bool isLocked = false;
+    [SerializeField] private bool isQuarantined = false;
     [SerializeField] private bool requireKeyA = false;
     [SerializeField] private GameObject keyNoteObject;
     [SerializeField] private TextMeshProUGUI keyNote;
 
     string keyWarning = "This door requires <color=green>key.</color> The key must be around here, find it";
+    string quarantineWarning = "You are in quarantine area! Watch some information about COVID-19 to reduce your quarantine time.";
+    string lockedWarning = "This door is locked.";
 
     int enableDoorButton;
     int needKeyLock;
@@ -108,6 +112,20 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
 
     public void OpenDoor()
     {
+        if (isQuarantined)
+        {
+            keyNote.text = quarantineWarning;
+            keyNoteObject.SetActive(true);
+            doorAccessObject.SetActive(false);
+            return;
+        }
+        if (isLocked)
+        {
+            keyNote.text = lockedWarning;
+            keyNoteObject.SetActive(true);
+            doorAccessObject.SetActive(false);
+            return;
+        }
         if (animeColliderEnabled)
         {
             Debug.Log("Enabled Collider");

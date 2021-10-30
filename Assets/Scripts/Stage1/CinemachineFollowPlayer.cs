@@ -16,10 +16,10 @@ public class CinemachineFollowPlayer : MonoBehaviour
 
         if (vcamPlayerCameraRoot == null)
         {
-           vcamPlayerCameraRoot = GameObject.FindWithTag("CinemachineTarget");
+            vcamPlayerCameraRoot = GameObject.FindWithTag("CinemachineTarget");
+            vcamFollow = vcamPlayerCameraRoot.transform;
+            vcam.Follow = vcamFollow;
+            //vcam.LookAt = vcamFollowTarget;
         }
-        vcamFollow = vcamPlayerCameraRoot.transform;
-        vcam.Follow = vcamFollow;
-        //vcam.LookAt = vcamFollowTarget;
     }
 }
