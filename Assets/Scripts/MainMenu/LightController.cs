@@ -12,8 +12,7 @@ public class LightController : MonoBehaviour
 
     void Start()
     {
-        lightAnimationEnabled = PlayerPrefs.GetInt("LightAnimationFixed");
-
+        lightAnimationEnabled = PlayerPrefs.GetInt("Light Animation", 0);
         if (lightAnimationEnabled == 0)
         {
             Debug.Log("<color=white>LightController</color> - Light Animation: ON");
@@ -29,20 +28,20 @@ public class LightController : MonoBehaviour
         }
     }
 
-    public void lightSwitch()
+    public void LightSwitch()
     {
         bool onoffLight = lightToggle.GetComponent<Toggle>().isOn;
         if (onoffLight)
         {
             lightAnimation.enabled = false;
             canvasGroup.GetComponent<CanvasGroup>().alpha = 1.0f;
-            PlayerPrefs.SetInt("LightAnimationFixed", 1);
+            PlayerPrefs.SetInt("Light Animation", 1);
             Debug.Log("<color=white>LightController</color> - Light Animation: OFF");
         }
         else
         {
             lightAnimation.enabled = true;
-            PlayerPrefs.SetInt("LightAnimationFixed", 0);
+            PlayerPrefs.SetInt("Light Animation", 0);
             Debug.Log("<color=white>LightController</color> - Light Animation: ON");
         }
     }
