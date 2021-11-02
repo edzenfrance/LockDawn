@@ -8126,7 +8126,7 @@ GameObject:
   - component: {fileID: 811686524}
   - component: {fileID: 811686525}
   m_Layer: 0
-  m_Name: AnimationController
+  m_Name: LightAnimationController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20309,7 +20309,7 @@ GameObject:
   - component: {fileID: 2109494659}
   - component: {fileID: 2109494658}
   m_Layer: 0
-  m_Name: MainMenuController
+  m_Name: MainMenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
