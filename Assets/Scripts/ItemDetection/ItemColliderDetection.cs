@@ -7,22 +7,16 @@ using UnityEngine.UI;
 
 public class ItemColliderDetection : MonoBehaviour
 {
-    // public AudioSource audioSource;
     [SerializeField] private GameObject grabItem;
-    [SerializeField] private string item;
+    [SerializeField] private ItemGrabDetection itemGrabDetection;
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("<color=white>ItemColliderDetection</color> - OnTriggerEnter");
         if (other.tag == "Player")
         {
-                grabItem.SetActive(true);
-                Debug.Log("<color=white>ItemColliderDetection</color> - Get Item: Enabled");
-                // audioSource.enabled = true;;
-                item = gameObject.name;
-                grabItem.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Get the " + item;
-                PlayerPrefs.SetString("DetectedItem", item);
-                Debug.Log("<color=white>ItemColliderDetection</color> - Detected Object Name: " + item);
+            grabItem.SetActive(true);
+            itemGrabDetection.itemName(gameObject.name);
         }
     }
 
@@ -32,8 +26,6 @@ public class ItemColliderDetection : MonoBehaviour
         if (other.tag == "Player")
         {
             grabItem.SetActive(false);
-            PlayerPrefs.DeleteKey("DetectedItem");
-            Debug.Log("<color=white>ItemColliderDetection</color> - Get Item: Disabled");
         }
     }
 }
