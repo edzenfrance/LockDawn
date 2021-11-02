@@ -1131,11 +1131,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
+  nomove: {x: 0, y: 0}
   jump: 0
   sprint: 0
   analogMovement: 0
   cursorLocked: 0
   cursorInputForLook: 0
+  pressDetector: {fileID: 0}
 --- !u!114 &5550696136509761185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,7 +1151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 2
-  SprintSpeed: 5.335
+  SprintSpeed: 5
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   JumpHeight: 0.8

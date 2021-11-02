@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class HealthBarTester : MonoBehaviour
 {
-    [SerializeField] private HealthBarController healthBar;
+    [SerializeField] private HealthController healthBar;
 
     void Awake()
     {
-        healthBar = GameObject.Find("Health Bar").GetComponent<HealthBarController>();
+        healthBar = GameObject.Find("Health Bar").GetComponent<HealthController>();
     }
 
     public void TestHP()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -21,6 +22,17 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 #endif
+
+		public PressDetector pressDetector;
+		public GameObject touchZoneSprint;
+		public Button touchZoneSprintButton;
+
+		private void Start()
+		{
+			pressDetector = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint").GetComponent<PressDetector>();
+			touchZoneSprint = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint");
+			touchZoneSprintButton = touchZoneSprint.GetComponent<Button>();
+		}
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
@@ -56,7 +68,27 @@ namespace StarterAssets
 			// UI_Canvas_StarterAssetsInputs_Joysticks >  UI_Virtual_Joystick_Move
 			// sprint = newMoveDirection.sqrMagnitude > 0.75f;
 			move = newMoveDirection;
-		} 
+
+			// Enable or disable sprint button based on character Vector2
+			if (move.Equals(Vector2.zero))
+			{
+				touchZoneSprintButton.interactable = false;
+				SprintInput(false);
+			}
+			else if (!pressDetector.exhausted)
+				touchZoneSprintButton.interactable = true;
+		}
+
+		public void getMoveInput()
+		{
+			if (move.Equals(Vector2.zero))
+			{
+				touchZoneSprintButton.interactable = false;
+				SprintInput(false);
+			}
+			else if (!pressDetector.exhausted)
+				touchZoneSprintButton.interactable = true;
+		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{

@@ -14,11 +14,11 @@ namespace EmeraldAI
     {
         public List<string> ActiveEffects = new List<string>();
 
-        [SerializeField] private HealthBarController healthBarController;
+        [SerializeField] private HealthController healthController;
 
         void Awake()
         {
-            healthBarController = GameObject.Find("Health Bar").GetComponent<HealthBarController>();
+            healthController = GameObject.Find("Health Bar").GetComponent<HealthController>();
         }
 
         public void SendPlayerDamage(int DamageAmount, Transform Target, EmeraldAISystem EmeraldComponent, bool CriticalHit = false)
@@ -44,7 +44,7 @@ namespace EmeraldAI
         void DamagePlayerStandard(int DamageAmount)
         {
             Debug.Log("<color=red>EmeraldAIPlayerDamage</color> - Damage: " + DamageAmount);
-            healthBarController.ChangeHealthPoint(-DamageAmount);
+            healthController.ChangeHealthPoint(-DamageAmount);
             // IDK How to use this
             /*
             if (GetComponent<EmeraldAIPlayerHealth>() != null)

@@ -10,8 +10,6 @@ public class Temp_MoveObject : MonoBehaviour
     [SerializeField] private Vector3 quarantineVectorPosition;
     [SerializeField] private Vector3 characterVectorPosition;
 
-    float speed = 1f;
-
     private void Start()
     {
         character = GameObject.FindWithTag("Player");
