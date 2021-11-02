@@ -11227,7 +11227,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 811686525}
         m_TargetAssemblyTypeName: LightController, Assembly-CSharp
-        m_MethodName: lightSwitch
+        m_MethodName: LightSwitch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
