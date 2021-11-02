@@ -4,15 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class MainMenu : MonoBehaviour
+public class MainMenuManager : MonoBehaviour
 {
-
-    void Start()
-    {
-        //Set Cursor to not be visible
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
 
     public void GotoAchievements()
     {
