@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -26,12 +27,17 @@ namespace StarterAssets
 		public PressDetector pressDetector;
 		public GameObject touchZoneSprint;
 		public Button touchZoneSprintButton;
-
+		string sceneName;
+		
 		private void Start()
 		{
-			pressDetector = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint").GetComponent<PressDetector>();
-			touchZoneSprint = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint");
-			touchZoneSprintButton = touchZoneSprint.GetComponent<Button>();
+			sceneName = SceneManager.GetActiveScene().name;
+			if (sceneName != "CharacterSelection")
+            {
+				pressDetector = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint").GetComponent<PressDetector>();
+				touchZoneSprint = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint");
+				touchZoneSprintButton = touchZoneSprint.GetComponent<Button>();
+			}
 		}
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED

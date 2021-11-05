@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryView;
+    [SerializeField] private GameObject objectives;
     [SerializeField] private Sprite[] spriteList;
     [SerializeField] private Image[] imageObject;
 
@@ -16,11 +17,13 @@ public class Inventory : MonoBehaviour
         if (inventoryView.activeSelf == false)
         {
             LoadItemImage();
-            inventoryView.SetActive(true); 
+            inventoryView.SetActive(true);
+            objectives.SetActive(false);
         }
         else if (inventoryView.activeSelf == true)
         {
             inventoryView.SetActive(false);
+            objectives.SetActive(true);
         }
     }
 

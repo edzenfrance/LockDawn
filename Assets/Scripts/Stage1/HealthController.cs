@@ -35,11 +35,11 @@ public class HealthController : MonoBehaviour
     [SerializeField] private GameObject bloodSmearObject;
 
     [Header("Quarantine")]
-    [Range(1, 4)]
-    [SerializeField] private int quarantineSkipCount = 4;
-    [SerializeField] private GameObject quarantineSkip;
-    [SerializeField] private TextMeshProUGUI quarantineSkipText;
-    [SerializeField] private GameObject quarantine;
+    [Range(1, 3)]
+    [SerializeField] private int characterLife = 3;
+    [SerializeField] private GameObject characterLifeObject;
+    [SerializeField] private TextMeshProUGUI characterLifeText;
+    [SerializeField] private GameObject quarantineObject;
 
     [SerializeField] private RuntimeAnimatorController[] animatorControllers;
 
@@ -47,7 +47,6 @@ public class HealthController : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
 
     int countDPS;
-    int countQuarantineSkip;
 
     bool achievementsA = true;
     bool isInfected = false;
@@ -64,7 +63,7 @@ public class HealthController : MonoBehaviour
     {
         character = GameObject.FindGameObjectWithTag("Player");
         animator = character.GetComponent<Animator>();
-        PlayerPrefs.DeleteKey("SkipQuarantine");
+        PlayerPrefs.DeleteKey("CharacterLife");
     }
 
     public void ChangeHealthPoint(int dHP)
@@ -142,16 +141,16 @@ public class HealthController : MonoBehaviour
         infectedNote.SetActive(false);
         EnableDisableObjects(false);
 
-        countQuarantineSkip = PlayerPrefs.GetInt("SkipQuarantine");
-        countQuarantineSkip += 1;
-        quarantineSkipText.text = "Quarantine: (" + countQuarantineSkip + "/3)";
-        Debug.Log("Count Quarantine Skip: " + countQuarantineSkip);
-        if (countQuarantineSkip == quarantineSkipCount)
+        characterLife = PlayerPrefs.GetInt("CharacterLife", 3);
+        characterLife -= 1;
+        characterLifeText.text = "Life: " + characterLife;
+        Debug.Log("Life: " + characterLife);
+        if (characterLife <= 0)
         {
-            quarantine.SetActive(true);
+            quarantineObject.SetActive(true);
             return;
         }
-        PlayerPrefs.SetInt("SkipQuarantine", countQuarantineSkip);
+        PlayerPrefs.SetInt("SkipQuarantine", characterLife);
         animator.runtimeAnimatorController = animatorControllers[0];
         StartCoroutine(WaitAndDeath(2f));
     }
@@ -195,7 +194,7 @@ public class HealthController : MonoBehaviour
         mapButton.SetActive(setBool);
         healthBarFill.SetActive(setBool);
         stageNumber.SetActive(setBool);
-        quarantineSkip.SetActive(setBool);
+        characterLifeObject.SetActive(setBool);
         taskMission.SetActive(setBool);
         playerFollowCamera.SetActive(setBool);
         canvasTouchZone.SetActive(setBool);
