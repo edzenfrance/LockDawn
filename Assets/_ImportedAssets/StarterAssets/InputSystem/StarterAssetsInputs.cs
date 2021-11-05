@@ -24,7 +24,7 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 #endif
 
-		public PressDetector pressDetector;
+		public StaminaController staminaController;
 		public GameObject touchZoneSprint;
 		public Button touchZoneSprintButton;
 		string sceneName;
@@ -34,7 +34,7 @@ namespace StarterAssets
 			sceneName = SceneManager.GetActiveScene().name;
 			if (sceneName != "CharacterSelection")
             {
-				pressDetector = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint").GetComponent<PressDetector>();
+				staminaController = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint").GetComponent<StaminaController>();
 				touchZoneSprint = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint");
 				touchZoneSprintButton = touchZoneSprint.GetComponent<Button>();
 			}
@@ -81,7 +81,7 @@ namespace StarterAssets
 				touchZoneSprintButton.interactable = false;
 				SprintInput(false);
 			}
-			else if (!pressDetector.exhausted)
+			else if (!staminaController.exhausted)
 				touchZoneSprintButton.interactable = true;
 		}
 
@@ -92,7 +92,7 @@ namespace StarterAssets
 				touchZoneSprintButton.interactable = false;
 				SprintInput(false);
 			}
-			else if (!pressDetector.exhausted)
+			else if (!staminaController.exhausted)
 				touchZoneSprintButton.interactable = true;
 		}
 
