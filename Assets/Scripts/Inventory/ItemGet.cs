@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ItemGet : MonoBehaviour
 {
+    [SerializeField] private Toggle[] toggleObjectives;
     [SerializeField] private GameObject stageComplete;
     [SerializeField] private TextMeshProUGUI grabItem;
     [SerializeField] private string objectName;
@@ -14,12 +16,15 @@ public class ItemGet : MonoBehaviour
             PlayerPrefs.SetInt("Key A", 1);
 
         if (objectName == "S1 Special Syrup")
+        {
             PlayerPrefs.SetInt("Special Syrup", 1);
-
+            toggleObjectives[1].isOn = true;
+        }
         if (objectName == "S1 Vitamins")
         {
             PlayerPrefs.SetInt("Vitamin", 1);
             stageComplete.SetActive(true);
+            toggleObjectives[2].isOn = true;
         }
 
         GameObject detectedObject = GameObject.Find("Item/"+ objectName);

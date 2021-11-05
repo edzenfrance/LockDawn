@@ -140,7 +140,6 @@ public class HealthController : MonoBehaviour
         isInfected = false;
         infectedNote.SetActive(false);
         EnableDisableObjects(false);
-
         characterLife = PlayerPrefs.GetInt("CharacterLife", 3);
         characterLife -= 1;
         characterLifeText.text = "Life: " + characterLife;
@@ -150,7 +149,7 @@ public class HealthController : MonoBehaviour
             quarantineObject.SetActive(true);
             return;
         }
-        PlayerPrefs.SetInt("SkipQuarantine", characterLife);
+        PlayerPrefs.SetInt("CharacterLife", characterLife);
         animator.runtimeAnimatorController = animatorControllers[0];
         StartCoroutine(WaitAndDeath(2f));
     }
