@@ -9,6 +9,9 @@ public class ItemGet : MonoBehaviour
     [SerializeField] private GameObject stageComplete;
     [SerializeField] private TextMeshProUGUI grabItem;
     [SerializeField] private string objectName;
+    [SerializeField] private Inventory inventory;
+
+    public RiddleManager riddleManager;
 
     public void getItem()
     {
@@ -26,7 +29,13 @@ public class ItemGet : MonoBehaviour
             stageComplete.SetActive(true);
             toggleObjectives[2].isOn = true;
         }
-
+        if (objectName == "S1 Riddle A")
+        {
+            toggleObjectives[3].isOn = true;
+            riddleManager.ProcessRiddle(objectName);
+            return;
+        }
+        inventory.ReLoadItemImage();
         GameObject detectedObject = GameObject.Find("Item/"+ objectName);
         detectedObject.SetActive(false);
         gameObject.SetActive(false);
@@ -48,6 +57,12 @@ public class ItemGet : MonoBehaviour
                 break;
             case "S1 Vitamins":
                 handtext = "Get the vitamins!";
+                break;
+            case "S1 Riddle A":
+                handtext = "Answer the riddle";
+                break;
+            case "S1 Riddle B":
+                handtext = "Answer the riddle";
                 break;
             default:
                 handtext = "Get this thing";

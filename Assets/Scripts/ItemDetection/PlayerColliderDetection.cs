@@ -20,6 +20,6 @@ public class PlayerColliderDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("<color=blue>PlayerColliderDetection</color> - OnTriggerEnter");
+        //Debug.Log("<color=blue>PlayerColliderDetection</color> - OnTriggerEnter");
     }
 }

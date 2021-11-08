@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
 
     void LoadItemImage()
     {
-        PlayerPrefs.SetInt("Key A", 1);
+        //PlayerPrefs.DeleteAll();
         int keyA = PlayerPrefs.GetInt("Key A");
         int vitamin = PlayerPrefs.GetInt("Vitamin");
         int syrup = PlayerPrefs.GetInt("Special Syrup");
@@ -60,6 +60,11 @@ public class Inventory : MonoBehaviour
             button[iObj].image.sprite = spriteList[2];
             iObj++;
         }
+    }
+
+    public void ReLoadItemImage()
+    {
+        LoadItemImage();
     }
 
     public void InventoryButtonA()
