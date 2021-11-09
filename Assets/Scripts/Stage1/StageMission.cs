@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class StageMission : MonoBehaviour
 {
+
+    [SerializeField] private AudioManager audioManager;
+
     void Start()
     {
         Time.timeScale = 0;
         Debug.Log("<color=white>StageMission</color> - Game Paused");
+        audioManager.PlayAudioObjective();
     }
 
     public void OnResume()
@@ -15,5 +19,6 @@ public class StageMission : MonoBehaviour
         gameObject.SetActive(false);
         Time.timeScale = 1;
         Debug.Log("<color=white>StageMission</color> - Game Unpaused");
+        audioManager.StopAudio();
     }
 }

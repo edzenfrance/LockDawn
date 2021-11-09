@@ -10,29 +10,34 @@ public class ItemGet : MonoBehaviour
     [SerializeField] private TextMeshProUGUI grabItem;
     [SerializeField] private string objectName;
     [SerializeField] private Inventory inventory;
-
-    public RiddleManager riddleManager;
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private RiddleManager riddleManager;
 
     public void getItem()
     {
         if (objectName == "S1 Key A")
+        {
             PlayerPrefs.SetInt("Key A", 1);
-
+            audioManager.PlayAudioPickUpKey();
+        }
         if (objectName == "S1 Special Syrup")
         {
             PlayerPrefs.SetInt("Special Syrup", 1);
             toggleObjectives[1].isOn = true;
+            audioManager.PlayAudioPickUpBottle();
         }
         if (objectName == "S1 Vitamins")
         {
             PlayerPrefs.SetInt("Vitamin", 1);
             stageComplete.SetActive(true);
             toggleObjectives[2].isOn = true;
+            audioManager.PlayAudioPickUpItem();
         }
         if (objectName == "S1 Riddle A")
         {
             toggleObjectives[3].isOn = true;
             riddleManager.ProcessRiddle(objectName);
+            audioManager.PlayAudioPickUpItem();
             return;
         }
         inventory.ReLoadItemImage();

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DoorColliderController : MonoBehaviour
 {
-    [SerializeField] public Animator myDoor = null;
+    [SerializeField] private Animator myDoor = null;
+    [SerializeField] private AudioManager audioManager;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class DoorColliderController : MonoBehaviour
         {
             Debug.Log("<color=white>DoorAnimationController</color> - Animation Paused");
             myDoor.enabled = false;
+            audioManager.PauseAudio();
         }
     }
 
@@ -26,6 +28,7 @@ public class DoorColliderController : MonoBehaviour
         {
             Debug.Log("<color=white>DoorAnimationController</color> - Animation Unpaused");
             myDoor.enabled = true;
+            audioManager.PlayAudio();
         }
     }
 

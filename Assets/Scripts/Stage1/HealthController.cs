@@ -19,6 +19,9 @@ public class HealthController : MonoBehaviour
     [SerializeField] private GameObject stageNumber;
     [SerializeField] private GameObject taskMission;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioManager audioManager;
+
     [Header("Player")]
     [SerializeField] private GameObject character;
     [SerializeField] private Animator animator;
@@ -79,6 +82,7 @@ public class HealthController : MonoBehaviour
                 Debug.Log("Player is now infected");
                 countDPS = 0;
                 isInfected = true;
+                audioManager.PlayAudioHeartBeat();
                 infectedNote.SetActive(true);
                 bloodSmearObject.SetActive(true);
                 StartCoroutine(DamageHealthPerSecond(-damagePerSecond));
