@@ -6,8 +6,15 @@ using TMPro;
 
 public class HealthController : MonoBehaviour
 {
+    [Header("Player")]
+    [SerializeField] private GameObject character;
+    [SerializeField] private Animator animator;
+
+    [Header("Health")]
     [SerializeField] private Slider healthBar;
-    [SerializeField] private GameObject deathUI;
+    [SerializeField] private int currentHP = 100;
+    [SerializeField] private TextMeshProUGUI healthCountText;
+    [SerializeField] private GameObject healthBarFill;
 
     [Header("Button")]
     [SerializeField] private GameObject settingsButton;
@@ -17,37 +24,32 @@ public class HealthController : MonoBehaviour
     [Header("Object")]
     [SerializeField] private GameObject infectedNote;
     [SerializeField] private GameObject stageNumber;
-    [SerializeField] private GameObject taskMission;
+    [SerializeField] private GameObject stageTask;
+    [SerializeField] private GameObject deathUI;
+    [SerializeField] private GameObject mapView;
 
     [Header("Sounds")]
     [SerializeField] private AudioManager audioManager;
 
-    [Header("Player")]
-    [SerializeField] private GameObject character;
-    [SerializeField] private Animator animator;
-    [SerializeField] private int currentHP = 100;
-    [SerializeField] private TextMeshProUGUI healthCountText;
-    [SerializeField] private GameObject healthBarFill;
-    [SerializeField] private GameObject virtualTouchZone;
-    [SerializeField] private GameObject mapView;
+    [Header("Character Control")]
+    [SerializeField] private GameObject touchZoneVirtualMove;
+    [SerializeField] private GameObject touchZoneCanvas;
     [SerializeField] private GameObject playerFollowCamera;
-    [SerializeField] private GameObject canvasTouchZone;
 
-    [Header("NPC AI")]
+    [Header("NPC")]
     [SerializeField] private int damagePerSecond = 1;
-    [SerializeField] private GameObject bloodSmearObject;
+    [SerializeField] private GameObject bloodSmear;
 
     [Header("Quarantine")]
+    [SerializeField] private GameObject quarantineObject;
     [Range(1, 3)]
     [SerializeField] private int characterLife = 3;
     [SerializeField] private GameObject characterLifeObject;
     [SerializeField] private TextMeshProUGUI characterLifeText;
-    [SerializeField] private GameObject quarantineObject;
 
+    [Header("Animation and Prefab")]
     [SerializeField] private RuntimeAnimatorController[] animatorControllers;
-
     [SerializeField] private GameObject[] characterPrefabs;
-    [SerializeField] private Transform spawnPoint;
 
     int countDPS;
 
@@ -58,7 +60,6 @@ public class HealthController : MonoBehaviour
 
     void Awake()
     {
-        healthBar = GetComponent<Slider>();
         healthBar.value = currentHP;
     }
 
@@ -84,7 +85,7 @@ public class HealthController : MonoBehaviour
                 isInfected = true;
                 audioManager.PlayAudioHeartBeat();
                 infectedNote.SetActive(true);
-                bloodSmearObject.SetActive(true);
+                bloodSmear.SetActive(true);
                 StartCoroutine(DamageHealthPerSecond(-damagePerSecond));
             }
             if (currentHP < 100)
@@ -163,7 +164,7 @@ public class HealthController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         // animator.enabled = false;
         deathUI.SetActive(true);
-        virtualTouchZone.SetActive(true);
+        touchZoneVirtualMove.SetActive(true);
         character.SetActive(false);
         //Destroy(character);
     }
@@ -177,7 +178,7 @@ public class HealthController : MonoBehaviour
         deathUI.SetActive(false);
 
         //mapView.SetActive(true);
-        bloodSmearObject.SetActive(false);
+        bloodSmear.SetActive(false);
         character.SetActive(true);
         animator.runtimeAnimatorController = animatorControllers[1];
 
@@ -191,16 +192,16 @@ public class HealthController : MonoBehaviour
 
     void EnableDisableObjects(bool setBool)
     {
-        virtualTouchZone.SetActive(setBool);
+        touchZoneVirtualMove.SetActive(setBool);
         settingsButton.SetActive(setBool);
         inventoryButton.SetActive(setBool);
         mapButton.SetActive(setBool);
         healthBarFill.SetActive(setBool);
         stageNumber.SetActive(setBool);
+        stageTask.SetActive(setBool);
         characterLifeObject.SetActive(setBool);
-        taskMission.SetActive(setBool);
         playerFollowCamera.SetActive(setBool);
-        canvasTouchZone.SetActive(setBool);
+        touchZoneCanvas.SetActive(setBool);
     }
 
     public void ChangeAnimA()

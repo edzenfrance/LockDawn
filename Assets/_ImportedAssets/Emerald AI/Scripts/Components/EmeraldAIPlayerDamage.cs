@@ -18,7 +18,7 @@ namespace EmeraldAI
 
         void Awake()
         {
-            healthController = GameObject.Find("Health Bar").GetComponent<HealthController>();
+            healthController = GameObject.Find("Canvas UI/Health").GetComponent<HealthController>();
         }
 
         public void SendPlayerDamage(int DamageAmount, Transform Target, EmeraldAISystem EmeraldComponent, bool CriticalHit = false)
