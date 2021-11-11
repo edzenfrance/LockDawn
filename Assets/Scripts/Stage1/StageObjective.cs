@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageMission : MonoBehaviour
+public class StageObjective : MonoBehaviour
 {
 
     [SerializeField] private AudioManager audioManager;
