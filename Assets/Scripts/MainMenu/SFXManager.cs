@@ -5,11 +5,8 @@ using UnityEngine.Events;
 
 public class SFXManager : MonoBehaviour
 {
-
     public static SFXManager sfxInstance;
-    [Header("SFX Manager")]
-    public AudioSource Audio;
-    [Header("Sound Click")]
+    public AudioSource audioSource;
     public AudioClip UIClick;
 
     private void Awake()

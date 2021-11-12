@@ -41,11 +41,6 @@ public class AudioSceneController : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnDisable()
-    {
-        Debug.Log("<color=white>AudioSceneController</color> - On Disabled");
-    }
-
     void Start()
     {
         musicAudio.volume = musicVolume;

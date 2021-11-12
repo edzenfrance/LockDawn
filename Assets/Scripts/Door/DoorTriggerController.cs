@@ -224,7 +224,11 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
             Debug.Log("<color=white>DoorTriggerController</color> - Key Required");
         }
         else if (checkKey == 1)
+        {
+            requireKeyFail = false;
             noteController.ShowNote("Opening the door using <color=green>Key: " + KeyName, 1.5f);
+        }
+
     }
 
     public void OpenableDoor()
