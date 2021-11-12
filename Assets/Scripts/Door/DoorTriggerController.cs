@@ -42,15 +42,29 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     [SerializeField] private bool isLocked = false;
     [SerializeField] private bool isQuarantined = false;
     [SerializeField] private bool requireKeyA = false;
-    [SerializeField] private GameObject keyNoteObject;
-    [SerializeField] private TextMeshProUGUI keyNote;
+    [SerializeField] private bool requireKeyB = false;
+    [SerializeField] private bool requireKeyC = false;
+    [SerializeField] private bool requireKeyD = false;
+    [SerializeField] private bool requireKeyE = false;
+    [SerializeField] private bool requireKeyF = false;
+    [SerializeField] private GameObject noteObject;
+    [SerializeField] private NoteController noteController;
 
-    string keyWarning = "This door requires <color=green>key.</color> The key must be around here, find it";
-    string quarantineWarning = "You are in quarantine area! Watch some information about COVID-19 to reduce your quarantine time.";
-    string lockedWarning = "This door is locked.";
+    string keyWarningA = "This door requires <color=green>Key: Upper Floor</color> to open.\nThe key must be around here, find it!";
+    string keyWarningB = "This door requires <color=green>Key: Stock Room</color> to open.\nThe key must be around here, find it!";
+    string keyWarningC = "This door requires <color=green>Key: Small Room</color> to open.\nThe key must be around here, find it!";
+    string keyWarningD = "This door requires <color=green>Key: Large Room</color> to open.\nThe key must be around here, find it!";
+    string keyWarningE = "This door requires <color=green>Key: Bathroom</color> to open.\nThe key must be around here, find it!";
+    string keyWarningF = "This door requires <color=green>Key: Kitchen</color> to open.\nThe key must be around here, find it!";
+    string quarantineWarning = "You are in quarantine area! Watch some information to learn about COVID-19 and to reduce your quarantine time.";
+    string budgeWarning = "The door doesnt budge.";
 
     int enableDoorButton;
     int needKeyLock;
+
+    int checkKey;
+
+    bool requireKeyFail = false;
 
     void Awake()
     {
@@ -63,8 +77,7 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     void Start()
     {
         myDoor = transform.parent.GetComponent<Animator>();
-        keyNote = GameObject.Find("Canvas UI/KeyNote").GetComponent<TextMeshProUGUI>();
-        keyNoteObject = GameObject.Find("Canvas UI/KeyNote");
+        noteController = noteObject.GetComponent<NoteController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -108,7 +121,6 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         {
             PlayerPrefs.DeleteKey("SaveDoorName");
             doorAccessObject.SetActive(false);
-            keyNote.text = "";
         }
     }
 
@@ -116,35 +128,30 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     {
         if (isQuarantined)
         {
-            keyNote.text = quarantineWarning;
-            keyNoteObject.SetActive(true);
+            noteController.ShowNote(quarantineWarning, 1.5f);
             doorAccessObject.SetActive(false);
+            audioManager.PlayAudioDoorLockedNoKey();
             return;
         }
 
         if (isLocked)
         {
-            keyNote.text = lockedWarning;
-            keyNoteObject.SetActive(true);
+            noteController.ShowNote(budgeWarning, 1.2f);
             doorAccessObject.SetActive(false);
-            audioManager.PlayAudioDoorLocked();
+            audioManager.PlayAudioDoorLockedNoKey();
             return;
         }
 
-        if (requireKeyA)
-        {
-            int checkKeyA = PlayerPrefs.GetInt("Key A");
-            if (checkKeyA == 0)
-            {
-                Debug.Log("<color=white>DoorTriggerController</color> - Key Required");
-                audioManager.PlayAudioDoorLocked();
-                keyNote.text = keyWarning;
-                keyNoteObject.SetActive(true);
-                doorAccessObject.SetActive(false);
-                return;
-            }
-        }
+        if (requireKeyA) RequiresKey(keyWarningA, "Key A", "Upper Floor");
+        if (requireKeyB) RequiresKey(keyWarningB, "Key B", "Stock Room");
+        if (requireKeyC) RequiresKey(keyWarningC, "Key C", "Small Room");
+        if (requireKeyD) RequiresKey(keyWarningD, "Key D", "Large Room");
+        if (requireKeyE) RequiresKey(keyWarningE, "Key E", "Bathroom");
+        if (requireKeyF) RequiresKey(keyWarningF, "Key F", "Kitchen");
+        if (requireKeyFail)
+            return;
 
+        Debug.Log("Opening Doors..");
         if (playOpenAudio)
             audioManager.PlayAudioDoorOpen();
         else if (playCloseAudio)
@@ -152,13 +159,13 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
 
         if (animeColliderEnabled)
         {
-            Debug.Log("Enabled Collider");
+            Debug.Log("<color=white>DoorTriggerController</color> - Enabled Collider");
             animCollider.SetActive(true);
             myDoor.enabled = true;
         }
         else
         {
-            Debug.Log("Disabled Collider");
+            Debug.Log("<color=white>DoorTriggerController</color> - Disabled Collider");
             animCollider.SetActive(false);
             myDoor.enabled = true;
         }
@@ -178,7 +185,6 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
             Debug.Log("<color=white>DoorTriggerController</color> - Close Outside");
             doorAccessObject.SetActive(false);
             gameObject.SetActive(false);
-
             openOutside.SetActive(true);
             openInside.SetActive(true);
             closeInside.SetActive(false);
@@ -204,6 +210,21 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
             closeOutside.SetActive(false);
             myDoor.Play("Door_Close");
         }
+    }
+
+    void RequiresKey(string KeyWarning, string PrefsName, string KeyName)
+    {
+        checkKey = PlayerPrefs.GetInt(PrefsName);
+        if (checkKey == 0)
+        {
+            requireKeyFail = true;
+            audioManager.PlayAudioDoorLockedKey();
+            noteController.ShowNote(KeyWarning, 2.3f);
+            doorAccessObject.SetActive(false);
+            Debug.Log("<color=white>DoorTriggerController</color> - Key Required");
+        }
+        else if (checkKey == 1)
+            noteController.ShowNote("Opening the door using <color=green>Key: " + KeyName, 1.5f);
     }
 
     public void OpenableDoor()

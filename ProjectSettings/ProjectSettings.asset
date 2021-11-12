@@ -248,7 +248,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/memey/Downloads/Unity/edzenkey.keystore
+  AndroidKeystoreName: D:/Game Development/Unity Keystore/e12p.keystore
   AndroidKeyaliasName: edzenkey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

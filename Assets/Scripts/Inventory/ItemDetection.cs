@@ -9,6 +9,7 @@ public class ItemDetection : MonoBehaviour
 {
     [SerializeField] private GameObject grabItem;
     [SerializeField] private ItemGet itemGet;
+    [SerializeField] private string itemNote;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +17,7 @@ public class ItemDetection : MonoBehaviour
         if (other.tag == "Player")
         {
             grabItem.SetActive(true);
-            itemGet.itemName(gameObject.name);
+            itemGet.ItemInfo(itemNote, gameObject.name);
         }
     }
 

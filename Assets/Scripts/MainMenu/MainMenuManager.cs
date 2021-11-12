@@ -49,4 +49,9 @@ public class MainMenuManager : MonoBehaviour
     {
         SFXManager.sfxInstance.Audio.PlayOneShot(SFXManager.sfxInstance.UIClick);
     }
+
+    public void OpenShop()
+    {
+        SceneManager.LoadScene("CharacterShop");
+    }
 }

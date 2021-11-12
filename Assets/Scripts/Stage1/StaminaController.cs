@@ -8,7 +8,7 @@ using StarterAssets;
 public class StaminaController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
 
-    [Range(0.1f, 2.5f)]
+    [Range(0.1f, 5.0f)]
     public float stamina = 2.5f;
     private float maximumStamina;
     [Range(2.0f, 8.0f)]

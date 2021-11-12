@@ -62,16 +62,16 @@ public class RiddleManager : MonoBehaviour
         inventoryButton.SetActive(false);
         hand.SetActive(false);
         if (getRiddleName == "S1 Riddle A") num = 0;
-        changeText();
+        ChangeRiddleText();
     }
 
-    void changeText()
+    void ChangeRiddleText()
     {
       questionText.text = riddleTexts[num][0];
       answerText[0].GetComponentInChildren<Text>().text = riddleTexts[num][1];
       answerText[1].GetComponentInChildren<Text>().text = riddleTexts[num][2];
       answerText[2].GetComponentInChildren<Text>().text = riddleTexts[num][3];
-      answerText[3].GetComponentInChildren<Text> ().text = riddleTexts[num][4];
+      answerText[3].GetComponentInChildren<Text>().text = riddleTexts[num][4];
     }
 
     public void SelectRiddleAnswer()

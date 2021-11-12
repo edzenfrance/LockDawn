@@ -16,6 +16,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthCountText;
     [SerializeField] private GameObject healthBarFill;
 
+
     [Header("Button")]
     [SerializeField] private GameObject settingsButton;
     [SerializeField] private GameObject inventoryButton;
@@ -26,10 +27,12 @@ public class HealthController : MonoBehaviour
     [SerializeField] private GameObject stageNumber;
     [SerializeField] private GameObject stageTask;
     [SerializeField] private GameObject deathUI;
-    [SerializeField] private GameObject mapView;
+    [SerializeField] private GameObject note;
 
-    [Header("Sounds")]
+    [Header("Script")]
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private SaveManager saveManager;
+    [SerializeField] private Inventory inventory;
 
     [Header("Character Control")]
     [SerializeField] private GameObject touchZoneVirtualMove;
@@ -57,6 +60,7 @@ public class HealthController : MonoBehaviour
     bool isInfected = false;
     bool isAlive = true;
     bool isDead = false;
+    bool stopInfection = false;
 
     void Awake()
     {
@@ -78,9 +82,10 @@ public class HealthController : MonoBehaviour
             currentHP += dHP;
             healthCountText.text = ": " + currentHP;
             healthBar.value = currentHP;
+            audioManager.PlayAudioZombieAttack();
             if (!isInfected)
             {
-                Debug.Log("Player is now infected");
+                Debug.Log("<color=white>HealthBarController</color> - Player is now infected");
                 countDPS = 0;
                 isInfected = true;
                 audioManager.PlayAudioHeartBeat();
@@ -92,8 +97,7 @@ public class HealthController : MonoBehaviour
             {
                 if (achievementsA)
                 {
-                    Debug.Log("No Achievement!");
-                    PlayerPrefs.SetInt("Achievement: Show Off", 1);
+                    saveManager.SetFailedAchievementOne();
                     achievementsA = false;
                 }
             }
@@ -103,7 +107,7 @@ public class HealthController : MonoBehaviour
                 isAlive = false;
                 if (!isDead)
                 {
-                    Debug.Log("Player died because of hit");
+                    Debug.Log("<color=white>HealthBarController</color> - Player died because of hit");
                     PlayerDied();
                 }
             }
@@ -117,6 +121,8 @@ public class HealthController : MonoBehaviour
             yield return new WaitForSeconds(3);
             countDPS++;
             currentHP += dPS;
+            if (stopInfection)
+                yield break;
             if (currentHP > 0)
             {
                 healthCountText.text = ": " + currentHP;
@@ -128,14 +134,14 @@ public class HealthController : MonoBehaviour
                 isAlive = false;
                 if (!isDead)
                 {
-                    Debug.Log("Player died because of infection");
+                    Debug.Log("<color=white>HealthBarController</color> - Player died because of infection");
                     PlayerDied();
                     yield break;
                 }
                 else
                     yield break;
             }
-            Debug.Log("Damage Count: " + countDPS + " Current HP: " + currentHP + " - DPS: " + dPS);
+            Debug.Log("<color=white>HealthBarController</color> - Damage Count: " + countDPS + " Current HP: " + currentHP + " - DPS: " + dPS);
         }
     }
 
@@ -143,12 +149,13 @@ public class HealthController : MonoBehaviour
     {
         isDead = true;
         isInfected = false;
+        audioManager.PlayAudioDeadCharacter();
         infectedNote.SetActive(false);
         EnableDisableObjects(false);
-        characterLife = PlayerPrefs.GetInt("CharacterLife", 3);
+        saveManager.GetCharacterLife();
         characterLife -= 1;
         characterLifeText.text = "Life: " + characterLife;
-        Debug.Log("Life: " + characterLife);
+        Debug.Log("<color=white>HealthBarController</color> - Life: " + characterLife);
         if (characterLife <= 0)
         {
             quarantineObject.SetActive(true);
@@ -169,25 +176,50 @@ public class HealthController : MonoBehaviour
         //Destroy(character);
     }
 
-    public void DeathRestart()
+    public void RespawnCharacter()
     {
         isAlive = true;
         isDead = false;
+        audioManager.StopAudioLoop();
         infectedNote.SetActive(false);
         EnableDisableObjects(true);
         deathUI.SetActive(false);
-
-        //mapView.SetActive(true);
         bloodSmear.SetActive(false);
         character.SetActive(true);
         animator.runtimeAnimatorController = animatorControllers[1];
-
         currentHP = 100;
         healthBar.value = currentHP;
         healthCountText.text = ": " + currentHP;
-        //mapView.SetActive(false);
+    }
 
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    public void StopInfection()
+    {
+        if (isInfected)
+        {
+            Debug.Log("Infection is stop");
+            bloodSmear.SetActive(false);
+            infectedNote.SetActive(false);
+            note.SetActive(true);
+            note.GetComponent<TextMeshProUGUI>().text = "Special syrup stop the infection!";
+            stopInfection = true;
+            saveManager.UseSpecialSyrup();
+            inventory.ReloadInventory();
+            audioManager.StopAudioLoop();
+            StartCoroutine(StopInfectionDone());
+        }
+        else
+        {
+            note.SetActive(true);
+            note.GetComponent<TextMeshProUGUI>().text = "You are not infected";
+            StartCoroutine(StopInfectionDone());
+        }
+    }
+
+    IEnumerator StopInfectionDone()
+    {
+        yield return new WaitForSeconds(2);
+        note.SetActive(false);
+        note.GetComponent<TextMeshProUGUI>().text = "";
     }
 
     void EnableDisableObjects(bool setBool)
@@ -204,6 +236,7 @@ public class HealthController : MonoBehaviour
         touchZoneCanvas.SetActive(setBool);
     }
 
+    /*
     public void ChangeAnimA()
     {
         animator.runtimeAnimatorController = animatorControllers[0];
@@ -213,4 +246,5 @@ public class HealthController : MonoBehaviour
     {
         animator.runtimeAnimatorController = animatorControllers[1];
     }
+    */
 }

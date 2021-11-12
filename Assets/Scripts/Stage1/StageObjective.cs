@@ -10,7 +10,7 @@ public class StageObjective : MonoBehaviour
     void Start()
     {
         Time.timeScale = 0;
-        Debug.Log("<color=white>StageMission</color> - Game Paused");
+        Debug.Log("<color=white>StageObjective</color> - Game Paused");
         audioManager.PlayAudioObjective();
     }
 
@@ -18,7 +18,7 @@ public class StageObjective : MonoBehaviour
     {
         gameObject.SetActive(false);
         Time.timeScale = 1;
-        Debug.Log("<color=white>StageMission</color> - Game Unpaused");
+        Debug.Log("<color=white>StageObjective</color> - Game Unpaused");
         audioManager.StopAudio();
     }
 }

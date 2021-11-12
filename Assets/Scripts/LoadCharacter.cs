@@ -9,7 +9,7 @@ public class LoadCharacter : MonoBehaviour
 
     void Awake()
     {
-        int selectedCharacter = PlayerPrefs.GetInt("selectedCharacter", 0);
+        int selectedCharacter = PlayerPrefs.GetInt("Current Character", 0);
         GameObject prefab = characterPrefabs[selectedCharacter];
         GameObject clone = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
         Debug.Log("<color=white>LoadCharacter</color> - Enabled Character: " + prefab.name);

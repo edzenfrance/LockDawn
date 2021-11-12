@@ -34,9 +34,12 @@ namespace StarterAssets
 			sceneName = SceneManager.GetActiveScene().name;
 			if (sceneName != "CharacterSelection")
             {
-				staminaController = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint").GetComponent<StaminaController>();
-				touchZoneSprint = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint");
-				touchZoneSprintButton = touchZoneSprint.GetComponent<Button>();
+				if (sceneName != "CharacterShop")
+                {
+					staminaController = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint").GetComponent<StaminaController>();
+					touchZoneSprint = GameObject.Find("UI_Canvas_StarterAssetsInputs_TouchZones/UI_Virtual_Button_Sprint");
+					touchZoneSprintButton = touchZoneSprint.GetComponent<Button>();
+				}
 			}
 		}
 

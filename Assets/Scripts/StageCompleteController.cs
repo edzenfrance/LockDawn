@@ -5,6 +5,7 @@ using UnityEngine;
 public class StageCompleteController : MonoBehaviour
 {
     [SerializeField] private GameObject getAchievements;
+    [SerializeField] private SurveyManager surveyManager;
     [SerializeField] private StageTimer stageTimer;
 
     int achShowOff;
@@ -13,6 +14,8 @@ public class StageCompleteController : MonoBehaviour
     {
         stageTimer.OnFinishTimer();
         PlayerPrefs.SetInt("Achievement Show Off", 0);
+        // Get the stage number first
+        surveyManager.ProcessSurvey("Stage 1 Survey");
         Debug.Log("Checking achievements");
         StartCoroutine(CheckAchievements());
     }

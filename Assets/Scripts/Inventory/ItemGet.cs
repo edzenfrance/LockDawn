@@ -6,30 +6,44 @@ using TMPro;
 public class ItemGet : MonoBehaviour
 {
     [SerializeField] private Toggle[] toggleObjectives;
-    [SerializeField] private GameObject stageComplete;
     [SerializeField] private TextMeshProUGUI grabItem;
-    [SerializeField] private string objectName;
     [SerializeField] private Inventory inventory;
-    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private TextMeshProUGUI taskKeyText;
+
+    [Header("Exit")]
+    [SerializeField] private GameObject[] stageExit;
+
+    [Header("Types")]
+    [SerializeField] private string objectName;
+    [SerializeField] private bool getCoin;
+
+    [Header("Scripts")]
     [SerializeField] private RiddleManager riddleManager;
+    [SerializeField] private SaveManager saveManager;
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private NoteController noteController;
+
+    int keyCount;
 
     public void getItem()
     {
-        if (objectName == "S1 Key A")
-        {
-            PlayerPrefs.SetInt("Key A", 1);
-            audioManager.PlayAudioPickUpKey();
-        }
+        if (objectName == "S1 Key A") KeyCount("Key A", "Door Key: Upper Floor");
+        if (objectName == "S1 Key B") KeyCount("Key B", "Door Key: Stock Room");
+        if (objectName == "S1 Key C") KeyCount("Key C", "Door Key: Small Room");
+        if (objectName == "S1 Key D") KeyCount("Key D", "Door Key: Large Room");
+        if (objectName == "S1 Key E") KeyCount("Key E", "Door Key: Bathroom");
+        if (objectName == "S1 Key F") KeyCount("Key F", "Door Key: Kitchen");
         if (objectName == "S1 Special Syrup")
         {
-            PlayerPrefs.SetInt("Special Syrup", 1);
+            saveManager.SetSpecialSyrup();
             toggleObjectives[1].isOn = true;
             audioManager.PlayAudioPickUpBottle();
         }
         if (objectName == "S1 Vitamins")
         {
-            PlayerPrefs.SetInt("Vitamin", 1);
-            stageComplete.SetActive(true);
+            saveManager.SetVitamins();
+            stageExit[0].SetActive(true);
+            noteController.ShowNote("You got the main item vitamins!\nExit the house to finish the stage!", 3.0f);
             toggleObjectives[2].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
@@ -40,40 +54,38 @@ public class ItemGet : MonoBehaviour
             audioManager.PlayAudioPickUpItem();
             return;
         }
-        inventory.ReLoadItemImage();
+        if (getCoin)
+        {
+            noteController.ShowNote("<color=yellow>+10 coins</color> added to inventory.", 1.5f);
+            saveManager.SetCoin();
+            audioManager.PlayAudioPickUpCoin();
+        }
+        inventory.ReloadInventory ();
         GameObject detectedObject = GameObject.Find("Item/"+ objectName);
         detectedObject.SetActive(false);
         gameObject.SetActive(false);
-        Debug.Log("<color=white>ItemGrabDetection</color> - Added to inventory: " + objectName);
+        Debug.Log("<color=white>ItemGet</color> - Added to inventory: " + objectName);
     }
 
-    public void itemName(string objName)
+    void KeyCount(string KeyName, string KeyNote)
     {
-        string handtext = "";
-        objectName = objName;
+        saveManager.SetKey(KeyName);
+        keyCount =  PlayerPrefs.GetInt("Key Count");
+        taskKeyText.text = "Keys (" + keyCount + " of 6)";
+        noteController.ShowNote("<color=green>" + KeyNote + "</color> added to inventory.", 2.0f);
+        audioManager.PlayAudioPickUpKey();
+        if (keyCount == 6)
+            toggleObjectives[0].isOn = true;
+    }
 
-        switch(objName)
-        {
-            case "S1 Key A":
-                handtext = "Get the key";
-                break;
-            case "S1 Special Syrup":
-                handtext = "Get the special syrup";
-                break;
-            case "S1 Vitamins":
-                handtext = "Get the vitamins!";
-                break;
-            case "S1 Riddle A":
-                handtext = "Answer the riddle";
-                break;
-            case "S1 Riddle B":
-                handtext = "Answer the riddle";
-                break;
-            default:
-                handtext = "Get this thing";
-                break;
-        }
-        grabItem.text = handtext;
-        Debug.Log("<color=white>ItemGrabDetection</color> - Detected Item: " + objectName);
+    public void ItemInfo(string itemNote, string objName)
+    {
+        if (itemNote == "Get the <color=yellow>Coin")
+            getCoin = true;
+        else
+            getCoin = false;
+        objectName = objName;
+        grabItem.text = itemNote;
+        Debug.Log("<color=white>ItemGet</color> - Detected Item: " + objectName);
     }
 }
