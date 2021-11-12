@@ -2,17 +2,15 @@ using UnityEngine;
 
 public class Footstep : MonoBehaviour
 {
-    public AudioClip[] audioClip;
-    public AudioSource audioSource;
+    public AudioManager audioManager;
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
     }
 
-    private void Step()
+    public void Step()
     {
-        AudioClip clip = audioClip[2];
-        audioSource.PlayOneShot(clip);
+        audioManager.PlayAudioFootstep();
     }
 }

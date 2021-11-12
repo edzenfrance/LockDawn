@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource heart;
 
     [Header("Audio Clip")]
+    public AudioClip footstep;
     public AudioClip doorOpen;
     public AudioClip doorClose;
     public AudioClip doorLockedKey;
@@ -26,6 +27,11 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponents<AudioSource>();
         sounds = audioSource[0];
         heart = audioSource[1];
+    }
+
+    public void PlayAudioFootstep()
+    {
+        PlaySounds(footstep);
     }
 
     public void PlayAudioDoorOpen()
@@ -133,4 +139,5 @@ public class AudioManager : MonoBehaviour
     {
         sounds.Stop();
     }
+
 }
