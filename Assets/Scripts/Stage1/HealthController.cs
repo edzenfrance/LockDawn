@@ -74,7 +74,7 @@ public class HealthController : MonoBehaviour
         PlayerPrefs.DeleteKey("CharacterLife");
     }
 
-    public void ChangeHealthPoint(int dHP)
+    public void ChangeHealthPoint(int dHP, bool zombieDmg)
     {
         if (isAlive)
         {
@@ -82,16 +82,19 @@ public class HealthController : MonoBehaviour
             currentHP += dHP;
             healthCountText.text = ": " + currentHP;
             healthBar.value = currentHP;
-            audioManager.PlayAudioZombieAttack();
-            if (!isInfected)
+            if (zombieDmg)
             {
-                Debug.Log("<color=white>HealthBarController</color> - Player is now infected");
-                countDPS = 0;
-                isInfected = true;
-                audioManager.PlayAudioHeartBeat();
-                infectedNote.SetActive(true);
-                bloodSmear.SetActive(true);
-                StartCoroutine(DamageHealthPerSecond(-damagePerSecond));
+                audioManager.PlayAudioZombieAttack();
+                if (!isInfected)
+                {
+                    Debug.Log("<color=white>HealthBarController</color> - Player is now infected");
+                    countDPS = 0;
+                    isInfected = true;
+                    audioManager.PlayAudioHeartBeat();
+                    infectedNote.SetActive(true);
+                    bloodSmear.SetActive(true);
+                    StartCoroutine(DamageHealthPerSecond(-damagePerSecond));
+                }
             }
             if (currentHP < 100)
             {

@@ -17,6 +17,7 @@ public class StaminaController : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public GameObject character;
     public StarterAssetsInputs starterAssetsInputs;
+    public UIVirtualTouchZoneFootstep UITouchZoneFootstep;
     public Button touchZoneSprintButton;
 
     [SerializeField] private Slider staminaBar;
@@ -44,6 +45,7 @@ public class StaminaController : MonoBehaviour, IPointerDownHandler, IPointerUpH
         {
             if (!exhausted)
             {
+                UITouchZoneFootstep.IsRunning(true);
                 OutputButtonStateValue(true);
                 StopAllCoroutines();
                 StartCoroutine(DepleteStamina());
@@ -57,6 +59,7 @@ public class StaminaController : MonoBehaviour, IPointerDownHandler, IPointerUpH
         StopAllCoroutines();
         if (stamina < maximumStamina)
             StartCoroutine(ReplenishStamina());
+        UITouchZoneFootstep.IsRunning(false);
     }
 
     private IEnumerator ReplenishStamina()

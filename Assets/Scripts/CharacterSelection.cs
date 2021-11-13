@@ -111,7 +111,7 @@ public class CharacterSelection : MonoBehaviour
 
 	public void StartGame()
 	{
-		ClearPlayerPrefs();
+		ProcessPlayerPrefs();
 		PlayerPrefs.SetInt("Current Character", currentCharacter);
 		SceneManager.LoadScene("Stage1", LoadSceneMode.Single);
 	}
@@ -121,7 +121,7 @@ public class CharacterSelection : MonoBehaviour
 		SceneManager.LoadScene("MainMenu");
     }
 
-	void ClearPlayerPrefs()
+	void ProcessPlayerPrefs()
     {
 		PlayerPrefs.DeleteKey("Key A");
 		PlayerPrefs.DeleteKey("Key B");
@@ -133,5 +133,7 @@ public class CharacterSelection : MonoBehaviour
 		PlayerPrefs.DeleteKey("Special Syrup");
 		PlayerPrefs.DeleteKey("Key Count");
 		PlayerPrefs.DeleteKey("Achievement: Show Off");
+		PlayerPrefs.SetInt("Current Stage", 1);
+		PlayerPrefs.SetInt("Current Immunity", 0);
 	}
 }

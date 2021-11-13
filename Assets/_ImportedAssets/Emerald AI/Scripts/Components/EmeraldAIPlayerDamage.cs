@@ -44,7 +44,7 @@ namespace EmeraldAI
         void DamagePlayerStandard(int DamageAmount)
         {
             Debug.Log("<color=red>EmeraldAIPlayerDamage</color> - Damage: " + DamageAmount);
-            healthController.ChangeHealthPoint(-DamageAmount);
+            healthController.ChangeHealthPoint(-DamageAmount, true);
             // IDK How to use this
             /*
             if (GetComponent<EmeraldAIPlayerHealth>() != null)

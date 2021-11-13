@@ -22,17 +22,18 @@ public class ItemGet : MonoBehaviour
     [SerializeField] private SaveManager saveManager;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private NoteController noteController;
+    [SerializeField] private ImmunityController immunityController;
 
     int keyCount;
 
     public void getItem()
     {
-        if (objectName == "S1 Key A") KeyCount("Key A", "Door Key: Upper Floor");
-        if (objectName == "S1 Key B") KeyCount("Key B", "Door Key: Stock Room");
-        if (objectName == "S1 Key C") KeyCount("Key C", "Door Key: Small Room");
-        if (objectName == "S1 Key D") KeyCount("Key D", "Door Key: Large Room");
-        if (objectName == "S1 Key E") KeyCount("Key E", "Door Key: Bathroom");
-        if (objectName == "S1 Key F") KeyCount("Key F", "Door Key: Kitchen");
+        if (objectName == "S1 Key A") KeyCount("S1 Key A", "Door Key: Upper Floor");
+        if (objectName == "S1 Key B") KeyCount("S1 Key B", "Door Key: Stock Room");
+        if (objectName == "S1 Key C") KeyCount("S1 Key C", "Door Key: Small Room");
+        if (objectName == "S1 Key D") KeyCount("S1 Key D", "Door Key: Large Room");
+        if (objectName == "S1 Key E") KeyCount("S1 Key E", "Door Key: Bathroom");
+        if (objectName == "S1 Key F") KeyCount("S1 Key F", "Door Key: Kitchen");
         if (objectName == "S1 Special Syrup")
         {
             saveManager.SetSpecialSyrup();
@@ -41,12 +42,54 @@ public class ItemGet : MonoBehaviour
         }
         if (objectName == "S1 Vitamins")
         {
-            saveManager.SetVitamins();
+            saveManager.ObtainMainItemImmunity("Vitamins", 5);
+            immunityController.CheckImmunity();
             stageExit[0].SetActive(true);
             noteController.ShowNote("You got the main item vitamins!\nExit the house to finish the stage!", 3.0f);
             toggleObjectives[2].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
+
+        if (objectName == "S2 Alcohol")
+        {
+            saveManager.ObtainMainItemImmunity("Alcohol", 10);
+            immunityController.CheckImmunity();
+            stageExit[1].SetActive(true);
+            noteController.ShowNote("You got the main item alcohol!\nExit the house to finish the stage!", 3.0f);
+            toggleObjectives[2].isOn = true;
+            audioManager.PlayAudioPickUpItem();
+        }
+
+        if (objectName == "S3 Face Mask")
+        {
+            saveManager.ObtainMainItemImmunity("Face Mask", 30);
+            immunityController.CheckImmunity();
+            stageExit[2].SetActive(true);
+            noteController.ShowNote("You got the main item face mask!\nGoto the end of the road to finish the staeg", 3.0f);
+            toggleObjectives[2].isOn = true;
+            audioManager.PlayAudioPickUpItem();
+        }
+
+        if (objectName == "S4 Face Shield")
+        {
+            saveManager.ObtainMainItemImmunity("Face Shield", 50);
+            immunityController.CheckImmunity();
+            stageExit[3].SetActive(true);
+            noteController.ShowNote("You got the main item face shield!\nExit the mall to finish the stage", 3.0f);
+            toggleObjectives[2].isOn = true;
+            audioManager.PlayAudioPickUpItem();
+        }
+
+        if (objectName == "S5 Vaccine")
+        {
+            saveManager.ObtainMainItemImmunity("Vaccine", 100);
+            immunityController.CheckImmunity();
+            stageExit[4].SetActive(true);
+            noteController.ShowNote("You got the main item vitamins!\nExit the hospital to finish the staeg!", 3.0f);
+            toggleObjectives[2].isOn = true;
+            audioManager.PlayAudioPickUpItem();
+        }
+
         if (objectName == "S1 Riddle A")
         {
             toggleObjectives[3].isOn = true;
