@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
 
     public void AccessInventory()
     {
-        Debug.Log(inventoryView.activeSelf ? "Inventory is Active" : " Inventory is Inactive");
+        Debug.Log(inventoryView.activeSelf ? "Inventory is Active" : "Inventory is Inactive");
         if (inventoryView.activeSelf == false)
         {
             ClearInventory();

@@ -106,6 +106,8 @@ public class TextManager : MonoBehaviour
     public static string openingDoor = "Opening the door using <color=green>Key:";
     public static string addedToInventory = "added to inventory.";
     public static string coinAdded = "<color=yellow>+10 coins</color> " + addedToInventory;
+    public static string stopInfection = "Special syrup stop the infection!";
+    public static string notInfected = "You are not infected";
 
     public static string quarantineArea = "You are in quarantine area!\nWatch some information to learn about COVID-19 and to reduce your quarantine time.";
     public static string doorIsLocked = "The door doesnt budge.";

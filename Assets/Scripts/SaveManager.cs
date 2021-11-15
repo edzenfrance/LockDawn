@@ -2,12 +2,21 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+    public static int currentCharacter;
     public static int currentLife;
     public static int currentCoin;
-    public static int keyCount;
     public static int currentImmunity;
     public static int currentStage;
+    public static int gameDifficulty;
+    public static int keyCount;
     public static int doorAccess;
+    public static int framerateOn;
+    public static float cameraDistance;
+    public static float lookSensitivity;
+
+    public static int ObtainSkinA;
+    public static int ObtainSkinB;
+    public static int ObtainSkinC;
 
     private void Awake()
     {
@@ -41,6 +50,11 @@ public class SaveManager : MonoBehaviour
     public void SetCurrentStage(int num)
     {
         PlayerPrefs.SetInt("Current Stage", num);
+    }
+
+    public void GetCurrentCharacter()
+    {
+        currentCharacter = PlayerPrefs.GetInt("Current Character", 0);
     }
 
     public void GetCurrentStage()
@@ -101,10 +115,14 @@ public class SaveManager : MonoBehaviour
         doorAccess = PlayerPrefs.GetInt("Door Access", 1);
     }
 
-
     public void SetShowFramerate(int num)
     {
         PlayerPrefs.SetInt("Framerate", num);
+    }
+
+    public void GetShowFramerate()
+    {
+        PlayerPrefs.SetInt("Framerate", 0);
     }
 
     public void GetCurrentImmunity()
@@ -117,6 +135,21 @@ public class SaveManager : MonoBehaviour
     public void SetGameDifficulty(int diff)
     {
         PlayerPrefs.SetInt("Game Difficulty", diff);
+    }
+
+    public void GetGameDifficulty()
+    {
+        gameDifficulty = PlayerPrefs.GetInt("Game Difficulty", 2);
+    }
+
+    public void GetCameraDistance()
+    {
+        cameraDistance = PlayerPrefs.GetFloat("Camera Distance", 1.75f);
+    }
+
+    public void GetLookSensitivity()
+    {
+        lookSensitivity = PlayerPrefs.GetFloat("Look Sensitivity", 60f);
     }
 
     public void DeleteKeyStage(int num)
@@ -166,6 +199,30 @@ public class SaveManager : MonoBehaviour
             PlayerPrefs.DeleteKey("S1 Key E");
             PlayerPrefs.DeleteKey("S1 Key F");
         }
+    }
+
+    public void NewGamePlayerPrefs()
+    {
+		PlayerPrefs.DeleteKey("Key A");
+		PlayerPrefs.DeleteKey("Key B");
+		PlayerPrefs.DeleteKey("Key C");
+		PlayerPrefs.DeleteKey("Key D");
+		PlayerPrefs.DeleteKey("Key E");
+		PlayerPrefs.DeleteKey("Key F");
+		PlayerPrefs.DeleteKey("Vitamin");
+		PlayerPrefs.DeleteKey("Special Syrup");
+		PlayerPrefs.DeleteKey("Key Count");
+		PlayerPrefs.DeleteKey("Coin");
+		PlayerPrefs.DeleteKey("Achievement 1");
+		PlayerPrefs.SetInt("Current Stage", 1);
+		PlayerPrefs.SetInt("Current Immunity", 0);
+   }
+
+    public void GetObtainSkin()
+    {
+        ObtainSkinA = PlayerPrefs.GetInt("Obtain Skin 0");
+        ObtainSkinB = PlayerPrefs.GetInt("Obtain Skin 1");
+        ObtainSkinC = PlayerPrefs.GetInt("Obtain Skin 2");
     }
 
     #endregion

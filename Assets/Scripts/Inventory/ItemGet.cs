@@ -10,6 +10,11 @@ public class ItemGet : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private TextMeshProUGUI taskKeyText;
 
+    [Header("Immunity")]
+    [SerializeField] private Slider immunityBar;
+    [SerializeField] private GameObject immunityFill;
+    [SerializeField] private TextMeshProUGUI immunityText;
+
     [Header("Types")]
     [SerializeField] private string objectName;
     [SerializeField] private bool getCoin;
@@ -47,6 +52,11 @@ public class ItemGet : MonoBehaviour
             stageExit[0].SetActive(true);
             noteController.ShowNote(TextManager.gotVitamin, 3.0f);
             toggleObjectives[0].isOn = true;
+            saveManager.GetCurrentImmunity();
+            int currentImmunity = SaveManager.currentImmunity;
+                        immunityFill.SetActive(true);
+            immunityBar.value = currentImmunity;
+            immunityText.text = currentImmunity.ToString();
             audioManager.PlayAudioPickUpItem();
         }
 

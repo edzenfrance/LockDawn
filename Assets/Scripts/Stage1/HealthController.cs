@@ -45,8 +45,8 @@ public class HealthController : MonoBehaviour
 
     [Header("Quarantine")]
     [SerializeField] private GameObject quarantineObject;
-    [SerializeField] private GameObject characterLifeObject;
-    [SerializeField] private TextMeshProUGUI characterLifeText;
+    [SerializeField] private GameObject lifeObject;
+    [SerializeField] private TextMeshProUGUI lifeText;
 
     [Header("Animation and Prefab")]
     [SerializeField] private RuntimeAnimatorController[] animatorControllers;
@@ -126,12 +126,12 @@ public class HealthController : MonoBehaviour
                 yield break;
             if (currentHP > 0)
             {
-                healthCountText.text = ": " + currentHP;
+                healthCountText.text = currentHP.ToString();
                 healthBar.value = currentHP;
             }
             if (currentHP <= 0)
             {
-                healthCountText.text = ": 0";
+                healthCountText.text = "0";
                 isAlive = false;
                 if (!isDead)
                 {
@@ -156,7 +156,7 @@ public class HealthController : MonoBehaviour
         int currentLife = SaveManager.currentLife;
         currentLife -= 1;
         saveManager.SetCurrentLife(currentLife);
-        characterLifeText.text = "Life: " + currentLife;
+        lifeText.text = "Life: " + currentLife;
         Debug.Log("<color=white>HealthBarController</color> - Life: " + currentLife);
         if (currentLife <= 0)
         {
@@ -176,7 +176,6 @@ public class HealthController : MonoBehaviour
         deathUI.SetActive(true);
         touchZoneVirtualMove.SetActive(true);
         character.SetActive(false);
-        //Destroy(character);
     }
 
     public void RespawnCharacter()
@@ -192,7 +191,7 @@ public class HealthController : MonoBehaviour
         animator.runtimeAnimatorController = animatorControllers[1];
         currentHP = 100;
         healthBar.value = currentHP;
-        healthCountText.text = ": " + currentHP;
+        healthCountText.text = currentHP.ToString();
     }
 
     public void RespawnFromQuarantine()
@@ -201,28 +200,28 @@ public class HealthController : MonoBehaviour
         bloodSmear.SetActive(false);
         currentHP = 100;
         healthBar.value = currentHP;
-        healthCountText.text = ": " + currentHP;
+        healthCountText.text = currentHP.ToString();
     }
 
     public void StopInfection()
     {
         if (isInfected)
         {
-            Debug.Log("Infection is stop");
+            stopInfection = true;
+            isInfected = false;
             bloodSmear.SetActive(false);
             infectedNote.SetActive(false);
             note.SetActive(true);
-            note.GetComponent<TextMeshProUGUI>().text = "Special syrup stop the infection!";
-            stopInfection = true;
             saveManager.UseSpecialSyrup();
             inventory.ReloadInventory();
             audioManager.StopAudioLoop();
+            note.GetComponent<TextMeshProUGUI>().text = TextManager.stopInfection;
             StartCoroutine(StopInfectionDone());
         }
         else
         {
             note.SetActive(true);
-            note.GetComponent<TextMeshProUGUI>().text = "You are not infected";
+            note.GetComponent<TextMeshProUGUI>().text = TextManager.notInfected;
             StartCoroutine(StopInfectionDone());
         }
     }
@@ -243,7 +242,7 @@ public class HealthController : MonoBehaviour
         healthBarFill.SetActive(setBool);
         stageNumber.SetActive(setBool);
         stageTask.SetActive(setBool);
-        characterLifeObject.SetActive(setBool);
+        lifeObject.SetActive(setBool);
         playerFollowCamera.SetActive(setBool);
         touchZoneCanvas.SetActive(setBool);
     }

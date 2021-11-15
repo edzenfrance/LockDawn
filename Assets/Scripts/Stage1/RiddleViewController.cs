@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class RiddleViewController : MonoBehaviour
 {
-    [SerializeField] private GameObject mapButton;
-    [SerializeField] private GameObject inventoryButton;
-    [SerializeField] private GameObject hand;
     [SerializeField] private CanvasGroup overlay;
     [SerializeField] private Transform overlayObject;
 
@@ -22,9 +19,6 @@ public class RiddleViewController : MonoBehaviour
 
     public void OnEnable()
     {
-        mapButton.SetActive(false);
-        inventoryButton.SetActive(false);
-        hand.SetActive(false);
         overlay.alpha = 0;
         overlay.LeanAlpha(1, 0.5f);
         overlayObject.localPosition = new Vector2(0, -Screen.height);
@@ -46,8 +40,5 @@ public class RiddleViewController : MonoBehaviour
     void OnBackComplete()
     {
         gameObject.SetActive(false);
-        mapButton.SetActive(true);
-        inventoryButton.SetActive(true);
-        hand.SetActive(true);
     }
 }

@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using TMPro;
 
 public class StartManager : MonoBehaviour
 {
-    //[SerializeField] private TMP_Text currentCharacterText;
     [SerializeField] private UIVirtualTouchZone UIVirtualTouchZoneLook;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private SaveManager saveManager;
     [SerializeField] private GameObject framerateCounter;
     [SerializeField] private Slider immunityBar;
     [SerializeField] private GameObject immunityFill;
+    [SerializeField] private TextMeshProUGUI immunityText;
     [SerializeField] private GameObject[] characterPrefabs;
     [SerializeField] private Transform[] spawnPoint;
     [SerializeField] private GameObject[] NPCDifficulty;
@@ -20,46 +21,56 @@ public class StartManager : MonoBehaviour
     void Awake()
     {
         // Character
-        int currentCharacter = PlayerPrefs.GetInt("Current Character", 1);
+        saveManager.GetCurrentCharacter();
         saveManager.GetCurrentStage();
+        int currentCharacter = SaveManager.currentCharacter;
         int currentStage = SaveManager.currentStage;
         GameObject prefab = characterPrefabs[currentCharacter];
         GameObject clone = Instantiate(prefab, spawnPoint[currentStage-1].position, Quaternion.identity);
-        Debug.Log("<color=white>StartManager</color> - Character: " + prefab.name + " - SpawnPoint: " + currentStage);
-        //currentCharacterText.text = "Player: " + prefab.name;
 
         // NPC
-        int npcDiff = PlayerPrefs.GetInt("Game Difficulty", 2);
+        saveManager.GetGameDifficulty();
+        int gameDiff = SaveManager.gameDifficulty;
         NPCDifficulty[0].SetActive(true);
         NPCDifficulty[1].SetActive(false);
         NPCDifficulty[2].SetActive(false);
-        if (npcDiff == 1) NPCDifficulty[0].SetActive(true);
-        if (npcDiff == 2) NPCDifficulty[1].SetActive(true);
-        if (npcDiff == 3) NPCDifficulty[2].SetActive(true);
+        if (gameDiff == 1) NPCDifficulty[0].SetActive(true);
+        if (gameDiff == 2) NPCDifficulty[1].SetActive(true);
+        if (gameDiff == 3) NPCDifficulty[2].SetActive(true);
 
         // Look Sensitivity
-        float lookSens = PlayerPrefs.GetFloat("Look Sensitivity", 60);
-        UIVirtualTouchZoneLook.magnitudeMultiplier = lookSens;
+        saveManager.GetLookSensitivity();
+        float lookSensitivity = SaveManager.lookSensitivity;
+        UIVirtualTouchZoneLook.magnitudeMultiplier = lookSensitivity;
 
         // Framerate Counter
-        int framerateOn = PlayerPrefs.GetInt("Show Framerate", 0);
+        saveManager.GetShowFramerate();
+        int framerateOn = SaveManager.framerateOn;
         if (framerateOn == 1)
             framerateCounter.SetActive(true);
         else
             framerateCounter.SetActive(false);
 
         // Camera
-        float cameraDis = PlayerPrefs.GetFloat("Camera Distance", 1.75f);
-        virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = cameraDis;;
+        saveManager.GetCameraDistance();
+        float cameraDistance = SaveManager.cameraDistance;
+        virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = cameraDistance;;
 
         // Immunity
         saveManager.GetCurrentImmunity();
         currentImmunity = SaveManager.currentImmunity;
-        Debug.Log("<color=white>ChangeImmunity</color> - Current Immunity: " + currentImmunity);
         if (currentImmunity > 0)
             immunityFill.SetActive(true);
         else
             immunityFill.SetActive(false);
         immunityBar.value = currentImmunity;
+        immunityText.text = currentImmunity.ToString();
+
+        Debug.Log("<color=white>StartManager</color> - Prefab: " + prefab.name + " - SpawnPoint: " + currentStage);
+        Debug.Log("<color=white>StartManager</color> - Game Difficulty: " + gameDiff);
+        Debug.Log("<color=white>StartManager</color> - Framerate: " + framerateOn);
+        Debug.Log("<color=white>StartManager</color> - Camera Distance: " + cameraDistance);
+        Debug.Log("<color=white>StartManager</color> - Current Immunity: " + currentImmunity);
+        Debug.Log("<color=white>StartManager</color> - Look Sensitivity: " + lookSensitivity);
     }
 }

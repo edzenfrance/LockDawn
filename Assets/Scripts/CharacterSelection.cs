@@ -52,8 +52,10 @@ public class CharacterSelection : MonoBehaviour
 	[SerializeField] private GameObject buyText;
 	[SerializeField] private GameObject useCharacter;
 	[SerializeField] private TextMeshProUGUI characterNameText;
+	[SerializeField] private SaveManager saveManager;
 	[SerializeField] private GameObject[] character;
 	[SerializeField] private string[] characterName;
+
 
 	public void NextCharacter()
 	{
@@ -79,9 +81,10 @@ public class CharacterSelection : MonoBehaviour
     {
 		if (currentCharacter >= 2)
 		{
-			int ObtainA = PlayerPrefs.GetInt("Obtain Skin: 0");
-			int ObtainB = PlayerPrefs.GetInt("Obtain Skin: 1");
-			int ObtainC = PlayerPrefs.GetInt("Obtain Skin: 2");
+			saveManager.GetObtainSkin();
+			int ObtainA = SaveManager.ObtainSkinA;
+			int ObtainB = SaveManager.ObtainSkinB;
+			int ObtainC = SaveManager.ObtainSkinC;
 			if (currentCharacter == 2)
 				if (ObtainA != 1)
 					BuyCharacter();
@@ -111,7 +114,7 @@ public class CharacterSelection : MonoBehaviour
 
 	public void StartGame()
 	{
-		ProcessPlayerPrefs();
+		saveManager.NewGamePlayerPrefs();
 		PlayerPrefs.SetInt("Current Character", currentCharacter);
 		SceneManager.LoadScene("Stage1", LoadSceneMode.Single);
 	}
@@ -120,20 +123,4 @@ public class CharacterSelection : MonoBehaviour
     {
 		SceneManager.LoadScene("MainMenu");
     }
-
-	void ProcessPlayerPrefs()
-    {
-		PlayerPrefs.DeleteKey("Key A");
-		PlayerPrefs.DeleteKey("Key B");
-		PlayerPrefs.DeleteKey("Key C");
-		PlayerPrefs.DeleteKey("Key D");
-		PlayerPrefs.DeleteKey("Key E");
-		PlayerPrefs.DeleteKey("Key F");
-		PlayerPrefs.DeleteKey("Vitamin");
-		PlayerPrefs.DeleteKey("Special Syrup");
-		PlayerPrefs.DeleteKey("Key Count");
-		PlayerPrefs.DeleteKey("Achievement: Show Off");
-		PlayerPrefs.SetInt("Current Stage", 1);
-		PlayerPrefs.SetInt("Current Immunity", 0);
-	}
 }
