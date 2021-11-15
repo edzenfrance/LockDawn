@@ -21,15 +21,9 @@ public class PauseScreen : MonoBehaviour
     void Update()
     {
         if (GamePaused)
-        {
             Time.timeScale = 0;
-            //Debug.Log("PauseScreen - GAME PAUSED: " + GamePaused);
-        }
         else
-        {
             Time.timeScale = 1;
-            //Debug.Log("PauseScreen - GAME PAUSED: " + GamePaused);
-        }
     }
 
     public void OnEnable()
@@ -66,17 +60,11 @@ public class PauseScreen : MonoBehaviour
 
     public void OnStage()
     {
-        /*
-        GamePaused = false;
-        Debug.Log("PauseScreen - Previous Scene: Stage 1");
-        PlayerPrefs.SetString("Scene", "Stage1");
-        SceneManager.LoadScene("StageSelect");
-        */
-
         GamePaused = false;
         background.LeanAlpha(0, 0.5f);
         box.LeanMoveLocalY(-Screen.height, 0.5f).setEaseInExpo().setOnComplete(OnStageComplete);
     }
+
     void OnStageComplete()
     {
         gameObject.SetActive(false);
@@ -86,14 +74,11 @@ public class PauseScreen : MonoBehaviour
     public void OnRestart()
     {
         buttonsDialog.SetActive(false);
-        Debug.Log("PauseScreen - RESTART SCENE: " + SceneManager.GetActiveScene().buildIndex);
         restartDialog.SetActive(true);
     }
 
     public void OnRestartYes()
     {
-
-        Debug.Log("PauseScreen - RESTART SCENE: " + SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         GamePaused = false;
     }

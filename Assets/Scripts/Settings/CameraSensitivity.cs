@@ -11,10 +11,9 @@ public class CameraSensitivity : MonoBehaviour
     [SerializeField] private Slider cameraSensitivitySlider;
     [SerializeField] private float cameraSensitivityValue;
 
-    // Start is called before the first frame update
     void Start()
     {
-        cameraSensitivityValue = PlayerPrefs.GetFloat("TouchZoneLookMultiplier", 60);
+        cameraSensitivityValue = PlayerPrefs.GetFloat("Look Sensitivity", 60);
         cameraSensitivityText.text = cameraSensitivityValue.ToString();
         cameraSensitivitySlider.value = cameraSensitivityValue;
         UIVirtualTouchZoneLook.magnitudeMultiplier = cameraSensitivityValue;
@@ -23,7 +22,7 @@ public class CameraSensitivity : MonoBehaviour
     public void UpdateLookSensitivty(float sensitivity)
     {
         UIVirtualTouchZoneLook.magnitudeMultiplier = sensitivity;
-        PlayerPrefs.SetFloat("TouchZoneLookMultiplier", sensitivity);
+        PlayerPrefs.SetFloat("Look Sensitivity", sensitivity);
         cameraSensitivityText.text = sensitivity.ToString();
     }
 

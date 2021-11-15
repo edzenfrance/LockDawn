@@ -15,18 +15,13 @@ public class StageSelection : MonoBehaviour
     void Update()
     {
         if (GamePaused)
-        {
             Time.timeScale = 0;
-        }
         else
-        {
             Time.timeScale = 1;
-        }
     }
 
     public void OnEnable()
     {
-        Debug.Log("<color=white>StageSelection</color> - OnEnable");
         overlay.alpha = 0;
         overlay.LeanAlpha(1, 0.5f);
         overlayObject.localPosition = new Vector2(0, -Screen.height);

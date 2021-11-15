@@ -45,8 +45,6 @@ public class HealthController : MonoBehaviour
 
     [Header("Quarantine")]
     [SerializeField] private GameObject quarantineObject;
-    [Range(1, 3)]
-    [SerializeField] private int characterLife = 3;
     [SerializeField] private GameObject characterLifeObject;
     [SerializeField] private TextMeshProUGUI characterLifeText;
 
@@ -71,7 +69,7 @@ public class HealthController : MonoBehaviour
     {
         character = GameObject.FindGameObjectWithTag("Player");
         animator = character.GetComponent<Animator>();
-        PlayerPrefs.DeleteKey("CharacterLife");
+        saveManager.SetAchievement(1, 1);
     }
 
     public void ChangeHealthPoint(int dHP, bool zombieDmg)
@@ -100,7 +98,7 @@ public class HealthController : MonoBehaviour
             {
                 if (achievementsA)
                 {
-                    saveManager.SetFailedAchievementOne();
+                    saveManager.SetAchievement(1, 0);
                     achievementsA = false;
                 }
             }
@@ -152,19 +150,21 @@ public class HealthController : MonoBehaviour
     {
         isDead = true;
         isInfected = false;
-        audioManager.PlayAudioDeadCharacter();
         infectedNote.SetActive(false);
         EnableDisableObjects(false);
-        saveManager.GetCharacterLife();
-        characterLife -= 1;
-        characterLifeText.text = "Life: " + characterLife;
-        Debug.Log("<color=white>HealthBarController</color> - Life: " + characterLife);
-        if (characterLife <= 0)
+        saveManager.GetCurrentLife();
+        int currentLife = SaveManager.currentLife;
+        currentLife -= 1;
+        saveManager.SetCurrentLife(currentLife);
+        characterLifeText.text = "Life: " + currentLife;
+        Debug.Log("<color=white>HealthBarController</color> - Life: " + currentLife);
+        if (currentLife <= 0)
         {
+            audioManager.StopAudioLoop();
             quarantineObject.SetActive(true);
             return;
         }
-        PlayerPrefs.SetInt("CharacterLife", characterLife);
+        audioManager.PlayAudioDeadCharacter();
         animator.runtimeAnimatorController = animatorControllers[0];
         StartCoroutine(WaitAndDeath(2f));
     }
@@ -190,6 +190,15 @@ public class HealthController : MonoBehaviour
         bloodSmear.SetActive(false);
         character.SetActive(true);
         animator.runtimeAnimatorController = animatorControllers[1];
+        currentHP = 100;
+        healthBar.value = currentHP;
+        healthCountText.text = ": " + currentHP;
+    }
+
+    public void RespawnFromQuarantine()
+    {
+        infectedNote.SetActive(false);
+        bloodSmear.SetActive(false);
         currentHP = 100;
         healthBar.value = currentHP;
         healthCountText.text = ": " + currentHP;

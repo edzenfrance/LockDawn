@@ -10,9 +10,6 @@ public class ItemGet : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private TextMeshProUGUI taskKeyText;
 
-    [Header("Exit")]
-    [SerializeField] private GameObject[] stageExit;
-
     [Header("Types")]
     [SerializeField] private string objectName;
     [SerializeField] private bool getCoin;
@@ -24,29 +21,32 @@ public class ItemGet : MonoBehaviour
     [SerializeField] private NoteController noteController;
     [SerializeField] private ImmunityController immunityController;
 
-    int keyCount;
+    [Header("Exit")]
+    [SerializeField] private GameObject[] stageExit;
 
     public void getItem()
     {
-        if (objectName == "S1 Key A") KeyCount("S1 Key A", "Door Key: Upper Floor");
-        if (objectName == "S1 Key B") KeyCount("S1 Key B", "Door Key: Stock Room");
-        if (objectName == "S1 Key C") KeyCount("S1 Key C", "Door Key: Small Room");
-        if (objectName == "S1 Key D") KeyCount("S1 Key D", "Door Key: Large Room");
-        if (objectName == "S1 Key E") KeyCount("S1 Key E", "Door Key: Bathroom");
-        if (objectName == "S1 Key F") KeyCount("S1 Key F", "Door Key: Kitchen");
-        if (objectName == "S1 Special Syrup")
-        {
-            saveManager.SetSpecialSyrup();
-            toggleObjectives[1].isOn = true;
-            audioManager.PlayAudioPickUpBottle();
-        }
+        if (objectName == "S1 Key A") SaveKey("S1 Key A", TextManager.S1_DoorKey_A_Add);
+        if (objectName == "S1 Key B") SaveKey("S1 Key B", TextManager.S1_DoorKey_B_Add);
+        if (objectName == "S1 Key C") SaveKey("S1 Key C", TextManager.S1_DoorKey_C_Add);
+        if (objectName == "S1 Key D") SaveKey("S1 Key D", TextManager.S1_DoorKey_D_Add);
+        if (objectName == "S1 Key E") SaveKey("S1 Key E", TextManager.S1_DoorKey_E_Add);
+        if (objectName == "S1 Key F") SaveKey("S1 Key F", TextManager.S1_DoorKey_F_Add);
+
+        if (objectName == "S2 Key A") SaveKey("S2 Key A", TextManager.S1_DoorKey_A_Add);
+        if (objectName == "S2 Key B") SaveKey("S2 Key B", TextManager.S1_DoorKey_B_Add);
+        if (objectName == "S2 Key C") SaveKey("S2 Key C", TextManager.S1_DoorKey_C_Add);
+        if (objectName == "S2 Key D") SaveKey("S2 Key D", TextManager.S1_DoorKey_D_Add);
+        if (objectName == "S2 Key E") SaveKey("S2 Key E", TextManager.S1_DoorKey_E_Add);
+        if (objectName == "S2 Key F") SaveKey("S2 Key F", TextManager.S1_DoorKey_F_Add);
+
         if (objectName == "S1 Vitamins")
         {
             saveManager.ObtainMainItemImmunity("Vitamins", 5);
             immunityController.CheckImmunity();
             stageExit[0].SetActive(true);
-            noteController.ShowNote("You got the main item vitamins!\nExit the house to finish the stage!", 3.0f);
-            toggleObjectives[2].isOn = true;
+            noteController.ShowNote(TextManager.gotVitamin, 3.0f);
+            toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
 
@@ -55,8 +55,8 @@ public class ItemGet : MonoBehaviour
             saveManager.ObtainMainItemImmunity("Alcohol", 10);
             immunityController.CheckImmunity();
             stageExit[1].SetActive(true);
-            noteController.ShowNote("You got the main item alcohol!\nExit the house to finish the stage!", 3.0f);
-            toggleObjectives[2].isOn = true;
+            noteController.ShowNote(TextManager.gotAlcohol, 3.0f);
+            toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
 
@@ -65,8 +65,8 @@ public class ItemGet : MonoBehaviour
             saveManager.ObtainMainItemImmunity("Face Mask", 30);
             immunityController.CheckImmunity();
             stageExit[2].SetActive(true);
-            noteController.ShowNote("You got the main item face mask!\nGoto the end of the road to finish the staeg", 3.0f);
-            toggleObjectives[2].isOn = true;
+            noteController.ShowNote(TextManager.gotFaceMask, 3.0f);
+            toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
 
@@ -75,8 +75,8 @@ public class ItemGet : MonoBehaviour
             saveManager.ObtainMainItemImmunity("Face Shield", 50);
             immunityController.CheckImmunity();
             stageExit[3].SetActive(true);
-            noteController.ShowNote("You got the main item face shield!\nExit the mall to finish the stage", 3.0f);
-            toggleObjectives[2].isOn = true;
+            noteController.ShowNote(TextManager.gotFaceShield, 3.0f);
+            toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
 
@@ -85,50 +85,58 @@ public class ItemGet : MonoBehaviour
             saveManager.ObtainMainItemImmunity("Vaccine", 100);
             immunityController.CheckImmunity();
             stageExit[4].SetActive(true);
-            noteController.ShowNote("You got the main item vitamins!\nExit the hospital to finish the staeg!", 3.0f);
-            toggleObjectives[2].isOn = true;
+            noteController.ShowNote(TextManager.gotVaccine, 3.0f);
+            toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
 
-        if (objectName == "S1 Riddle A")
+        if (objectName.Contains("Riddle"))
         {
-            toggleObjectives[3].isOn = true;
+            toggleObjectives[2].isOn = true;
             riddleManager.ProcessRiddle(objectName);
-            audioManager.PlayAudioPickUpItem();
-            return;
+            audioManager.PlayAudioPickUpPaper();
         }
-        if (getCoin)
+
+        if (objectName.Contains("Special Syrup"))
         {
-            noteController.ShowNote("<color=yellow>+10 coins</color> added to inventory.", 1.5f);
+            saveManager.SetSpecialSyrup();
+            toggleObjectives[1].isOn = true;
+            audioManager.PlayAudioPickUpBottle();
+        }
+
+        if (objectName.Contains("Coin"))
+        {
+            noteController.ShowNote(TextManager.coinAdded, 1.5f);
             saveManager.SetCoin();
             audioManager.PlayAudioPickUpCoin();
         }
-        inventory.ReloadInventory ();
-        GameObject detectedObject = GameObject.Find("Item/"+ objectName);
+
+        inventory.ReloadInventory();
+        saveManager.GetCurrentStage();
+        int currentStage = SaveManager.currentStage;
+        GameObject detectedObject = GameObject.Find("Item/Stage" + currentStage + "/" + objectName);
         detectedObject.SetActive(false);
         gameObject.SetActive(false);
         Debug.Log("<color=white>ItemGet</color> - Added to inventory: " + objectName);
     }
 
-    void KeyCount(string KeyName, string KeyNote)
-    {
-        saveManager.SetKey(KeyName);
-        keyCount =  PlayerPrefs.GetInt("Key Count");
-        taskKeyText.text = "Keys (" + keyCount + " of 6)";
-        noteController.ShowNote("<color=green>" + KeyNote + "</color> added to inventory.", 2.0f);
-        audioManager.PlayAudioPickUpKey();
-        if (keyCount == 6)
-            toggleObjectives[0].isOn = true;
-    }
-
     public void ItemInfo(string itemNote, string objName)
     {
-        if (itemNote == "Get the <color=yellow>Coin")
-            getCoin = true;
-        else
-            getCoin = false;
         objectName = objName;
         grabItem.text = itemNote;
         Debug.Log("<color=white>ItemGet</color> - Detected Item: " + objectName);
+    }
+
+    void SaveKey(string KeyName, string KeyNote)
+    {
+        saveManager.SetKeyName(KeyName);
+        saveManager.SetKeyCount();
+        saveManager.GetKeyCount();
+        int keyCount = SaveManager.keyCount;
+        taskKeyText.text = "Keys (" + keyCount + " of 6)";
+        noteController.ShowNote(KeyNote + "</color> " + TextManager.addedToInventory, 3.0f);
+        audioManager.PlayAudioPickUpKey();
+        if (keyCount == 6)
+            toggleObjectives[0].isOn = true;
     }
 }

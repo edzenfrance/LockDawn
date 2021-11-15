@@ -17,6 +17,7 @@ public class Inventory : MonoBehaviour
 
     int num;
     int iObj = 0;
+    int stageNum;
 
     public void AccessInventory()
     {
@@ -50,25 +51,77 @@ public class Inventory : MonoBehaviour
 
     void LoadItemImage()
     {
-        int keyA = PlayerPrefs.GetInt("Key A");
-        int keyB = PlayerPrefs.GetInt("Key B");
-        int keyC = PlayerPrefs.GetInt("Key C");
-        int keyD = PlayerPrefs.GetInt("Key D");
-        int keyE = PlayerPrefs.GetInt("Key E");
-        int keyF = PlayerPrefs.GetInt("Key F");
-        int vitamin = PlayerPrefs.GetInt("Vitamin");
+        stageNum = PlayerPrefs.GetInt("Current Stage", 1);
+        if (stageNum == 1)
+        {
+            int keyA = PlayerPrefs.GetInt("S1 Key A");
+            int keyB = PlayerPrefs.GetInt("S1 Key B");
+            int keyC = PlayerPrefs.GetInt("S1 Key C");
+            int keyD = PlayerPrefs.GetInt("S1 Key D");
+            int keyE = PlayerPrefs.GetInt("S1 Key E");
+            int keyF = PlayerPrefs.GetInt("S1 Key F");
+            int vitamin = PlayerPrefs.GetInt("S1 Vitamin");
+            iObj = 0;
+            if (keyA == 1) LoadSprite(0);
+            if (keyB == 1) LoadSprite(1);
+            if (keyC == 1) LoadSprite(2);
+            if (keyD == 1) LoadSprite(3);
+            if (keyE == 1) LoadSprite(4);
+            if (keyF == 1) LoadSprite(5);
+            if (vitamin == 1) LoadSprite(8);
+        }
+        if (stageNum == 2)
+        {
+            int keyA = PlayerPrefs.GetInt("S2 Key A");
+            int keyB = PlayerPrefs.GetInt("S2 Key B");
+            int keyC = PlayerPrefs.GetInt("S2 Key C");
+            int keyD = PlayerPrefs.GetInt("S2 Key D");
+            int keyE = PlayerPrefs.GetInt("S2 Key E");
+            int keyF = PlayerPrefs.GetInt("S2 Key F");
+            int alcohol = PlayerPrefs.GetInt("S2 Alcohol");
+            iObj = 0;
+            if (keyA == 1) LoadSprite(0);
+            if (keyB == 1) LoadSprite(1);
+            if (keyC == 1) LoadSprite(2);
+            if (keyD == 1) LoadSprite(3);
+            if (keyE == 1) LoadSprite(4);
+            if (keyF == 1) LoadSprite(5);
+            if (alcohol == 1) LoadSprite(9);
+        }
+        if (stageNum == 3)
+        {
+            int facemask = PlayerPrefs.GetInt("S3 Face Mask");
+            iObj = 0;
+            if (facemask == 1) LoadSprite(10);
+        }
+        if (stageNum == 4)
+        {
+            int keyA = PlayerPrefs.GetInt("S4 Key A");
+            int keyB = PlayerPrefs.GetInt("S4 Key B");
+            int keyC = PlayerPrefs.GetInt("S4 Key C");
+            int keyD = PlayerPrefs.GetInt("S4 Key D");
+            int keyE = PlayerPrefs.GetInt("S4 Key E");
+            int keyF = PlayerPrefs.GetInt("S4 Key F");
+            int vitamin = PlayerPrefs.GetInt("S4 Face Shield");
+            iObj = 0;
+            if (keyA == 1) LoadSprite(0);
+            if (keyB == 1) LoadSprite(1);
+            if (keyC == 1) LoadSprite(2);
+            if (keyD == 1) LoadSprite(3);
+            if (keyE == 1) LoadSprite(4);
+            if (keyF == 1) LoadSprite(5);
+            if (vitamin == 1) LoadSprite(11);
+        }
+        if (stageNum == 5)
+        {
+            int vitamin = PlayerPrefs.GetInt("S5 Vaccine");
+            iObj = 0;
+            if (vitamin == 1) LoadSprite(12);
+        }
         int syrup = PlayerPrefs.GetInt("Special Syrup");
         int coin = PlayerPrefs.GetInt("Coin");
-        iObj = 0;
-        if (keyA == 1) LoadSprite(0);
-        if (keyB == 1) LoadSprite(1);
-        if (keyC == 1) LoadSprite(2);
-        if (keyD == 1) LoadSprite(3);
-        if (keyE == 1) LoadSprite(4);
-        if (keyF == 1) LoadSprite(5);
         if (syrup >= 1) LoadSprite(6);
-        if (vitamin == 1) LoadSprite(7);
-        if (coin >= 10) LoadSprite(8);
+        if (coin >= 10) LoadSprite(7);
     }
 
     void LoadSprite(int num)
@@ -100,29 +153,49 @@ public class Inventory : MonoBehaviour
         string imageName = buttonObject[num].GetComponent<Image>().sprite.name;
         inventoryText.text = "";
         useSyrupButton.SetActive(false);
-        if (imageName == "Inventory Key A")
-            inventoryText.text = "<color=green>Door Key: Upper Floor</color> - Can be use to open a locked door.";
-        if (imageName == "Inventory Key B")
-            inventoryText.text = "<color=green>Door Key: Stock Room</color> - Can be use to open a locked door.";
-        if (imageName == "Inventory Key C")
-            inventoryText.text = "<color=green>Door Key: Small Room</color> - Can be use to open a locked door.";
-        if (imageName == "Inventory Key D")
-            inventoryText.text = "<color=green>Door Key: Large Room</color> - Can be use to open a locked door.";
-        if (imageName == "Inventory Key E")
-            inventoryText.text = "<color=green>Door Key: Bath Room</color> - Can be use to open a locked door.";
-        if (imageName == "Inventory Key F")
-            inventoryText.text = "<color=green>Door Key: Kitchen</color> - Can be use to open a locked door.";
+        if (stageNum == 1)
+        {
+            if (imageName == "S1 Inventory Key A") inventoryText.text = TextManager.S1_Inventory_A;
+            if (imageName == "S1 Inventory Key B") inventoryText.text = TextManager.S1_Inventory_B;
+            if (imageName == "S1 Inventory Key C") inventoryText.text = TextManager.S1_Inventory_C;
+            if (imageName == "S1 Inventory Key D") inventoryText.text = TextManager.S1_Inventory_D;
+            if (imageName == "S1 Inventory Key E") inventoryText.text = TextManager.S1_Inventory_E;
+            if (imageName == "S1 Inventory Key F") inventoryText.text = TextManager.S1_Inventory_F;
+            if (imageName == "S1 Inventory Vitamin") inventoryText.text = TextManager.inventoryVitamin;
+        }
+        if (stageNum == 2)
+        {
+            if (imageName == "S2 Inventory Key A") inventoryText.text = TextManager.S1_Inventory_A;
+            if (imageName == "S2 Inventory Key B") inventoryText.text = TextManager.S2_Inventory_A;
+            if (imageName == "S2 Inventory Key C") inventoryText.text = TextManager.S2_Inventory_A;
+            if (imageName == "S2 Inventory Key D") inventoryText.text = TextManager.S2_Inventory_A;
+            if (imageName == "S2 Inventory Key E") inventoryText.text = TextManager.S2_Inventory_A;
+            if (imageName == "S2 Inventory Key F") inventoryText.text = TextManager.S2_Inventory_A;
+            if (imageName == "S2 Inventory Alcohol") inventoryText.text = TextManager.inventoryAlcohol;
+        }
+        if (stageNum == 3)
+        {
+            if (imageName == "S1 Inventory Face Mask") inventoryText.text = TextManager.inventoryFaceMask;
+        }
+        if (stageNum == 4)
+        {
+            if (imageName == "S1 Inventory Face Shield") inventoryText.text = TextManager.inventoryFaceShield;
+        }
+        if (stageNum == 5)
+        {
+            if (imageName == "S1 Inventory Vaccine") inventoryText.text = TextManager.inventoryVaccine;
+        }
         if (imageName == "Inventory Syrup")
         {
-            inventoryText.text = "<color=green>Special Syrup</color> - Can be use to stop your health from draining.";
+            int syrupCount = PlayerPrefs.GetInt("Special Syrup");
+            inventoryText.text = "[" + syrupCount + "] " + TextManager.inventorySyrup;
             useSyrupButton.SetActive(true);
         }
-        if (imageName == "Inventory Vitamin Bottle")
-            inventoryText.text = "<color=green>Vitamins</color> - This item increased your immunity.";
+
         if (imageName == "Inventory Coin")
         {
             int coinCount = PlayerPrefs.GetInt("Coin");
-            inventoryText.text = "<color=yellow>Coin (" + coinCount + ")</color> - Can be used to buy new skin in shop.";
+            inventoryText.text = "[" + coinCount + "] " + TextManager.inventoryCoin;
         }
     }
 }

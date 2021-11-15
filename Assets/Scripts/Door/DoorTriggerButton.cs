@@ -9,7 +9,7 @@ public class DoorTriggerButton : MonoBehaviour
 
     public void OpenCloseDoor()
     {
-        doorName = PlayerPrefs.GetString("SaveDoorName");
+        doorName = PlayerPrefs.GetString("Door Name");
         Debug.Log("<color=green>TriggerDoorButton</color> - " + doorName);
         doorTransform = GameObject.Find(doorName).GetComponent<Transform>();
         doorTransform.gameObject.GetComponent<IInteractable>().OpenableDoor();

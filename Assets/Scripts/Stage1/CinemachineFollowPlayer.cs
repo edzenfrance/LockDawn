@@ -4,22 +4,17 @@ using Cinemachine;
 
 public class CinemachineFollowPlayer : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera vcam;
-    [SerializeField] private Cinemachine3rdPersonFollow vcamThirdPersonFollow;
-    [SerializeField] private GameObject vcamPlayerCameraRoot;
-    [SerializeField] private Transform vcamFollow;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private Transform playerTransform;
 
     void Start()
     {
-        vcam = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
-        vcamThirdPersonFollow = vcam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-
-        if (vcamPlayerCameraRoot == null)
+        virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        if (playerTransform == null)
         {
-            vcamPlayerCameraRoot = GameObject.FindWithTag("CinemachineTarget");
-            vcamFollow = vcamPlayerCameraRoot.transform;
-            vcam.Follow = vcamFollow;
-            //vcam.LookAt = vcamFollowTarget;
+            playerTransform = GameObject.FindWithTag("CinemachineTarget").GetComponent<Transform>().transform;
+            virtualCamera.Follow = playerTransform;
+            // vcam.LookAt = playerTransform;
         }
     }
 }

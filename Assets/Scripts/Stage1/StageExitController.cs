@@ -7,12 +7,15 @@ public class StageExitController : MonoBehaviour
     int num;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             string name = gameObject.name;
             string getNum = name.Replace("StageExit", "");
             if (int.TryParse(getNum, out num))
+            {
                 surveyManager.ProcessSurvey("Stage " + num + " Survey");
+                gameObject.SetActive(false);
+            }
             else
                 Debug.Log("Not a valid int");
         }

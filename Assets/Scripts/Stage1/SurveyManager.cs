@@ -4,14 +4,11 @@ using TMPro;
 
 public class SurveyManager : MonoBehaviour
 {
-
-    public GameObject mapButton;
-    public GameObject inventoryButton;
-    public GameObject hand;
     public GameObject answerButton;
     public GameObject showAnswer;
     public TextMeshProUGUI showAnswerText;
     public GameObject doneSurveyButton;
+    public AudioManager audioManager;
 
     [Header("Survey")]
     public GameObject surveyCanvas;
@@ -26,6 +23,7 @@ public class SurveyManager : MonoBehaviour
       new string[] {
         "2",
         "B",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
         "While playing the game for the first time, what have you learned about the game that you can do in real life to avoid getting infected or spread the virus?",
         "A. Hide from infected",
         "B. Physical distancing",
@@ -33,6 +31,7 @@ public class SurveyManager : MonoBehaviour
       new string[] {
         "3",
         "A",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
         "What is the most essential way to make your family safe from COVID-19 while inside your house?",
         "A. Use disinfectant regularly",
         "B. Wash hands using water only",
@@ -41,6 +40,7 @@ public class SurveyManager : MonoBehaviour
        new string[] {
         "3",
         "B",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
         "When do you need to where your facemask?",
         "A. When sleeping",
         "B. When outside",
@@ -49,6 +49,7 @@ public class SurveyManager : MonoBehaviour
        new string[] {
         "3",
         "C",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
         "How do you wear your face shield properly?",
         "A. Over the head",
         "B. On the back of your head",
@@ -57,6 +58,7 @@ public class SurveyManager : MonoBehaviour
       new string[] {
         "2",
         "A",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
         "_______ is a biological preparation that provides active acquired immunity to a particular infectious disease.",
         "A. Vaccine",
         "B. Vitamin",
@@ -64,6 +66,7 @@ public class SurveyManager : MonoBehaviour
       new string[] {
         "2",
         "A",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
         "You are now on the final stage of the game, does the game help you to understand how safety protocols work in a pandemic situation?",
         "A. Yes",
         "B. No",
@@ -71,8 +74,9 @@ public class SurveyManager : MonoBehaviour
     };
 
     int num;
-    int limit;
+    int toggleLimit;
     string myAnswer;
+    //int correctNum = 0;
 
     void OnEnable()
     {
@@ -81,10 +85,8 @@ public class SurveyManager : MonoBehaviour
 
     public void ProcessSurvey(string StageSurvey)
     {
-        mapButton.SetActive(false);
-        inventoryButton.SetActive(false);
-        hand.SetActive(false);
         surveyCanvas.SetActive(true);
+        audioManager.PlayAudioPickUpPaper();
         if (StageSurvey == "Stage 1 Survey") SetStageNumber(0, 1);
         if (StageSurvey == "Stage 2 Survey") SetStageNumber(1, 2);
         if (StageSurvey == "Stage 3 Survey") SetStageNumber(2, 3);
@@ -106,17 +108,17 @@ public class SurveyManager : MonoBehaviour
 
     void ChangeSurveyText()
     {
-        string getLimit = surveyTexts[num][0];
-        if (int.TryParse(getLimit, out limit))
+        string getToggleLimit = surveyTexts[num][0];
+        if (int.TryParse(getToggleLimit, out toggleLimit))
         {
             toggleObject[0].SetActive(false);
             toggleObject[1].SetActive(false);
             toggleObject[2].SetActive(false);
             toggleObject[3].SetActive(false);
 
-            questionText.text = surveyTexts[num][2];
-            int g = 3;
-            for (int i = 0; i < limit; i++)
+            questionText.text = surveyTexts[num][3];
+            int g = 4;
+            for (int i = 0; i < toggleLimit; i++)
             {
                 toggleObject[i].SetActive(true);
                 toggleObject[i].GetComponent<Toggle>().GetComponentInChildren<Text>().text = surveyTexts[num][g];
@@ -146,7 +148,6 @@ public class SurveyManager : MonoBehaviour
     {
         answerButton.SetActive(false);
         showAnswer.SetActive(true);
-        int correctNum = 0;
         if (myAnswer == surveyTexts[num][1])
         {
             showAnswerText.text = "Your answer it correctly! You learn something!";
@@ -154,10 +155,10 @@ public class SurveyManager : MonoBehaviour
         }
         else
         {
-            if (surveyTexts[num][1] == "A") correctNum = 3;
-            if (surveyTexts[num][1] == "B") correctNum = 4;
-            if (surveyTexts[num][1] == "C") correctNum = 5;
-            showAnswerText.text = "Your answer is wrong!\n" + surveyTexts[num][correctNum] + " is the correct answer!";
+            //if (surveyTexts[num][1] == "A") correctNum = 3;
+            //if (surveyTexts[num][1] == "B") correctNum = 4;
+            //if (surveyTexts[num][1] == "C") correctNum = 5;
+            showAnswerText.text = "Your wrong! " + surveyTexts[num][2];
             doneSurveyButton.SetActive(true);
         }
     }

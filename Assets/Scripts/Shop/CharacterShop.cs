@@ -94,7 +94,6 @@ public class CharacterShop : MonoBehaviour
 			skinInfo.text = skinName[currentSkin];
 		else
 			skinInfo.text = "Buy " + skinName[currentSkin] + "\nfor <color=yellow>" + skinPrice[currentSkin] + " Coins";
-
 	}
 
 	public void BuyCharacter()

@@ -6,6 +6,7 @@ public class Temp_MoveObject : MonoBehaviour
 {
     [SerializeField] private GameObject quarantinePosition;
     [SerializeField] private GameObject character;
+    [SerializeField] private GameObject quarantineObject;
 
     [SerializeField] private Vector3 quarantineVectorPosition;
     [SerializeField] private Vector3 characterVectorPosition;
@@ -22,5 +23,6 @@ public class Temp_MoveObject : MonoBehaviour
         character.transform.position = quarantineVectorPosition;
         character.SetActive(false);
         character.SetActive(true);
+        quarantineObject.SetActive(true);
     }
 }

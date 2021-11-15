@@ -24,7 +24,7 @@ public class DifficultyController : MonoBehaviour
 
     void Start()
     {
-        saveManager.GameDifficulty(2);
+        saveManager.SetGameDifficulty(2);
     }
 
     public void DifficultyEasy()
@@ -65,21 +65,21 @@ public class DifficultyController : MonoBehaviour
         colorBlock.normalColor = normalColorAlpha;
         if (diff == 1)
         {
-            saveManager.GameDifficulty(diff);
+            saveManager.SetGameDifficulty(diff);
             textEasy.SetActive(true);
             buttonTextEasy.color = buttonTextVertexColor;
             buttonEasy.colors = colorBlock;
         }
         if (diff == 2)
         {
-            saveManager.GameDifficulty(diff);
+            saveManager.SetGameDifficulty(diff);
             textNormal.SetActive(true);
             buttonTextNormal.color = buttonTextVertexColor;
             buttonNormal.colors = colorBlock;
         }
         if (diff == 3)
         {
-            saveManager.GameDifficulty(diff);
+            saveManager.SetGameDifficulty(diff);
             textHard.SetActive(true);
             buttonTextHard.color = buttonTextVertexColor;
             buttonHard.colors = colorBlock;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -22,12 +23,24 @@ public class AudioManager : MonoBehaviour
     public AudioClip pickUpPaper;
     public AudioClip pickUpCoin;
     public AudioClip woodBreak;
-
     void Awake()
     {
         audioSource = GetComponents<AudioSource>();
         sounds = audioSource[0];
         heart = audioSource[1];
+
+        float isMusicMuted = PlayerPrefs.GetInt("Music Mute", 0);
+        float isSoundMuted = PlayerPrefs.GetInt("Sound Mute", 0);
+        float musicVolume = PlayerPrefs.GetFloat("Music Volume", 1);
+        float soundVolume = PlayerPrefs.GetFloat("Music Volume", 1);
+
+        if (isMusicMuted == 1)
+            sounds.mute = true;
+        if (isSoundMuted == 1)
+            heart.mute = true;
+
+        sounds.volume = soundVolume;
+        heart.volume = musicVolume;
     }
 
     public void PlayAudioFootstep()
@@ -71,10 +84,9 @@ public class AudioManager : MonoBehaviour
         PlaySoundsLoop(dead);
     }
 
-
     public void PlayAudioObjective()
     {
-       // PlaySounds(objectiveVoice);
+       PlaySounds(objectiveVoice);
     }
 
     public void PlayAudioPickUpItem()
@@ -141,6 +153,11 @@ public class AudioManager : MonoBehaviour
         sounds.Pause();
     }
 
+    public void UnpauseAudio()
+    {
+        sounds.UnPause();
+    }
+
     public void PlayAudio()
     {
         sounds.Play();
@@ -150,5 +167,4 @@ public class AudioManager : MonoBehaviour
     {
         sounds.Stop();
     }
-
 }

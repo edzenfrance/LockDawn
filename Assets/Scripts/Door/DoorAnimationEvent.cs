@@ -6,17 +6,18 @@ using UnityEngine;
 public class DoorAnimationEvent : MonoBehaviour
 {
     [SerializeField] private GameObject animCollider;
+    [SerializeField] private SaveManager saveManager;
 
     void EnableDoorHand()
     {
-        PlayerPrefs.SetInt("EnableDoorAccess", 1);
-        Debug.Log("<color=yellow>DoorAnimationEvent</color> - Animation Ended");
+        saveManager.SetDoorAccess(1);
         animCollider.SetActive(false);
+        Debug.Log("<color=yellow>DoorAnimationEvent</color> - Animation Ended");
     }
 
     void DisableDoorHand()
     {
-        PlayerPrefs.SetInt("EnableDoorAccess", 0);
+        saveManager.SetDoorAccess(0);
         Debug.Log("<color=yellow>DoorAnimationEvent</color> - Animation Started");
     }
 }

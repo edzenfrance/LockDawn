@@ -44,7 +44,21 @@ public class RiddleManager : MonoBehaviour
         "B. Light",
         "C. Darkness",
         "D. Shadow",
-        "D"}
+        "D"},
+      new string[] {
+        "What begins but has no end and is the ending of all that begins?",
+        "A. Death",
+        "B. Reborn",
+        "C. War",
+        "D. Justice",
+        "A"},
+      new string[] {
+        "What begins but has no end and is the ending of all that begins?",
+        "A. Death",
+        "B. Reborn",
+        "C. War",
+        "D. Justice",
+        "A"}
     };
 
     int num;
@@ -62,6 +76,10 @@ public class RiddleManager : MonoBehaviour
         inventoryButton.SetActive(false);
         hand.SetActive(false);
         if (getRiddleName == "S1 Riddle A") num = 0;
+        if (getRiddleName == "S2 Riddle A") num = 1;
+        if (getRiddleName == "S3 Riddle A") num = 2;
+        if (getRiddleName == "S4 Riddle A") num = 3;
+        if (getRiddleName == "S5 Riddle A") num = 4;
         ChangeRiddleText();
     }
 

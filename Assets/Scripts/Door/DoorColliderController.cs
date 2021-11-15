@@ -16,19 +16,30 @@ public class DoorColliderController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("<color=white>DoorAnimationController</color> - Animation Paused");
+            Debug.Log("<color=white>DoorAnimationController</color> - Enter - Animation Paused");
             myDoor.enabled = false;
             audioManager.PauseAudio();
         }
     }
 
+    /*
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            myDoor.enabled = false;
+            audioManager.PauseAudio();
+        }
+    }*/
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("<color=white>DoorAnimationController</color> - Animation Unpaused");
+            Debug.Log("<color=white>DoorAnimationController</color> - Exit - Animation Unpaused");
             myDoor.enabled = true;
-            audioManager.PlayAudio();
+            audioManager.UnpauseAudio();
+
         }
     }
 

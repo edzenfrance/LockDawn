@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class SurveyViewController : MonoBehaviour
 {
-    [SerializeField] private GameObject mapButton;
-    [SerializeField] private GameObject inventoryButton;
-    [SerializeField] private GameObject hand;
     [SerializeField] private CanvasGroup overlay;
     [SerializeField] private Transform overlayObject;
+    [SerializeField] private GameObject stageComplete;
 
     bool GamePaused = false;
 
@@ -20,10 +18,6 @@ public class SurveyViewController : MonoBehaviour
 
     public void OnEnable()
     {
-        mapButton.SetActive(false);
-        inventoryButton.SetActive(false);
-        hand.SetActive(false);
-        Debug.Log("<color=white>StageSelection</color> - OnEnable");
         overlay.alpha = 0;
         overlay.LeanAlpha(1, 0.5f);
         overlayObject.localPosition = new Vector2(0, -Screen.height);
@@ -44,7 +38,7 @@ public class SurveyViewController : MonoBehaviour
 
     void OnBackComplete()
     {
+        stageComplete.SetActive(true);
         gameObject.SetActive(false);
-        
     }
 }

@@ -8,7 +8,6 @@ public class GraphicsToggleSelect : MonoBehaviour
 {
     [SerializeField] private ToggleGroup toggleGroup;
     [SerializeField] private Toggle toggleQualityLow, toggleQualityMedium, toggleQualityHigh;
-    [SerializeField] private int setGraphicsQuality;
 
     private void Awake()
     {
@@ -17,7 +16,7 @@ public class GraphicsToggleSelect : MonoBehaviour
 
     void Start()
     {
-        setGraphicsQuality = PlayerPrefs.GetInt("LDGraphicsQuality", 3);
+        int setGraphicsQuality = PlayerPrefs.GetInt("Graphics Quality", 3);
         if (setGraphicsQuality == 1)
         {
             Debug.Log("<color=white>GraphicsToggleSelect</color> - Graphics Quality: Low");
@@ -43,17 +42,17 @@ public class GraphicsToggleSelect : MonoBehaviour
             if (toggle.name == "Low")
             {
                 Debug.Log("<color=white>GraphicsToggleSelect</color> - Selected Quality: Low");
-                PlayerPrefs.SetInt("LDGraphicsQuality", 1);
+                PlayerPrefs.SetInt("Graphics Quality", 1);
             }
             if (toggle.name == "Medium")
             {
                 Debug.Log("<color=white>GraphicsToggleSelect</color> - Selected Quality: Medium");
-                PlayerPrefs.SetInt("LDGraphicsQuality", 2);
+                PlayerPrefs.SetInt("Graphics Quality", 2);
             }
             if (toggle.name == "High")
             {
                 Debug.Log("<color=white>GraphicsToggleSelect</color> - Selected Quality: High");
-                PlayerPrefs.SetInt("LDGraphicsQuality", 3);
+                PlayerPrefs.SetInt("Graphics Quality", 3);
             }
         }
 

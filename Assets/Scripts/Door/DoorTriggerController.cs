@@ -29,7 +29,6 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
 
     [Header("Door Button")]
     [SerializeField] private GameObject doorAccessObject;
-    [SerializeField] private Button doorAccessButton;
     public Sprite handImage;
     public Sprite keyImage;
 
@@ -41,35 +40,27 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     [Header("Key")]
     [SerializeField] private bool isLocked = false;
     [SerializeField] private bool isQuarantined = false;
+
     [SerializeField] private bool requireKeyA = false;
     [SerializeField] private bool requireKeyB = false;
     [SerializeField] private bool requireKeyC = false;
     [SerializeField] private bool requireKeyD = false;
     [SerializeField] private bool requireKeyE = false;
     [SerializeField] private bool requireKeyF = false;
+
+    [Header("Note")]
     [SerializeField] private GameObject noteObject;
     [SerializeField] private NoteController noteController;
 
-    string keyWarningA = "This door requires <color=green>Key: Upper Floor</color> to open.\nThe key must be around here, find it!";
-    string keyWarningB = "This door requires <color=green>Key: Stock Room</color> to open.\nThe key must be around here, find it!";
-    string keyWarningC = "This door requires <color=green>Key: Small Room</color> to open.\nThe key must be around here, find it!";
-    string keyWarningD = "This door requires <color=green>Key: Large Room</color> to open.\nThe key must be around here, find it!";
-    string keyWarningE = "This door requires <color=green>Key: Bathroom</color> to open.\nThe key must be around here, find it!";
-    string keyWarningF = "This door requires <color=green>Key: Kitchen</color> to open.\nThe key must be around here, find it!";
-    string quarantineWarning = "You are in quarantine area! Watch some information to learn about COVID-19 and to reduce your quarantine time.";
-    string budgeWarning = "The door doesnt budge.";
+    [Header("Save")]
+    [SerializeField] private SaveManager saveManager;
 
-    int enableDoorButton;
-    int needKeyLock;
-
-    int checkKey;
-
+    int currentStage;
     bool requireKeyFail = false;
 
     void Awake()
     {
-        PlayerPrefs.DeleteKey("EnableDoorAccess");
-        PlayerPrefs.DeleteKey("KeyLock");
+        PlayerPrefs.DeleteKey("Door Access");
         keyImage = Resources.Load<Sprite>("Art/Icons/KeyTwo");
         handImage = Resources.Load<Sprite>("Art/Icons/hand_icon_white");
     }
@@ -85,23 +76,15 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             // Save Door Name and Object Name
-            PlayerPrefs.SetString("SaveDoorName", myDoor.name + "/" + gameObject.name);
+            PlayerPrefs.SetString("Door Name", myDoor.name + "/" + gameObject.name);
 
-            // if Door Animation finish set the enDoorAccess to 1
-            enableDoorButton = PlayerPrefs.GetInt("EnableDoorAccess");
-            needKeyLock = PlayerPrefs.GetInt("Key A");
-
-            Debug.Log("<color=green>DoorTriggerController</color> - <color=white>Door Name:</color> " + gameObject.name);
-            Debug.Log("<color=green>DoorTriggerController</color> - <color=white>EnableDoorButton:</color>  " + enableDoorButton);
-
-            if (enableDoorButton == 1)
-            {
+            // if door animation finished enable the door button
+            saveManager.GetDoorAccess();
+            int doorButton = SaveManager.doorAccess;
+            if (doorButton == 1)
                 doorAccessObject.SetActive(true);
-            }
-            if (needKeyLock == 1)
-            {
-                //doorAccessObject.sprite
-            }
+
+            Debug.Log("<color=green>DoorTriggerController</color> - <color=white>Door Name:</color> " + gameObject.name + " - <color=white>EnableDoorButton:</color> " + doorButton);
         }
     }
 
@@ -109,8 +92,9 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            enableDoorButton = PlayerPrefs.GetInt("EnableDoorAccess", 1);
-            if (enableDoorButton == 1)
+            saveManager.GetDoorAccess();
+            int doorButton = SaveManager.doorAccess;
+            if (doorButton == 1)
                 doorAccessObject.SetActive(true);
         }
     }
@@ -119,7 +103,7 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            PlayerPrefs.DeleteKey("SaveDoorName");
+            PlayerPrefs.DeleteKey("Door Name");
             doorAccessObject.SetActive(false);
         }
     }
@@ -128,7 +112,7 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     {
         if (isQuarantined)
         {
-            noteController.ShowNote(quarantineWarning, 1.5f);
+            noteController.ShowNote(TextManager.quarantineArea, 5.0f);
             doorAccessObject.SetActive(false);
             audioManager.PlayAudioDoorLockedNoKey();
             return;
@@ -136,22 +120,40 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
 
         if (isLocked)
         {
-            noteController.ShowNote(budgeWarning, 1.2f);
+            noteController.ShowNote(TextManager.doorIsLocked, 1.2f);
             doorAccessObject.SetActive(false);
             audioManager.PlayAudioDoorLockedNoKey();
             return;
         }
 
-        if (requireKeyA) RequiresKey(keyWarningA, "Key A", "Upper Floor");
-        if (requireKeyB) RequiresKey(keyWarningB, "Key B", "Stock Room");
-        if (requireKeyC) RequiresKey(keyWarningC, "Key C", "Small Room");
-        if (requireKeyD) RequiresKey(keyWarningD, "Key D", "Large Room");
-        if (requireKeyE) RequiresKey(keyWarningE, "Key E", "Bathroom");
-        if (requireKeyF) RequiresKey(keyWarningF, "Key F", "Kitchen");
-        if (requireKeyFail)
-            return;
+        if (saveManager == null )
+            saveManager = GameObject.Find("Save Manager").GetComponent<SaveManager>();
+        saveManager.GetCurrentStage();
+        currentStage = SaveManager.currentStage;
 
-        Debug.Log("Opening Doors..");
+        if (currentStage == 1)
+        {
+            if (requireKeyA) RequiresKey(TextManager.S1_KeyWarn_A, "S1 Key A", TextManager.S1_DoorKey_A);
+            if (requireKeyB) RequiresKey(TextManager.S1_KeyWarn_B, "S1 Key B", TextManager.S1_DoorKey_B);
+            if (requireKeyC) RequiresKey(TextManager.S1_KeyWarn_C, "S1 Key C", TextManager.S1_DoorKey_C);
+            if (requireKeyD) RequiresKey(TextManager.S1_KeyWarn_D, "S1 Key D", TextManager.S1_DoorKey_D);
+            if (requireKeyE) RequiresKey(TextManager.S1_KeyWarn_E, "S1 Key E", TextManager.S1_DoorKey_E);
+            if (requireKeyF) RequiresKey(TextManager.S1_KeyWarn_F, "S1 Key F", TextManager.S1_DoorKey_F);
+            if (requireKeyFail)
+                return;
+        }
+        if (currentStage == 2)
+        {
+            if (requireKeyA) RequiresKey(TextManager.S2_KeyWarn_A, "S2 Key A", TextManager.S2_DoorKey_A);
+            if (requireKeyB) RequiresKey(TextManager.S2_KeyWarn_B, "S2 Key B", TextManager.S2_DoorKey_B);
+            if (requireKeyC) RequiresKey(TextManager.S2_KeyWarn_C, "S2 Key C", TextManager.S2_DoorKey_C);
+            if (requireKeyD) RequiresKey(TextManager.S2_KeyWarn_D, "S2 Key D", TextManager.S2_DoorKey_D);
+            if (requireKeyE) RequiresKey(TextManager.S2_KeyWarn_E, "S2 Key E", TextManager.S2_DoorKey_E);
+            if (requireKeyF) RequiresKey(TextManager.S2_KeyWarn_F, "S2 Key F", TextManager.S2_DoorKey_F);
+            if (requireKeyFail)
+                return;
+        }
+
         if (playOpenAudio)
             audioManager.PlayAudioDoorOpen();
         else if (playCloseAudio)
@@ -159,15 +161,15 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
 
         if (animeColliderEnabled)
         {
-            Debug.Log("<color=white>DoorTriggerController</color> - Enabled Collider");
             animCollider.SetActive(true);
             myDoor.enabled = true;
+            Debug.Log("<color=white>DoorTriggerController</color> - Collider Enabled");
         }
         else
         {
-            Debug.Log("<color=white>DoorTriggerController</color> - Disabled Collider");
             animCollider.SetActive(false);
             myDoor.enabled = true;
+            Debug.Log("<color=white>DoorTriggerController</color> - Collider Disabled");
         }
 
         if (openOutsideT)
@@ -214,7 +216,7 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
 
     void RequiresKey(string KeyWarning, string PrefsName, string KeyName)
     {
-        checkKey = PlayerPrefs.GetInt(PrefsName);
+        int checkKey = PlayerPrefs.GetInt(PrefsName);
         if (checkKey == 0)
         {
             requireKeyFail = true;
@@ -226,9 +228,8 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
         else if (checkKey == 1)
         {
             requireKeyFail = false;
-            noteController.ShowNote("Opening the door using <color=green>Key: " + KeyName, 1.5f);
+            noteController.ShowNote(TextManager.openingDoor + " " + KeyName, 2.0f);
         }
-
     }
 
     public void OpenableDoor()

@@ -8,6 +8,8 @@ public class StageTrap : MonoBehaviour
     public AudioManager audioManager;
     public NoteController noteController;
     public HealthController healthController;
+    [Range(1, 50)]
+    public int fallDamage = 25;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,7 +25,7 @@ public class StageTrap : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         noteController.ShowNote("You fall from upper floor!\nBe careful what you step on!", 4);
-        healthController.ChangeHealthPoint(-15, false);
+        healthController.ChangeHealthPoint(-fallDamage, false);
         Floor.isTrigger = false;
     }
 }
