@@ -8,7 +8,7 @@ public class VisSky : MonoBehaviour {
 //----------------------------------------------------------------------------------------------------------------------------------
 //
 //
-//                                           VisSky by Andre "AEG" Bürger of VIS-Games 2011 
+//                                           VisSky by Andre "AEG" Bï¿½rger of VIS-Games 2011 
 //                                                  
 //                                                            Version 1.0
 //
@@ -909,13 +909,13 @@ void Awake()
     time_seconds    = 0;
     //--------------------------------------------------------------
     sun = transform.Find("Sun").gameObject;    
-    sun_light = transform.Find("Sun/SunLight").light;
+    sun_light = transform.Find("Sun/SunLight").GetComponent<Light>();
 
     if(using_unity_pro == false)
         sun_light.shadows = LightShadows.None;    
     //--------------------------------------------------------------
     moon = transform.Find("Moon").gameObject;    
-    moon_light = transform.Find("Moon/MoonPlane/MoonLight").light;
+    moon_light = transform.Find("Moon/MoonPlane/MoonLight").GetComponent<Light>();
     moon_plane = transform.Find("Moon/MoonPlane").gameObject;
     
     if(moon_shadows == false)
@@ -929,9 +929,9 @@ void Awake()
     sunflare_renderer  = sun_flare.GetComponent<Renderer>();
     moonplane_renderer = moon_plane.GetComponent<Renderer>();
 
-    cloud_material = cloud_01.renderer.sharedMaterial;
+    cloud_material = cloud_01.GetComponent<Renderer>().sharedMaterial;
 
-    cloudcam = transform.Find("CloudCam").camera;
+    cloudcam = transform.Find("CloudCam").GetComponent<Camera>();
     cloudcam.enabled = using_unity_pro; // only active when running under unityPro
 
     //-- init sky gradient
@@ -955,7 +955,7 @@ void Awake()
     contrails_object         = new GameObject[MAX_CONTRAIL_PLANES];    
 
     contrail_obj = transform.Find("Clouds/contrail").gameObject;
-    contrail_material = contrail_obj.renderer.sharedMaterial;
+    contrail_material = contrail_obj.GetComponent<Renderer>().sharedMaterial;
         
     star_01 = transform.Find("Stars/star_01").gameObject;
     star_02 = transform.Find("Stars/star_02").gameObject;
@@ -966,7 +966,7 @@ void Awake()
     star_07 = transform.Find("Stars/star_07").gameObject;
     star_08 = transform.Find("Stars/star_08").gameObject;
 
-    stars_material = star_01.renderer.sharedMaterial;
+    stars_material = star_01.GetComponent<Renderer>().sharedMaterial;
 }
 //----------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -1462,13 +1462,13 @@ void Update()
     //-- enabled / disble light
     if(sun_light.intensity == 0.0f)
     {
-        if(sun_light.light.enabled == true)
-            sun_light.light.enabled = false;
+        if(sun_light.GetComponent<Light>().enabled == true)
+            sun_light.GetComponent<Light>().enabled = false;
     }
     else
     {
-        if(sun_light.light.enabled == false)
-            sun_light.light.enabled = true;
+        if(sun_light.GetComponent<Light>().enabled == false)
+            sun_light.GetComponent<Light>().enabled = true;
     }
 
     //-- set sunlight shadow intensity
@@ -1563,13 +1563,13 @@ void Update()
     //-- enabled / disble light
     if(moon_light.intensity == 0.0f)
     {
-        if(moon_light.light.enabled == true)
-            moon_light.light.enabled = false;
+        if(moon_light.GetComponent<Light>().enabled == true)
+            moon_light.GetComponent<Light>().enabled = false;
     }
     else
     {
-        if(moon_light.light.enabled == false)
-            moon_light.light.enabled = true;
+        if(moon_light.GetComponent<Light>().enabled == false)
+            moon_light.GetComponent<Light>().enabled = true;
     }
     //------------------------------------------------------------------
     //------------------------------------------------------------------

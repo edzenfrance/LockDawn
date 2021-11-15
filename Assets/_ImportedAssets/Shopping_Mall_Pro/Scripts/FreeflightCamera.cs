@@ -13,8 +13,8 @@ public class FreeflightCamera : MonoBehaviour
     
 	void Start()
 	{
-		if (rigidbody)
-			rigidbody.freezeRotation = true;
+		if (GetComponent<Rigidbody>())
+			GetComponent<Rigidbody>().freezeRotation = true;
 	}
 
 	void Update()

@@ -11,7 +11,7 @@ public class VisSky_Editor : Editor  {
 //
 //                        VisSky - Editor Script 
 //
-//                by Andre "AEG" Bürger / VIS-Games 2011 
+//                by Andre "AEG" Bï¿½rger / VIS-Games 2011 
 //
 //                       http://www.vis-games.de
 //    
@@ -69,7 +69,7 @@ public override void OnInspectorGUI()
 
    	if(!vissky.editor_image)
     {
-		vissky.editor_image = (Texture2D)UnityEngine.Resources.LoadAssetAtPath("Assets/VisSky/Textures/editor_logo.png", typeof(Texture2D));
+		vissky.editor_image = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/VisSky/Textures/editor_logo.png", typeof(Texture2D));
 	}
     EditorGUILayout.Separator();
     //----------------------------------------------------
