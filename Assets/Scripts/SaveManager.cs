@@ -152,6 +152,11 @@ public class SaveManager : MonoBehaviour
         lookSensitivity = PlayerPrefs.GetFloat("Look Sensitivity", 60f);
     }
 
+    public void SetCompleteStage(int stagenumber)
+    {
+        PlayerPrefs.SetInt("Stage " + stagenumber + " Complete", 1);
+    }
+
     public void DeleteKeyStage(int num)
     {
         if (num == 1)

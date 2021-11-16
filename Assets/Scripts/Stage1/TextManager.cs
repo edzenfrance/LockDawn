@@ -112,4 +112,104 @@ public class TextManager : MonoBehaviour
     public static string quarantineArea = "You are in quarantine area!\nWatch some information to learn about COVID-19 and to reduce your quarantine time.";
     public static string doorIsLocked = "The door doesnt budge.";
 
+    // Survey
+    public static string[][] surveyTexts = new string[][] {
+      new string[] {
+        "2",
+        "B",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
+        "While playing the game for the first time, what have you learned about the game that you can do in real life to avoid getting infected or spread the virus?",
+        "A. Hide from infected",
+        "B. Physical distancing",
+      },
+      new string[] {
+        "3",
+        "A",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
+        "What is the most essential way to make your family safe from COVID-19 while inside your house?",
+        "A. Use disinfectant regularly",
+        "B. Wash hands using water only",
+        "C. Use gloves inside the house everytime",
+       },
+       new string[] {
+        "3",
+        "B",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
+        "When do you need to where your facemask?",
+        "A. When sleeping",
+        "B. When outside",
+        "C. When an authority is looking",
+       },
+       new string[] {
+        "3",
+        "C",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
+        "How do you wear your face shield properly?",
+        "A. Over the head",
+        "B. On the back of your head",
+        "C. Aligned to your face",
+      },
+      new string[] {
+        "2",
+        "A",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
+        "_______ is a biological preparation that provides active acquired immunity to a particular infectious disease.",
+        "A. Vaccine",
+        "B. Vitamin",
+      },
+      new string[] {
+        "2",
+        "A",
+        "Physical distancing helps limit the spread of COVID-19 – this means we keep a distance of at least 1m from each other and avoid spending time in crowded places or in groups.",
+        "You are now on the final stage of the game, does the game help you to understand how safety protocols work in a pandemic situation?",
+        "A. Yes",
+        "B. No",
+      }
+    };
+
+    public static string surveyCorrect = "Your answer it correctly! You learn something!";
+    public static string surveyWrong = "Your wrong! ";
+
+    // Riddle
+    public static string[][] riddleTexts = new string[][] {
+      new string[] {
+        "I am neither a guest or a trespasser be, to this place I belong, it belongs also to me.",
+        "A. Door",
+        "B. Home",
+        "C. Mother",
+        "D. Land Owner",
+        "B"},
+      new string[] {
+        "What begins but has no end and is the ending of all that begins?",
+        "A. Death",
+        "B. Reborn",
+        "C. War",
+        "D. Justice",
+        "A"},
+      new string[] {
+        "Only one color, but not one size, Stuck at the bottom, yet easily flies. Present in sun, but not in rain, Doing no harm, and feeling no pain. What is it?",
+        "A. Sky",
+        "B. Light",
+        "C. Darkness",
+        "D. Shadow",
+        "D"},
+      new string[] {
+        "What begins but has no end and is the ending of all that begins?",
+        "A. Death",
+        "B. Reborn",
+        "C. War",
+        "D. Justice",
+        "A"},
+      new string[] {
+        "What begins but has no end and is the ending of all that begins?",
+        "A. Death",
+        "B. Reborn",
+        "C. War",
+        "D. Justice",
+        "A"}
+    };
+
+    public static string riddleCorrect = "Your riddle answer is correct! Congrats, you gained collectors item! You can view the item in collectors hall!";
+    public static string riddleWrong = "Your riddle answer is wrong! Better luck next time!";
+
 }
