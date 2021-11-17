@@ -64,6 +64,7 @@ public class QuarantineController : MonoBehaviour
 
     void Start()
     {
+        saveManager.SetQuarantine(1);
         playerMessage.SetActive(true);
         quarantineStart.SetActive(true);
 
@@ -145,7 +146,6 @@ public class QuarantineController : MonoBehaviour
             stageTask.SetActive(true);
 
             okayButton.SetActive(false);
-
             StartCoroutine(WaitCamera());
         }
     }
@@ -189,6 +189,7 @@ public class QuarantineController : MonoBehaviour
 
     void QuarantineFinish()
     {
+        saveManager.SetQuarantine(0);
         playerMessage.SetActive(true);
         quarantineFinish.SetActive(true);
         okayButton.SetActive(true);

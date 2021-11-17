@@ -9,10 +9,12 @@ public class SaveManager : MonoBehaviour
     public static int currentStage;
     public static int gameDifficulty;
     public static int keyCount;
+    public static int keyName;
     public static int doorAccess;
     public static int framerateOn;
     public static float cameraDistance;
     public static float lookSensitivity;
+    public static int continueGame;
 
     public static int ObtainSkinA;
     public static int ObtainSkinB;
@@ -41,15 +43,24 @@ public class SaveManager : MonoBehaviour
         currentLife = PlayerPrefs.GetInt("Life", 3);
     }
 
-    public void ObtainMainItemImmunity(string mainItem, int immunity)
+    public void ObtainMainItem(string mainitem)
     {
-        PlayerPrefs.SetInt("Obtain " + mainItem, 1);
-        PlayerPrefs.SetInt("Current Immunity", immunity);
+        PlayerPrefs.SetInt("Obtain " + mainitem, 1);
+    }
+
+    public void SetRiddle(int num, int set)
+    {
+        PlayerPrefs.SetInt("Riddle " + num, set);
     }
 
     public void SetCurrentStage(int num)
     {
         PlayerPrefs.SetInt("Current Stage", num);
+    }
+
+    public void SetCurrentCharacter(int num)
+    {
+        PlayerPrefs.SetInt("Current Character", num);
     }
 
     public void GetCurrentCharacter()
@@ -87,22 +98,30 @@ public class SaveManager : MonoBehaviour
     {
         keyCount = PlayerPrefs.GetInt("Key Count", 0);
     }
-
-    public void SetKeyName(string KeyName)
-    {
-        PlayerPrefs.SetInt(KeyName, 1);
-    }
-
     public void SetKeyCount()
     {
         keyCount = PlayerPrefs.GetInt("Key Count");
         keyCount += 1;
         PlayerPrefs.SetInt("Key Count", keyCount);
     }
-
     public void ResetKeyCount()
     {
         PlayerPrefs.SetInt("Key Count", 0);
+    }
+
+    public void SetKeyName(string keyname, int num)
+    {
+        PlayerPrefs.SetInt(keyname, num);
+    }
+
+    public void GetKeyName(string keyname)
+    {
+        keyName = PlayerPrefs.GetInt(keyname, 0);
+    }
+
+    public void SetQuarantine(int num)
+    {
+        PlayerPrefs.SetInt("Quarantine", num);
     }
     
     public void SetDoorAccess(int num)
@@ -123,6 +142,11 @@ public class SaveManager : MonoBehaviour
     public void GetShowFramerate()
     {
         PlayerPrefs.SetInt("Framerate", 0);
+    }
+
+    public void SetCurrrentImmunity(int immunity)
+    {
+        PlayerPrefs.SetInt("Current Immunity", immunity);
     }
 
     public void GetCurrentImmunity()
@@ -208,20 +232,48 @@ public class SaveManager : MonoBehaviour
 
     public void NewGamePlayerPrefs()
     {
-		PlayerPrefs.DeleteKey("Key A");
-		PlayerPrefs.DeleteKey("Key B");
-		PlayerPrefs.DeleteKey("Key C");
-		PlayerPrefs.DeleteKey("Key D");
-		PlayerPrefs.DeleteKey("Key E");
-		PlayerPrefs.DeleteKey("Key F");
-		PlayerPrefs.DeleteKey("Vitamin");
-		PlayerPrefs.DeleteKey("Special Syrup");
-		PlayerPrefs.DeleteKey("Key Count");
-		PlayerPrefs.DeleteKey("Coin");
+		PlayerPrefs.DeleteKey("S1 Key A");
+		PlayerPrefs.DeleteKey("S1 Key B");
+		PlayerPrefs.DeleteKey("S1 Key C");
+		PlayerPrefs.DeleteKey("S1 Key D");
+		PlayerPrefs.DeleteKey("S1 Key E");
+		PlayerPrefs.DeleteKey("S1 Key F");
+        PlayerPrefs.DeleteKey("S2 Key A");
+        PlayerPrefs.DeleteKey("S2 Key B");
+        PlayerPrefs.DeleteKey("S2 Key C");
+        PlayerPrefs.DeleteKey("S2 Key D");
+        PlayerPrefs.DeleteKey("S2 Key E");
+        PlayerPrefs.DeleteKey("S2 Key F");
+        PlayerPrefs.DeleteKey("Key Count");
+        PlayerPrefs.DeleteKey("Obtain Vitamin");
+        PlayerPrefs.DeleteKey("Obtain Alcohol");
+        PlayerPrefs.DeleteKey("Obtain Face Mask");
+        PlayerPrefs.DeleteKey("Obtain Face Shield");
+        PlayerPrefs.DeleteKey("Obtain Vaccine");
+        PlayerPrefs.DeleteKey("Special Syrup");
 		PlayerPrefs.DeleteKey("Achievement 1");
-		PlayerPrefs.SetInt("Current Stage", 1);
+        PlayerPrefs.DeleteKey("Achievement 2");
+        PlayerPrefs.DeleteKey("Achievement 3");
+        PlayerPrefs.DeleteKey("Achievement 4");
+        PlayerPrefs.DeleteKey("Achievement 5");
+        PlayerPrefs.DeleteKey("Achievement 6");
+        PlayerPrefs.SetInt("Current Stage", 1);
 		PlayerPrefs.SetInt("Current Immunity", 0);
-   }
+        PlayerPrefs.SetInt("Life", 3);
+        PlayerPrefs.SetInt("Coin", 0);
+        PlayerPrefs.SetInt("Quarantine", 0);
+        PlayerPrefs.SetInt("Continue Game", 0);
+    }
+
+    public void SetContinueGame()
+    {
+        PlayerPrefs.SetInt("Continue Game", 1);
+    }
+
+    public void GetContinueGame()
+    {
+        continueGame = PlayerPrefs.GetInt("Continue Game", 0);
+    }
 
     public void GetObtainSkin()
     {

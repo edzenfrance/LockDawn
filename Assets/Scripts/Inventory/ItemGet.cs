@@ -7,7 +7,6 @@ public class ItemGet : MonoBehaviour
 {
     [SerializeField] private Toggle[] toggleObjectives;
     [SerializeField] private TextMeshProUGUI grabItem;
-    [SerializeField] private Inventory inventory;
     [SerializeField] private TextMeshProUGUI taskKeyText;
 
     [Header("Immunity")]
@@ -20,11 +19,12 @@ public class ItemGet : MonoBehaviour
     [SerializeField] private bool getCoin;
 
     [Header("Scripts")]
-    [SerializeField] private RiddleManager riddleManager;
     [SerializeField] private SaveManager saveManager;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private NoteController noteController;
+    [SerializeField] private RiddleManager riddleManager;
     [SerializeField] private ImmunityController immunityController;
+    [SerializeField] private Inventory inventory;
 
     [Header("Exit")]
     [SerializeField] private GameObject[] stageExit;
@@ -45,16 +45,17 @@ public class ItemGet : MonoBehaviour
         if (objectName == "S2 Key E") SaveKey("S2 Key E", TextManager.S1_DoorKey_E_Add);
         if (objectName == "S2 Key F") SaveKey("S2 Key F", TextManager.S1_DoorKey_F_Add);
 
-        if (objectName == "S1 Vitamins")
+        if (objectName == "S1 Vitamin")
         {
-            saveManager.ObtainMainItemImmunity("Vitamins", 5);
+            saveManager.ObtainMainItem("Vitamin");
+            saveManager.SetCurrrentImmunity(5);
             immunityController.CheckImmunity();
             stageExit[0].SetActive(true);
-            noteController.ShowNote(TextManager.gotVitamin, 3.0f);
+            noteController.ShowNote(TextManager.gotVitamin, 5.0f);
             toggleObjectives[0].isOn = true;
             saveManager.GetCurrentImmunity();
             int currentImmunity = SaveManager.currentImmunity;
-                        immunityFill.SetActive(true);
+            immunityFill.SetActive(true);
             immunityBar.value = currentImmunity;
             immunityText.text = currentImmunity.ToString();
             audioManager.PlayAudioPickUpItem();
@@ -62,40 +63,45 @@ public class ItemGet : MonoBehaviour
 
         if (objectName == "S2 Alcohol")
         {
-            saveManager.ObtainMainItemImmunity("Alcohol", 10);
+            saveManager.ObtainMainItem("Alcohol");
+            saveManager.SetCurrrentImmunity(10);
             immunityController.CheckImmunity();
             stageExit[1].SetActive(true);
-            noteController.ShowNote(TextManager.gotAlcohol, 3.0f);
+            noteController.ShowNote(TextManager.gotAlcohol, 5.0f);
             toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
 
         if (objectName == "S3 Face Mask")
         {
-            saveManager.ObtainMainItemImmunity("Face Mask", 30);
+            saveManager.ObtainMainItem("Face Mask");
+            saveManager.SetCurrrentImmunity(30);
+
             immunityController.CheckImmunity();
             stageExit[2].SetActive(true);
-            noteController.ShowNote(TextManager.gotFaceMask, 3.0f);
+            noteController.ShowNote(TextManager.gotFaceMask, 5.0f);
             toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
 
         if (objectName == "S4 Face Shield")
         {
-            saveManager.ObtainMainItemImmunity("Face Shield", 50);
+            saveManager.ObtainMainItem("Face Shield");
+            saveManager.SetCurrrentImmunity(50);
             immunityController.CheckImmunity();
             stageExit[3].SetActive(true);
-            noteController.ShowNote(TextManager.gotFaceShield, 3.0f);
+            noteController.ShowNote(TextManager.gotFaceShield, 5.0f);
             toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
 
         if (objectName == "S5 Vaccine")
         {
-            saveManager.ObtainMainItemImmunity("Vaccine", 100);
+            saveManager.ObtainMainItem("Vaccine");
+            saveManager.SetCurrrentImmunity(100);
             immunityController.CheckImmunity();
             stageExit[4].SetActive(true);
-            noteController.ShowNote(TextManager.gotVaccine, 3.0f);
+            noteController.ShowNote(TextManager.gotVaccine, 5.0f);
             toggleObjectives[0].isOn = true;
             audioManager.PlayAudioPickUpItem();
         }
@@ -139,7 +145,7 @@ public class ItemGet : MonoBehaviour
 
     void SaveKey(string KeyName, string KeyNote)
     {
-        saveManager.SetKeyName(KeyName);
+        saveManager.SetKeyName(KeyName, 1);
         saveManager.SetKeyCount();
         saveManager.GetKeyCount();
         int keyCount = SaveManager.keyCount;

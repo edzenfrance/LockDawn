@@ -48,12 +48,10 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     [SerializeField] private bool requireKeyE = false;
     [SerializeField] private bool requireKeyF = false;
 
-    [Header("Note")]
-    [SerializeField] private GameObject noteObject;
-    [SerializeField] private NoteController noteController;
-
-    [Header("Save")]
+    [Header("Scripts")]
     [SerializeField] private SaveManager saveManager;
+    [SerializeField] private NoteController noteController;
+    [SerializeField] private Inventory inventory;
 
     int currentStage;
     bool requireKeyFail = false;
@@ -68,7 +66,6 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     void Start()
     {
         myDoor = transform.parent.GetComponent<Animator>();
-        noteController = noteObject.GetComponent<NoteController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -216,8 +213,9 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
 
     void RequiresKey(string KeyWarning, string PrefsName, string KeyName)
     {
-        int checkKey = PlayerPrefs.GetInt(PrefsName);
-        if (checkKey == 0)
+        saveManager.GetKeyName(PrefsName);
+        int keyName = SaveManager.keyName;
+        if (keyName == 0)
         {
             requireKeyFail = true;
             audioManager.PlayAudioDoorLockedKey();
@@ -225,10 +223,17 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
             doorAccessObject.SetActive(false);
             Debug.Log("<color=white>DoorTriggerController</color> - Key Required");
         }
-        else if (checkKey == 1)
+        if (keyName == 1)
         {
             requireKeyFail = false;
-            noteController.ShowNote(TextManager.openingDoor + " " + KeyName, 2.0f);
+            noteController.ShowNote(TextManager.unlockingDoor + KeyName, 2.0f);
+            saveManager.SetKeyName(PrefsName, 2);
+            inventory.ReloadInventory();
+        }
+        if (keyName == 2)
+        {
+            requireKeyFail = false;
+            noteController.ShowNote(TextManager.openingDoor + KeyName, 2.0f);
         }
     }
 

@@ -103,7 +103,8 @@ public class TextManager : MonoBehaviour
     // Item Detection
 
     // Others
-    public static string openingDoor = "Opening the door using <color=green>Key:";
+    public static string unlockingDoor = "Unlocking the door using <color=green>Key: ";
+    public static string openingDoor = "Opening the <color=green>Door: ";
     public static string addedToInventory = "added to inventory.";
     public static string coinAdded = "<color=yellow>+10 coins</color> " + addedToInventory;
     public static string stopInfection = "Special syrup stop the infection!";

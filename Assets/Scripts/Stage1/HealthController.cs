@@ -12,7 +12,7 @@ public class HealthController : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] private Slider healthBar;
-    [SerializeField] private int currentHP = 100;
+    [SerializeField] private float currentHP = 100f;
     [SerializeField] private TextMeshProUGUI healthCountText;
     [SerializeField] private GameObject healthBarFill;
 
@@ -27,12 +27,12 @@ public class HealthController : MonoBehaviour
     [SerializeField] private GameObject stageNumber;
     [SerializeField] private GameObject stageTask;
     [SerializeField] private GameObject deathUI;
-    [SerializeField] private GameObject note;
 
     [Header("Script")]
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private SaveManager saveManager;
     [SerializeField] private Inventory inventory;
+    [SerializeField] private NoteController noteController;
 
     [Header("Character Control")]
     [SerializeField] private GameObject touchZoneVirtualMove;
@@ -40,8 +40,10 @@ public class HealthController : MonoBehaviour
     [SerializeField] private GameObject playerFollowCamera;
 
     [Header("NPC")]
-    [SerializeField] private int damagePerSecond = 1;
+    [Range(1, 3)]
+    [SerializeField] private float damageEverySecond = 3f;
     [SerializeField] private GameObject bloodSmear;
+
 
     [Header("Quarantine")]
     [SerializeField] private GameObject quarantineObject;
@@ -52,12 +54,9 @@ public class HealthController : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController[] animatorControllers;
     [SerializeField] private GameObject[] characterPrefabs;
 
-    int countDPS;
-
-    bool achievementsA = true;
+    bool achievementA = true;
     bool isInfected = false;
     bool isAlive = true;
-    bool isDead = false;
     bool stopInfection = false;
 
     void Awake()
@@ -72,92 +71,80 @@ public class HealthController : MonoBehaviour
         saveManager.SetAchievement(1, 1);
     }
 
-    public void ChangeHealthPoint(int dHP, bool zombieDmg)
+    public void ChangeHealthPoint(int dmgAmount, bool dmgNpc)
     {
         if (isAlive)
         {
-            Debug.Log("<color=white>HealthBarController</color> - Current Health: <color=red>" + currentHP + "</color>  Damage To Health: " + dHP);
-            currentHP += dHP;
-            healthCountText.text = ": " + currentHP;
+            currentHP += dmgAmount;
+            healthCountText.text = currentHP.ToString("f0");
             healthBar.value = currentHP;
-            if (zombieDmg)
+            Debug.Log("<color=white>HealthController</color> - Current HP: <color=red>" + currentHP + "</color>  Damage: <color=red>" + dmgAmount + "</color>  <color=green>[Npc]</color>");
+            if (dmgNpc)  // Added because of Traps in Stage 2
             {
                 audioManager.PlayAudioZombieAttack();
                 if (!isInfected)
-                {
-                    Debug.Log("<color=white>HealthBarController</color> - Player is now infected");
-                    countDPS = 0;
-                    isInfected = true;
-                    audioManager.PlayAudioHeartBeat();
-                    infectedNote.SetActive(true);
-                    bloodSmear.SetActive(true);
-                    StartCoroutine(DamageHealthPerSecond(-damagePerSecond));
-                }
+                    StartCoroutine(CharacterInfected());
             }
-            if (currentHP < 100)
+            if (achievementA)
             {
-                if (achievementsA)
+                if (currentHP < 100)
                 {
                     saveManager.SetAchievement(1, 0);
-                    achievementsA = false;
+                    achievementA = false;
                 }
             }
             if (currentHP <= 0)
-            {
-                healthCountText.text = ": 0";
-                isAlive = false;
-                if (!isDead)
-                {
-                    Debug.Log("<color=white>HealthBarController</color> - Player died because of hit");
-                    PlayerDied();
-                }
-            }
+                CharacterDied();
         }
     }
 
-    private IEnumerator DamageHealthPerSecond(int dPS)
+    IEnumerator CharacterInfected()
     {
+        Debug.Log("<color=white>HealthController</color> - <color=red>Player is now infected</color>");
+        isInfected = true;
+        audioManager.PlayAudioHeartBeat();
+        infectedNote.SetActive(true);
+        bloodSmear.SetActive(true);
+        saveManager.GetCurrentImmunity();
+        float immunityNum = (float)SaveManager.currentImmunity;
+        float damagePerSecond = damageEverySecond - ((immunityNum / 100f) * 3f);
         while (true)
         {
-            yield return new WaitForSeconds(3);
-            countDPS++;
-            currentHP += dPS;
-            if (stopInfection)
-                yield break;
-            if (currentHP > 0)
+            if (currentHP > 0f)
             {
-                healthCountText.text = currentHP.ToString();
+                currentHP -= damagePerSecond;
+                healthCountText.text = currentHP.ToString("f0");
                 healthBar.value = currentHP;
+                Debug.Log("<color=white>HealthController</color> - Current HP: <color=red>" + currentHP + "</color>  Damage: <color=red>" + damagePerSecond + "</color>  <color=green>[Infection]</color>");
+                yield return new WaitForSeconds(damageEverySecond);
+            }
+            if (stopInfection)
+            {
+                stopInfection = false;
+                yield break;
             }
             if (currentHP <= 0)
             {
-                healthCountText.text = "0";
-                isAlive = false;
-                if (!isDead)
-                {
-                    Debug.Log("<color=white>HealthBarController</color> - Player died because of infection");
-                    PlayerDied();
-                    yield break;
-                }
-                else
-                    yield break;
+                CharacterDied();
+                yield break;
             }
-            Debug.Log("<color=white>HealthBarController</color> - Damage Count: " + countDPS + " Current HP: " + currentHP + " - DPS: " + dPS);
         }
     }
 
-    private void PlayerDied()
+    private void CharacterDied()
     {
-        isDead = true;
+        isAlive = false;
         isInfected = false;
+        healthCountText.text = "0";
         infectedNote.SetActive(false);
-        EnableDisableObjects(false);
+        ObjectSetActive(false);
         saveManager.GetCurrentLife();
         int currentLife = SaveManager.currentLife;
-        currentLife -= 1;
+        if (currentLife > 0)
+            currentLife -= 1;
         saveManager.SetCurrentLife(currentLife);
         lifeText.text = "Life: " + currentLife;
-        Debug.Log("<color=white>HealthBarController</color> - Life: " + currentLife);
+        Debug.Log("<color=white>HealthController</color> - Life: " + currentLife);
         if (currentLife <= 0)
         {
             audioManager.StopAudioLoop();
@@ -166,13 +153,12 @@ public class HealthController : MonoBehaviour
         }
         audioManager.PlayAudioDeadCharacter();
         animator.runtimeAnimatorController = animatorControllers[0];
-        StartCoroutine(WaitAndDeath(2f));
+        StartCoroutine(CharacterDeath());
     }
 
-    private IEnumerator WaitAndDeath(float waitTime)
+    IEnumerator CharacterDeath()
     {
-        yield return new WaitForSeconds(waitTime);
-        // animator.enabled = false;
+        yield return new WaitForSeconds(2f);
         deathUI.SetActive(true);
         touchZoneVirtualMove.SetActive(true);
         character.SetActive(false);
@@ -181,15 +167,15 @@ public class HealthController : MonoBehaviour
     public void RespawnCharacter()
     {
         isAlive = true;
-        isDead = false;
+        isInfected = false;
         audioManager.StopAudioLoop();
         infectedNote.SetActive(false);
-        EnableDisableObjects(true);
+        ObjectSetActive(true);
         deathUI.SetActive(false);
         bloodSmear.SetActive(false);
         character.SetActive(true);
         animator.runtimeAnimatorController = animatorControllers[1];
-        currentHP = 100;
+        currentHP = 100f;
         healthBar.value = currentHP;
         healthCountText.text = currentHP.ToString();
     }
@@ -198,7 +184,7 @@ public class HealthController : MonoBehaviour
     {
         infectedNote.SetActive(false);
         bloodSmear.SetActive(false);
-        currentHP = 100;
+        currentHP = 100f;
         healthBar.value = currentHP;
         healthCountText.text = currentHP.ToString();
     }
@@ -211,29 +197,16 @@ public class HealthController : MonoBehaviour
             isInfected = false;
             bloodSmear.SetActive(false);
             infectedNote.SetActive(false);
-            note.SetActive(true);
             saveManager.UseSpecialSyrup();
             inventory.ReloadInventory();
             audioManager.StopAudioLoop();
-            note.GetComponent<TextMeshProUGUI>().text = TextManager.stopInfection;
-            StartCoroutine(StopInfectionDone());
+            noteController.ShowNote(TextManager.stopInfection, 2);
         }
         else
-        {
-            note.SetActive(true);
-            note.GetComponent<TextMeshProUGUI>().text = TextManager.notInfected;
-            StartCoroutine(StopInfectionDone());
-        }
+            noteController.ShowNote(TextManager.notInfected, 2);
     }
 
-    IEnumerator StopInfectionDone()
-    {
-        yield return new WaitForSeconds(2);
-        note.SetActive(false);
-        note.GetComponent<TextMeshProUGUI>().text = "";
-    }
-
-    void EnableDisableObjects(bool setBool)
+    void ObjectSetActive(bool setBool)
     {
         touchZoneVirtualMove.SetActive(setBool);
         settingsButton.SetActive(setBool);
@@ -246,16 +219,4 @@ public class HealthController : MonoBehaviour
         playerFollowCamera.SetActive(setBool);
         touchZoneCanvas.SetActive(setBool);
     }
-
-    /*
-    public void ChangeAnimA()
-    {
-        animator.runtimeAnimatorController = animatorControllers[0];
-    }
-
-    public void ChangeAnimB()
-    {
-        animator.runtimeAnimatorController = animatorControllers[1];
-    }
-    */
 }

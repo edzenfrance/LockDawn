@@ -21,8 +21,6 @@ public class DoorColliderController : MonoBehaviour
             audioManager.PauseAudio();
         }
     }
-
-    /*
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -30,7 +28,7 @@ public class DoorColliderController : MonoBehaviour
             myDoor.enabled = false;
             audioManager.PauseAudio();
         }
-    }*/
+    }
 
     private void OnTriggerExit(Collider other)
     {

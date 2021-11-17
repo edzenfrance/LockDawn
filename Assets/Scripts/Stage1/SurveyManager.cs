@@ -4,28 +4,27 @@ using TMPro;
 
 public class SurveyManager : MonoBehaviour
 {
-    public GameObject answerButton;
-    public GameObject showAnswer;
-    public TextMeshProUGUI showAnswerText;
-    public GameObject doneSurveyButton;
-    public AudioManager audioManager;
     public SaveManager saveManager;
+    public AudioManager audioManager;
 
     [Header("Survey")]
+    public GameObject showAnswerButton;
+    public GameObject answerText;
+    public GameObject doneSurveyButton;
     public GameObject surveyCanvas;
     public TextMeshProUGUI questionText;
 
     [Header("Toggles")]
-    public GameObject[] toggleObject;
     public ToggleGroup toggleGroup;
+    public GameObject[] toggleObject;
 
     int num;
-    int toggleLimit;
     string myAnswer;
+    int toggleLimit;
 
     void OnEnable()
     {
-        answerButton.SetActive(false);
+        showAnswerButton.SetActive(false);
     }
 
     public void ProcessSurvey(string StageSurvey)
@@ -77,7 +76,7 @@ public class SurveyManager : MonoBehaviour
     {
         foreach (Toggle toggle in toggleGroup.ActiveToggles())
         {
-            answerButton.SetActive(true);
+            showAnswerButton.SetActive(true);
             if (toggle.name == "Toggle A") myAnswer = "A";
             if (toggle.name == "Toggle B") myAnswer = "B";
             if (toggle.name == "Toggle C") myAnswer = "C";
@@ -87,16 +86,16 @@ public class SurveyManager : MonoBehaviour
 
     public void CompareSurveyAnswer()
     {
-        answerButton.SetActive(false);
-        showAnswer.SetActive(true);
+        showAnswerButton.SetActive(false);
+        answerText.SetActive(true);
         if (myAnswer == TextManager.surveyTexts[num][1])
         {
-            showAnswerText.text = TextManager.surveyCorrect;
+            answerText.GetComponent<TextMeshProUGUI>().text = TextManager.surveyCorrect;
             doneSurveyButton.SetActive(true);
         }
         else
         {
-            showAnswerText.text = TextManager.surveyWrong + TextManager.surveyTexts[num][2];
+            answerText.GetComponent<TextMeshProUGUI>().text = TextManager.surveyWrong + TextManager.surveyTexts[num][2];
             doneSurveyButton.SetActive(true);
         }
     }

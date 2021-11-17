@@ -63,7 +63,9 @@ public void Start()
 //-------------------------------------------------------------------------------------
 public override void OnInspectorGUI()
 {
-	EditorGUIUtility.LookLikeControls(200, 50);
+	//EditorGUIUtility.LookLikeControls(200, 50)
+    EditorGUIUtility.labelWidth = 200;
+    EditorGUIUtility.fieldWidth = 50;
 
     VisSky vissky = target as VisSky;
 

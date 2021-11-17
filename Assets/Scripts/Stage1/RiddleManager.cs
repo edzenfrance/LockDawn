@@ -6,18 +6,20 @@ using TMPro;
 
 public class RiddleManager : MonoBehaviour
 {
+    public SaveManager saveManager;
+    public AudioManager audioManager;
     public GameObject getItemButton;
+
+    [Header("Riddle")]
     public GameObject showAnswerButton;
     public GameObject answerText;
     public GameObject doneRiddleButton;
-
-    [Header("Riddle")]
     public GameObject riddleCanvas;
     public TextMeshProUGUI questionText;
-    public Toggle[] answerToggle;
 
+    [Header("Toggles")]
     public ToggleGroup toggleGroup;
-    public Toggle toggleA, toggleB, toggleC, toggleD;
+    public Toggle[] toggleAnswer;
 
     int num;
     string myAnswer;
@@ -31,6 +33,7 @@ public class RiddleManager : MonoBehaviour
     {
         riddleCanvas.SetActive(true);
         getItemButton.SetActive(false);
+        audioManager.PlayAudioPickUpPaper();
         if (getRiddleName == "S1 Riddle A") num = 0;
         if (getRiddleName == "S2 Riddle A") num = 1;
         if (getRiddleName == "S3 Riddle A") num = 2;
@@ -42,10 +45,10 @@ public class RiddleManager : MonoBehaviour
     void ChangeRiddleText()
     {
       questionText.text = TextManager.riddleTexts[num][0];
-      answerToggle[0].GetComponentInChildren<Text>().text = TextManager.riddleTexts[num][1];
-      answerToggle[1].GetComponentInChildren<Text>().text = TextManager.riddleTexts[num][2];
-      answerToggle[2].GetComponentInChildren<Text>().text = TextManager.riddleTexts[num][3];
-      answerToggle[3].GetComponentInChildren<Text>().text = TextManager.riddleTexts[num][4];
+      toggleAnswer[0].GetComponentInChildren<Text>().text = TextManager.riddleTexts[num][1];
+      toggleAnswer[1].GetComponentInChildren<Text>().text = TextManager.riddleTexts[num][2];
+      toggleAnswer[2].GetComponentInChildren<Text>().text = TextManager.riddleTexts[num][3];
+      toggleAnswer[3].GetComponentInChildren<Text>().text = TextManager.riddleTexts[num][4];
     }
 
     public void SelectRiddleAnswer()
@@ -64,13 +67,16 @@ public class RiddleManager : MonoBehaviour
     {
         showAnswerButton.SetActive(false);
         answerText.SetActive(true);
+        int ridnum = num + 1;
         if (myAnswer == TextManager.riddleTexts[num][5])
         {
+            saveManager.SetRiddle(ridnum, 1);
             answerText.GetComponent<TextMeshProUGUI>().text = TextManager.riddleCorrect;
             doneRiddleButton.SetActive(true);
         }
         else
         {
+            saveManager.SetRiddle(ridnum, 0);
             answerText.GetComponent<TextMeshProUGUI>().text = TextManager.riddleWrong;
             doneRiddleButton.SetActive(true);
         }

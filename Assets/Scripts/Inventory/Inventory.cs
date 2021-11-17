@@ -149,7 +149,7 @@ public class Inventory : MonoBehaviour
 
     void LoadText()
     {
-        Debug.Log("Sprite Name: " + buttonObject[num].GetComponent<Image>().sprite.name + " Num: " + num);
+        Debug.Log("<color=white>Inventory</color> - Sprite Name [<color=green>" + num + "</color>]: " + buttonObject[num].GetComponent<Image>().sprite.name);
         string imageName = buttonObject[num].GetComponent<Image>().sprite.name;
         inventoryText.text = "";
         useSyrupButton.SetActive(false);

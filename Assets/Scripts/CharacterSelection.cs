@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-using StarterAssets;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -115,7 +114,7 @@ public class CharacterSelection : MonoBehaviour
 	public void StartGame()
 	{
 		saveManager.NewGamePlayerPrefs();
-		PlayerPrefs.SetInt("Current Character", currentCharacter);
+		saveManager.SetCurrentCharacter(currentCharacter);
 		SceneManager.LoadScene("Stage1", LoadSceneMode.Single);
 	}
 
