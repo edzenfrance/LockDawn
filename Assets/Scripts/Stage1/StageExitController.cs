@@ -5,6 +5,7 @@ public class StageExitController : MonoBehaviour
     [SerializeField] private SurveyManager surveyManager;
 
     int num;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

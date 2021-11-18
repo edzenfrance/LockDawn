@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -15,7 +13,6 @@ public class DifficultyController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttonTextHard;
     [SerializeField] private Color buttonNormalColor = new Color32(255, 255, 255, 255);
     [SerializeField] private Color buttonTextVertexColor = new Color32(192, 10, 10, 255);
-    [SerializeField] private SaveManager saveManager;
 
     [Header("TextMeshPro Text")]
     [SerializeField] private GameObject textEasy;
@@ -24,7 +21,7 @@ public class DifficultyController : MonoBehaviour
 
     void Start()
     {
-        saveManager.SetGameDifficulty(2);
+        SaveManager.SetGameDifficulty(2);
     }
 
     public void DifficultyEasy()
@@ -65,21 +62,21 @@ public class DifficultyController : MonoBehaviour
         colorBlock.normalColor = normalColorAlpha;
         if (diff == 1)
         {
-            saveManager.SetGameDifficulty(diff);
+            SaveManager.SetGameDifficulty(diff);
             textEasy.SetActive(true);
             buttonTextEasy.color = buttonTextVertexColor;
             buttonEasy.colors = colorBlock;
         }
         if (diff == 2)
         {
-            saveManager.SetGameDifficulty(diff);
+            SaveManager.SetGameDifficulty(diff);
             textNormal.SetActive(true);
             buttonTextNormal.color = buttonTextVertexColor;
             buttonNormal.colors = colorBlock;
         }
         if (diff == 3)
         {
-            saveManager.SetGameDifficulty(diff);
+            SaveManager.SetGameDifficulty(diff);
             textHard.SetActive(true);
             buttonTextHard.color = buttonTextVertexColor;
             buttonHard.colors = colorBlock;

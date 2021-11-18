@@ -51,7 +51,6 @@ public class CharacterSelection : MonoBehaviour
 	[SerializeField] private GameObject buyText;
 	[SerializeField] private GameObject useCharacter;
 	[SerializeField] private TextMeshProUGUI characterNameText;
-	[SerializeField] private SaveManager saveManager;
 	[SerializeField] private GameObject[] character;
 	[SerializeField] private string[] characterName;
 
@@ -80,19 +79,16 @@ public class CharacterSelection : MonoBehaviour
     {
 		if (currentCharacter >= 2)
 		{
-			saveManager.GetObtainSkin();
-			int ObtainA = SaveManager.ObtainSkinA;
-			int ObtainB = SaveManager.ObtainSkinB;
-			int ObtainC = SaveManager.ObtainSkinC;
+			SaveManager.GetObtainSkin();
 			if (currentCharacter == 2)
-				if (ObtainA != 1)
+				if (SaveManager.obtainSkinA != 1)
 					BuyCharacter();
 			if (currentCharacter == 3)
-				if (ObtainB != 1)
+				if (SaveManager.obtainSkinB != 1)
 					BuyCharacter();
 
 			if (currentCharacter == 4)
-				if (ObtainC != 1)
+				if (SaveManager.obtainSkinC != 1)
 					BuyCharacter();
 		}
 	}
@@ -113,8 +109,8 @@ public class CharacterSelection : MonoBehaviour
 
 	public void StartGame()
 	{
-		saveManager.NewGamePlayerPrefs();
-		saveManager.SetCurrentCharacter(currentCharacter);
+		SaveManager.NewGamePlayerPrefs();
+		SaveManager.SetCurrentCharacter(currentCharacter);
 		SceneManager.LoadScene("Stage1", LoadSceneMode.Single);
 	}
 

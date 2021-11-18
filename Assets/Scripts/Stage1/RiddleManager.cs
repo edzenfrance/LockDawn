@@ -6,7 +6,6 @@ using TMPro;
 
 public class RiddleManager : MonoBehaviour
 {
-    public SaveManager saveManager;
     public AudioManager audioManager;
     public GameObject getItemButton;
 
@@ -70,13 +69,13 @@ public class RiddleManager : MonoBehaviour
         int ridnum = num + 1;
         if (myAnswer == TextManager.riddleTexts[num][5])
         {
-            saveManager.SetRiddle(ridnum, 1);
+            SaveManager.SetRiddle(ridnum, 1);
             answerText.GetComponent<TextMeshProUGUI>().text = TextManager.riddleCorrect;
             doneRiddleButton.SetActive(true);
         }
         else
         {
-            saveManager.SetRiddle(ridnum, 0);
+            SaveManager.SetRiddle(ridnum, 0);
             answerText.GetComponent<TextMeshProUGUI>().text = TextManager.riddleWrong;
             doneRiddleButton.SetActive(true);
         }

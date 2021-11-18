@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class DoorTriggerController : MonoBehaviour, IInteractable
 {
@@ -49,7 +45,6 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     [SerializeField] private bool requireKeyF = false;
 
     [Header("Scripts")]
-    [SerializeField] private SaveManager saveManager;
     [SerializeField] private NoteController noteController;
     [SerializeField] private Inventory inventory;
 
@@ -76,12 +71,11 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
             PlayerPrefs.SetString("Door Name", myDoor.name + "/" + gameObject.name);
 
             // if door animation finished enable the door button
-            saveManager.GetDoorAccess();
-            int doorButton = SaveManager.doorAccess;
-            if (doorButton == 1)
+            SaveManager.GetDoorAccess();
+            if (SaveManager.doorAccess == 1)
                 doorAccessObject.SetActive(true);
 
-            Debug.Log("<color=green>DoorTriggerController</color> - <color=white>Door Name:</color> " + gameObject.name + " - <color=white>EnableDoorButton:</color> " + doorButton);
+            Debug.Log("<color=green>DoorTriggerController</color> - <color=white>Door Name:</color> " + gameObject.name + " - <color=white>EnableDoorButton:</color> " + SaveManager.doorAccess);
         }
     }
 
@@ -89,9 +83,8 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            saveManager.GetDoorAccess();
-            int doorButton = SaveManager.doorAccess;
-            if (doorButton == 1)
+            SaveManager.GetDoorAccess();
+            if (SaveManager.doorAccess == 1)
                 doorAccessObject.SetActive(true);
         }
     }
@@ -123,9 +116,7 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
             return;
         }
 
-        if (saveManager == null )
-            saveManager = GameObject.Find("Save Manager").GetComponent<SaveManager>();
-        saveManager.GetCurrentStage();
+        SaveManager.GetCurrentStage();
         currentStage = SaveManager.currentStage;
 
         if (currentStage == 1)
@@ -213,9 +204,8 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
 
     void RequiresKey(string KeyWarning, string PrefsName, string KeyName)
     {
-        saveManager.GetKeyName(PrefsName);
-        int keyName = SaveManager.keyName;
-        if (keyName == 0)
+        SaveManager.GetKeyName(PrefsName);
+        if (SaveManager.keyName == 0)
         {
             requireKeyFail = true;
             audioManager.PlayAudioDoorLockedKey();
@@ -223,14 +213,14 @@ public class DoorTriggerController : MonoBehaviour, IInteractable
             doorAccessObject.SetActive(false);
             Debug.Log("<color=white>DoorTriggerController</color> - Key Required");
         }
-        if (keyName == 1)
+        if (SaveManager.keyName == 1)
         {
             requireKeyFail = false;
             noteController.ShowNote(TextManager.unlockingDoor + KeyName, 2.0f);
-            saveManager.SetKeyName(PrefsName, 2);
+            SaveManager.SetKeyName(PrefsName, 2);
             inventory.ReloadInventory();
         }
-        if (keyName == 2)
+        if (SaveManager.keyName == 2)
         {
             requireKeyFail = false;
             noteController.ShowNote(TextManager.openingDoor + KeyName, 2.0f);

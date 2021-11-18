@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class AudioSceneController : MonoBehaviour
@@ -10,29 +7,16 @@ public class AudioSceneController : MonoBehaviour
     [SerializeField] private AudioSource musicAudio;
     [SerializeField] private AudioSource soundAudio;
 
-    [Header("Audio Source Volume")]
-    [SerializeField] private float musicVolume;
-    [SerializeField] private float soundVolume;
-
-    [Header("Volume Mute Check")]
-    [SerializeField] private int isMusicMuted;
-    [SerializeField] private int isSoundMuted;
-
     private void Awake()
     {
         // Use FindGameObjectWithTag because Audio Source is automatically destroyed in MainMenuBGM.cs
         musicAudio = GameObject.FindGameObjectWithTag("MainMenuBGM").GetComponent<AudioSource>();
         soundAudio = GameObject.FindGameObjectWithTag("SFXManager").GetComponent<AudioSource>();
 
-        isMusicMuted = PlayerPrefs.GetInt("mVolumeMute", 0);
-        isSoundMuted = PlayerPrefs.GetInt("sVolumeMute", 0);
-        musicVolume = PlayerPrefs.GetFloat("mVolume", 1);
-        soundVolume = PlayerPrefs.GetFloat("sVolume", 1);
+        SaveManager.GetSoundMusic();
 
-        if (isMusicMuted == 1)
-            musicAudio.mute = true;
-        if (isSoundMuted == 1)
-            soundAudio.mute = true;
+        if (SaveManager.musicMute == 1) musicAudio.mute = true;
+        if (SaveManager.soundMute == 1) soundAudio.mute = true;
     }
 
     void OnEnable()
@@ -43,24 +27,28 @@ public class AudioSceneController : MonoBehaviour
 
     void Start()
     {
-        musicAudio.volume = musicVolume;
-        soundAudio.volume = soundVolume;
+        musicAudio.volume = SaveManager.musicVolume;
+        soundAudio.volume = SaveManager.soundVolume;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.buildIndex == 0)
         {
-            musicAudio.Play();
-            Debug.Log("<color=white>AudioSceneController</color> - Current Scene Index: " + scene.buildIndex + " - Audio Play");
+            if (!musicAudio.isPlaying)
+            {
+                musicAudio.Play();
+                Debug.Log("<color=white>AudioSceneController</color> - Current Scene Index: " + scene.buildIndex + " - Audio Play");
+            }
         }
-        // if ((scene.buildIndex != 0) && (scene.buildIndex != 1))
-        if (scene.buildIndex > 4)
+        if (scene.buildIndex > 6)
         {
             //musicAudio.volume = 0f;
             //if (musicAudio.timeSamples > musicAudio.clip.samples - 300) musicAudio.Stop();  // Fix for pop/click artefact when stopping the music if not using Load Type: Streaming
             musicAudio.Stop();
             Debug.Log("<color=white>AudioSceneController</color> - Current Scene Index: " + scene.buildIndex + " - Audio Stop");
+            Destroy(musicAudio);
+            Destroy(soundAudio);
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -9,10 +7,6 @@ public class VolumeController : MonoBehaviour
     [Header("Audio Source")]
     [SerializeField] private AudioSource musicAudio;
     [SerializeField] private AudioSource soundAudio;
-
-    [Header("Audio Source Volume")]
-    [SerializeField] private float musicVolume;
-    [SerializeField] private float soundVolume;
 
     [Header("Volume Slider")]
     [SerializeField] private Slider musicSlider;
@@ -34,10 +28,6 @@ public class VolumeController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI musicToggleText;
     [SerializeField] private TextMeshProUGUI soundToggleText;
 
-    [Header("Volume Mute")]
-    [SerializeField] private int isMusicMuted;
-    [SerializeField] private int isSoundMuted;
-
     void Awake()
     {
         // Use FindGameObjectWithTag because Audio Source is automatically destroyed in MainMenuBGM.cs
@@ -46,39 +36,33 @@ public class VolumeController : MonoBehaviour
         //musicSliderFill = musicSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
         //soundSliderFill = soundSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
 
-        isMusicMuted = PlayerPrefs.GetInt("mVolumeMute", 0);
-        isSoundMuted = PlayerPrefs.GetInt("sVolumeMute", 0);
-        musicVolume = PlayerPrefs.GetFloat("mVolume", 1);
-        soundVolume = PlayerPrefs.GetFloat("sVolume", 1);
+        SaveManager.GetSoundMusic();
 
-        musicSlider.value = musicVolume;
-        soundSlider.value = soundVolume;
+        musicSlider.value = SaveManager.musicVolume;
+        soundSlider.value = SaveManager.soundVolume;
 
-        if (isMusicMuted == 1)
-            musicToggle.isOn = false;
-        if (isSoundMuted == 1)
-            soundToggle.isOn = false;
+        if (SaveManager.musicMute == 1) musicToggle.isOn = false;
+        if (SaveManager.soundMute == 1) soundToggle.isOn = false;
     }
 
     public void UpdateMusicVolume(float volume)
     {
         musicAudio.volume = volume;
-        PlayerPrefs.SetFloat("mVolume", volume);
-        Debug.Log("<color=white>VolumeController</color> - Slider Music - Volume: " + musicAudio.volume);
+        SaveManager.SetSoundVolume(volume);
     }
+
     public void UpdateSoundVolume(float volume)
     {
         soundAudio.volume = volume;
-        PlayerPrefs.SetFloat("sVolume", volume);
-        Debug.Log("<color=white>VolumeController</color> - Slider Sound - Volume: " + soundAudio.volume);
+        SaveManager.SetSoundVolume(volume);
     }
 
     public void ToggleMusic()
     {
-        bool MusicToggleSwitch = musicToggle.isOn;
-        if (MusicToggleSwitch)
+        bool nusicToggleSwitch = musicToggle.isOn;
+        if (nusicToggleSwitch)
         {
-            PlayerPrefs.SetInt("mVolumeMute", 0);
+            SaveManager.SetMusicMute(0);
             musicAudio.mute = false;
             musicSlider.enabled = true;
             musicSliderFill.color = fillColorUnmute;
@@ -88,7 +72,7 @@ public class VolumeController : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("mVolumeMute", 1);
+            SaveManager.SetMusicMute(1);
             musicAudio.mute = true;
             musicSlider.enabled = false;
             musicSliderFill.color = fillColorMute;
@@ -102,7 +86,7 @@ public class VolumeController : MonoBehaviour
         bool soundToggleSwitch = soundToggle.isOn;
         if (soundToggleSwitch)
         {
-            PlayerPrefs.SetInt("sVolumeMute", 0);
+            SaveManager.SetSoundMute(0);
             soundAudio.mute = false;
             soundSlider.enabled = true;
             soundSliderFill.color = fillColorUnmute;
@@ -111,7 +95,7 @@ public class VolumeController : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("sVolumeMute", 1);
+            SaveManager.SetSoundMute(1);
             soundAudio.mute = true;
             soundSlider.enabled = false;
             soundSliderFill.color = fillColorMute;

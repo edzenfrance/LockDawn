@@ -4,7 +4,7 @@ using TMPro;
 
 public class SurveyManager : MonoBehaviour
 {
-    public SaveManager saveManager;
+
     public AudioManager audioManager;
 
     [Header("Survey")]
@@ -21,6 +21,7 @@ public class SurveyManager : MonoBehaviour
     int num;
     string myAnswer;
     int toggleLimit;
+
 
     void OnEnable()
     {
@@ -42,7 +43,7 @@ public class SurveyManager : MonoBehaviour
     void SetStageNumber(int stagenumber, int arraycount)
     {
         if (arraycount < 5)
-            saveManager.SetCompleteStage(stagenumber);
+            SaveManager.SetCompleteStage(stagenumber);
         num = arraycount;
         ChangeSurveyText();
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+
     public static int currentCharacter;
     public static int currentLife;
     public static int currentCoin;
@@ -16,9 +17,22 @@ public class SaveManager : MonoBehaviour
     public static float lookSensitivity;
     public static int continueGame;
 
-    public static int ObtainSkinA;
-    public static int ObtainSkinB;
-    public static int ObtainSkinC;
+    public static float musicVolume;
+    public static float soundVolume;
+    public static int musicMute;
+    public static int soundMute;
+
+    public static int achievementA;
+    public static int achievementB;
+    public static int achievementC;
+    public static int achievementD;
+    public static int achievementE;
+    public static int achievementF;
+
+    public static int obtainSkinA;
+    public static int obtainSkinB;
+    public static int obtainSkinC;
+
 
     private void Awake()
     {
@@ -26,162 +40,166 @@ public class SaveManager : MonoBehaviour
         currentCoin = PlayerPrefs.GetInt("Coin");
     }
 
-    public void SetAchievement(int count, int num)
+    public static void SetAchievement(int count, int num)
     {
         // 0 = Failed  1 = Show it  2 = Show
         // Achivement 1 = Show Off
         PlayerPrefs.SetInt("Achievement " + count, num);
-    }    
+    }
 
-    public void SetCurrentLife(int num)
+    public static void GetAchievement()
+    {
+        // 0 = Failed  1 = Show it  2 = Show
+        achievementA = PlayerPrefs.GetInt("Achievement 1");
+        achievementB = PlayerPrefs.GetInt("Achievement 2");
+        achievementC = PlayerPrefs.GetInt("Achievement 3");
+        achievementD = PlayerPrefs.GetInt("Achievement 4");
+        achievementE = PlayerPrefs.GetInt("Achievement 5");
+    }
+
+    public static void SetCurrentLife(int num)
     {
         PlayerPrefs.SetInt("Life", num);
     }
 
-    public void GetCurrentLife()
+    public static void GetCurrentLife()
     {
         currentLife = PlayerPrefs.GetInt("Life", 3);
     }
 
-    public void ObtainMainItem(string mainitem)
+    public static void ObtainMainItem(string mainitem)
     {
         PlayerPrefs.SetInt("Obtain " + mainitem, 1);
     }
 
-    public void SetRiddle(int num, int set)
+    public static void SetRiddle(int num, int set)
     {
         PlayerPrefs.SetInt("Riddle " + num, set);
     }
 
-    public void SetCurrentStage(int num)
+    public static void SetCurrentStage(int num)
     {
         PlayerPrefs.SetInt("Current Stage", num);
     }
 
-    public void SetCurrentCharacter(int num)
+    public static void SetCurrentCharacter(int num)
     {
         PlayerPrefs.SetInt("Current Character", num);
     }
 
-    public void GetCurrentCharacter()
+    public static void GetCurrentCharacter()
     {
         currentCharacter = PlayerPrefs.GetInt("Current Character", 0);
     }
 
-    public void GetCurrentStage()
+    public static void GetCurrentStage()
     {
         currentStage = PlayerPrefs.GetInt("Current Stage", 1);
     }
 
-    public void SetSpecialSyrup()
+    public static void SetSpecialSyrup()
     {
-        int addsyrup = PlayerPrefs.GetInt("Special Syrup");
-        addsyrup += 1;
+        int addsyrup = PlayerPrefs.GetInt("Special Syrup") + 1;
         PlayerPrefs.SetInt("Special Syrup", addsyrup);
     }
 
-    public void UseSpecialSyrup()
+    public static void UseSpecialSyrup()
     {
-        int addsyrup = PlayerPrefs.GetInt("Special Syrup");
-        addsyrup -= 1;
-        PlayerPrefs.SetInt("Special Syrup", addsyrup);
+        int usesyrup = PlayerPrefs.GetInt("Special Syrup") - 1;
+        PlayerPrefs.SetInt("Special Syrup", usesyrup);
     }
 
-    public void SetCoin()
+    public static void SetCoin()
     {
-        currentCoin = PlayerPrefs.GetInt("Coin");
-        currentCoin += 10;
+        currentCoin = PlayerPrefs.GetInt("Coin") + 10;
         PlayerPrefs.SetInt("Coin", currentCoin);
     }
 
-    public void GetKeyCount()
+    public static void GetKeyCount()
     {
         keyCount = PlayerPrefs.GetInt("Key Count", 0);
     }
-    public void SetKeyCount()
+    public static void SetKeyCount()
     {
-        keyCount = PlayerPrefs.GetInt("Key Count");
-        keyCount += 1;
+        keyCount = PlayerPrefs.GetInt("Key Count") + 1;
         PlayerPrefs.SetInt("Key Count", keyCount);
     }
-    public void ResetKeyCount()
+    public static void ResetKeyCount()
     {
         PlayerPrefs.SetInt("Key Count", 0);
     }
 
-    public void SetKeyName(string keyname, int num)
+    public static void SetKeyName(string keyname, int num)
     {
         PlayerPrefs.SetInt(keyname, num);
     }
 
-    public void GetKeyName(string keyname)
+    public static void GetKeyName(string keyname)
     {
         keyName = PlayerPrefs.GetInt(keyname, 0);
     }
 
-    public void SetQuarantine(int num)
+    public static void SetQuarantine(int num)
     {
         PlayerPrefs.SetInt("Quarantine", num);
     }
     
-    public void SetDoorAccess(int num)
+    public static void SetDoorAccess(int num)
     {
         PlayerPrefs.SetInt("Door Access", num);
     }
 
-    public void GetDoorAccess()
+    public static void GetDoorAccess()
     {
         doorAccess = PlayerPrefs.GetInt("Door Access", 1);
     }
 
-    public void SetShowFramerate(int num)
+    public static void SetShowFramerate(int num)
     {
         PlayerPrefs.SetInt("Framerate", num);
     }
 
-    public void GetShowFramerate()
+    public static void GetShowFramerate()
     {
         PlayerPrefs.SetInt("Framerate", 0);
     }
 
-    public void SetCurrrentImmunity(int immunity)
+    public static void SetCurrrentImmunity(int immunity)
     {
         PlayerPrefs.SetInt("Current Immunity", immunity);
     }
 
-    public void GetCurrentImmunity()
+    public static void GetCurrentImmunity()
     {
         currentImmunity = PlayerPrefs.GetInt("Current Immunity", 0);
     }
 
-    #region Character Selection
-
-    public void SetGameDifficulty(int diff)
+    public static void SetGameDifficulty(int diff)
     {
         PlayerPrefs.SetInt("Game Difficulty", diff);
     }
 
-    public void GetGameDifficulty()
+    public static void GetGameDifficulty()
     {
         gameDifficulty = PlayerPrefs.GetInt("Game Difficulty", 2);
     }
 
-    public void GetCameraDistance()
+    public static void GetCameraDistance()
     {
         cameraDistance = PlayerPrefs.GetFloat("Camera Distance", 1.75f);
     }
 
-    public void GetLookSensitivity()
+    public static void GetLookSensitivity()
     {
         lookSensitivity = PlayerPrefs.GetFloat("Look Sensitivity", 60f);
     }
 
-    public void SetCompleteStage(int stagenumber)
+    public static void SetCompleteStage(int stagenumber)
     {
         PlayerPrefs.SetInt("Stage " + stagenumber + " Complete", 1);
     }
 
-    public void DeleteKeyStage(int num)
+    public static void DeleteKeyStage(int num)
     {
         if (num == 1)
         {
@@ -230,7 +248,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void NewGamePlayerPrefs()
+    public static void NewGamePlayerPrefs()
     {
 		PlayerPrefs.DeleteKey("S1 Key A");
 		PlayerPrefs.DeleteKey("S1 Key B");
@@ -265,22 +283,48 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Continue Game", 0);
     }
 
-    public void SetContinueGame()
+    public static void SetContinueGame()
     {
         PlayerPrefs.SetInt("Continue Game", 1);
     }
 
-    public void GetContinueGame()
+    public static void GetContinueGame()
     {
         continueGame = PlayerPrefs.GetInt("Continue Game", 0);
     }
 
-    public void GetObtainSkin()
+    public static void GetObtainSkin()
     {
-        ObtainSkinA = PlayerPrefs.GetInt("Obtain Skin 0");
-        ObtainSkinB = PlayerPrefs.GetInt("Obtain Skin 1");
-        ObtainSkinC = PlayerPrefs.GetInt("Obtain Skin 2");
+        obtainSkinA = PlayerPrefs.GetInt("Obtain Skin 0");
+        obtainSkinB = PlayerPrefs.GetInt("Obtain Skin 1");
+        obtainSkinC = PlayerPrefs.GetInt("Obtain Skin 2");
     }
 
-    #endregion
+    public static void SetSoundMute(int num)
+    {
+        PlayerPrefs.SetInt("Sound Mute", num);
+    }
+
+    public static void SetMusicMute(int num)
+    {
+        PlayerPrefs.SetInt("Music Mute", num);
+    }
+
+    public static void SetSoundVolume(float num)
+    {
+        PlayerPrefs.SetFloat("Sound Volume", num);
+    }
+
+    public static void SetMusicVolume(float num)
+    {
+        PlayerPrefs.SetFloat("Music Volume", num);
+    }
+
+    public static void GetSoundMusic()
+    {
+        soundVolume = PlayerPrefs.GetFloat("Sound Volume", 1);
+        musicVolume = PlayerPrefs.GetFloat("Music Volume", 1);
+        soundMute = PlayerPrefs.GetInt("Sound Mute", 0);
+        musicMute = PlayerPrefs.GetInt("Music Mute", 0);
+    }
 }

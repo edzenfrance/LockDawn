@@ -9,10 +9,6 @@ public class StageVolumeController : MonoBehaviour
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource sound;
 
-    [Header("Audio Source Volume")]
-    [SerializeField] private float musicVolume;
-    [SerializeField] private float soundVolume;
-
     [Header("Volume Slider")]
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider soundSlider;
@@ -33,49 +29,39 @@ public class StageVolumeController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI musicToggleText;
     [SerializeField] private TextMeshProUGUI soundToggleText;
 
-    [Header("Volume Mute")]
-    [SerializeField] private int isMusicMuted;
-    [SerializeField] private int isSoundMuted;
-
     void Awake()
     {
         audioSource = GameObject.Find("Audio Manager").GetComponents<AudioSource>();
         sound = audioSource[0];
         music = audioSource[1];
 
-        isMusicMuted = PlayerPrefs.GetInt("Music Mute", 0);
-        isSoundMuted = PlayerPrefs.GetInt("Sound Mute", 0);
-        musicVolume = PlayerPrefs.GetFloat("Music Volume", 1);
-        soundVolume = PlayerPrefs.GetFloat("Sound Volume", 1);
+        SaveManager.GetSoundMusic();
 
-        musicSlider.value = musicVolume;
-        soundSlider.value = soundVolume;
+        musicSlider.value = SaveManager.musicVolume;
+        soundSlider.value = SaveManager.soundVolume;
 
-        if (isMusicMuted == 1)
-            musicToggle.isOn = false;
-        if (isSoundMuted == 1)
-            soundToggle.isOn = false;
+        if (SaveManager.musicMute == 1) musicToggle.isOn = false;
+        if (SaveManager.soundMute == 1) soundToggle.isOn = false;
     }
 
     public void UpdateMusicVolume(float volume)
     {
         music.volume = volume;
-        PlayerPrefs.SetFloat("Music Volume", volume);
-        Debug.Log("<color=white>StageVolumeController</color> - Slider Music - Volume: " + music.volume);
+        SaveManager.SetMusicVolume(volume);
     }
+
     public void UpdateSoundVolume(float volume)
     {
         sound.volume = volume;
-        PlayerPrefs.SetFloat("Sound Volume", volume);
-        Debug.Log("<color=white>StageVolumeController</color> - Slider Sound - Volume: " + sound.volume);
+        SaveManager.SetSoundVolume(volume);
     }
 
     public void ToggleMusic()
     {
-        bool MusicToggleSwitch = musicToggle.isOn;
-        if (MusicToggleSwitch)
+        bool musicToggleSwitch = musicToggle.isOn;
+        if (musicToggleSwitch)
         {
-            PlayerPrefs.SetInt("Music Mute", 0);
+            SaveManager.SetMusicMute(0);
             music.mute = false;
             musicSlider.enabled = true;
             musicSliderFill.color = fillColorUnmute;
@@ -85,7 +71,7 @@ public class StageVolumeController : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("Music Mute", 1);
+            SaveManager.SetMusicMute(1);
             music.mute = true;
             musicSlider.enabled = false;
             musicSliderFill.color = fillColorMute;
@@ -99,7 +85,7 @@ public class StageVolumeController : MonoBehaviour
         bool soundToggleSwitch = soundToggle.isOn;
         if (soundToggleSwitch)
         {
-            PlayerPrefs.SetInt("Sound Mute", 0);
+            SaveManager.SetSoundMute(0);
             sound.mute = false;
             soundSlider.enabled = true;
             soundSliderFill.color = fillColorUnmute;
@@ -108,7 +94,7 @@ public class StageVolumeController : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("Sound Mute", 1);
+            SaveManager.SetSoundMute(1);
             sound.mute = true;
             soundSlider.enabled = false;
             soundSliderFill.color = fillColorMute;

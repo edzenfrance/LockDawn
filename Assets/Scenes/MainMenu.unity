@@ -1855,10 +1855,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicAudio: {fileID: 0}
   soundAudio: {fileID: 0}
-  musicVolume: 0
-  soundVolume: 0
-  isMusicMuted: 0
-  isSoundMuted: 0
 --- !u!4 &178173290
 Transform:
   m_ObjectHideFlags: 0
@@ -2493,8 +2489,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicAudio: {fileID: 0}
   soundAudio: {fileID: 0}
-  musicVolume: 1
-  soundVolume: 1
   musicSlider: {fileID: 1073656696}
   soundSlider: {fileID: 1427488906}
   musicSliderFill: {fileID: 1575957440}
@@ -2505,8 +2499,6 @@ MonoBehaviour:
   soundToggle: {fileID: 1244525086}
   musicToggleText: {fileID: 1575742667}
   soundToggleText: {fileID: 1701773417}
-  isMusicMuted: 0
-  isSoundMuted: 0
 --- !u!1 &273487131
 GameObject:
   m_ObjectHideFlags: 0
@@ -2809,7 +2801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21ab959f7871e44fb32828b81354978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveManager: {fileID: 771137069}
   continueButton: {fileID: 667706960}
   continueText: {fileID: 583132451}
 --- !u!1 &310549655

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TextManager : MonoBehaviour
@@ -62,19 +60,19 @@ public class TextManager : MonoBehaviour
     public static string S2_KeyWarn_E = "This door requires <color=green>Key: " + S2_DoorKey_E + "</color> to open.\nThe key must be around here, find it!";
     public static string S2_KeyWarn_F = "This door requires <color=green>Key: " + S2_DoorKey_F + "</color> to open.\nThe key must be around here, find it!";
 
-    public static string S2_Inventory_A = "<color=green>Door Key: " + S2_DoorKey_A + "</color> - Can be use to open a locked door.";
-    public static string S2_Inventory_B = "<color=green>Door Key: " + S2_DoorKey_B + "</color> - Can be use to open a locked door.";
-    public static string S2_Inventory_C = "<color=green>Door Key: " + S2_DoorKey_C + "</color> - Can be use to open a locked door.";
-    public static string S2_Inventory_D = "<color=green>Door Key: " + S2_DoorKey_D + "</color> - Can be use to open a locked door.";
-    public static string S2_Inventory_E = "<color=green>Door Key: " + S2_DoorKey_E + "</color> - Can be use to open a locked door.";
-    public static string S2_Inventory_F = "<color=green>Door Key: " + S2_DoorKey_F + "</color> - Can be use to open a locked door.";
+    public static string S2_Inventory_A = "<color=green>Key: " + S2_DoorKey_A + "</color> - This key will open the locked door.";
+    public static string S2_Inventory_B = "<color=green>Key: " + S2_DoorKey_B + "</color> - This key will open the locked door.";
+    public static string S2_Inventory_C = "<color=green>Key: " + S2_DoorKey_C + "</color> - This key will open the locked door.";
+    public static string S2_Inventory_D = "<color=green>Key: " + S2_DoorKey_D + "</color> - This key will open the locked door.";
+    public static string S2_Inventory_E = "<color=green>Key: " + S2_DoorKey_E + "</color> - This key will open the locked door.";
+    public static string S2_Inventory_F = "<color=green>Key: " + S2_DoorKey_F + "</color> - This key will open the locked door.";
 
-    public static string S2_ItemGet_A = "Get the <color=green>Door Key: " + S2_DoorKey_A;
-    public static string S2_ItemGet_B = "Get the <color=green>Door Key: " + S2_DoorKey_B;
-    public static string S2_ItemGet_C = "Get the <color=green>Door Key: " + S2_DoorKey_C;
-    public static string S2_ItemGet_D = "Get the <color=green>Door Key: " + S2_DoorKey_D;
-    public static string S2_ItemGet_E = "Get the <color=green>Door Key: " + S2_DoorKey_E;
-    public static string S2_ItemGet_F = "Get the <color=green>Door Key: " + S2_DoorKey_F;
+    public static string S2_ItemGet_A = "Get the door <color=green>Key: " + S2_DoorKey_A;
+    public static string S2_ItemGet_B = "Get the door <color=green>Key: " + S2_DoorKey_B;
+    public static string S2_ItemGet_C = "Get the door <color=green>Key: " + S2_DoorKey_C;
+    public static string S2_ItemGet_D = "Get the door <color=green>Key: " + S2_DoorKey_D;
+    public static string S2_ItemGet_E = "Get the door <color=green>Key: " + S2_DoorKey_E;
+    public static string S2_ItemGet_F = "Get the door <color=green>Key: " + S2_DoorKey_F;
 
     // Misc Get
     public static string ItemGet_Vitamins = "Get the <color=green>vitamins</color>";

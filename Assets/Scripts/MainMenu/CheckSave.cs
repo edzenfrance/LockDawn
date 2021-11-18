@@ -5,12 +5,10 @@ using TMPro;
 
 public class CheckSave : MonoBehaviour
 {
-    [SerializeField] private SaveManager saveManager;
     [SerializeField] private Button continueButton;
-
-    public TextMeshProUGUI continueText;
-
+    [SerializeField] private TextMeshProUGUI continueText;
     private ColorBlock buttonColor;
+
 
     void Awake()
     {
@@ -24,11 +22,11 @@ public class CheckSave : MonoBehaviour
 
     void OnEnable()
     {
-        saveManager.GetContinueGame();
+        SaveManager.GetContinueGame();
         if (SaveManager.continueGame == 1)
         {
             continueButton.interactable = true;
-            continueText.color = new Color32(255, 255, 255, 128);
+            continueText.color = new Color32(255, 255, 255, 255);
         }
         else if (SaveManager.continueGame == 0)
         {

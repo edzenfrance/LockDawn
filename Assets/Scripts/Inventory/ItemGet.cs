@@ -1,10 +1,10 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class ItemGet : MonoBehaviour
 {
+
     [SerializeField] private Toggle[] toggleObjectives;
     [SerializeField] private TextMeshProUGUI grabItem;
     [SerializeField] private TextMeshProUGUI taskKeyText;
@@ -16,10 +16,8 @@ public class ItemGet : MonoBehaviour
 
     [Header("Types")]
     [SerializeField] private string objectName;
-    [SerializeField] private bool getCoin;
 
     [Header("Scripts")]
-    [SerializeField] private SaveManager saveManager;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private NoteController noteController;
     [SerializeField] private RiddleManager riddleManager;
@@ -28,6 +26,7 @@ public class ItemGet : MonoBehaviour
 
     [Header("Exit")]
     [SerializeField] private GameObject[] stageExit;
+
 
     public void getItem()
     {
@@ -47,24 +46,23 @@ public class ItemGet : MonoBehaviour
 
         if (objectName == "S1 Vitamin")
         {
-            saveManager.ObtainMainItem("Vitamin");
-            saveManager.SetCurrrentImmunity(5);
+            SaveManager.ObtainMainItem("Vitamin");
+            SaveManager.SetCurrrentImmunity(5);
             immunityController.CheckImmunity();
             stageExit[0].SetActive(true);
             noteController.ShowNote(TextManager.gotVitamin, 5.0f);
             toggleObjectives[0].isOn = true;
-            saveManager.GetCurrentImmunity();
-            int currentImmunity = SaveManager.currentImmunity;
+            SaveManager.GetCurrentImmunity();
             immunityFill.SetActive(true);
-            immunityBar.value = currentImmunity;
-            immunityText.text = currentImmunity.ToString();
+            immunityBar.value = SaveManager.currentImmunity;
+            immunityText.text = SaveManager.currentImmunity.ToString();
             audioManager.PlayAudioPickUpItem();
         }
 
         if (objectName == "S2 Alcohol")
         {
-            saveManager.ObtainMainItem("Alcohol");
-            saveManager.SetCurrrentImmunity(10);
+            SaveManager.ObtainMainItem("Alcohol");
+            SaveManager.SetCurrrentImmunity(10);
             immunityController.CheckImmunity();
             stageExit[1].SetActive(true);
             noteController.ShowNote(TextManager.gotAlcohol, 5.0f);
@@ -74,8 +72,8 @@ public class ItemGet : MonoBehaviour
 
         if (objectName == "S3 Face Mask")
         {
-            saveManager.ObtainMainItem("Face Mask");
-            saveManager.SetCurrrentImmunity(30);
+            SaveManager.ObtainMainItem("Face Mask");
+            SaveManager.SetCurrrentImmunity(30);
 
             immunityController.CheckImmunity();
             stageExit[2].SetActive(true);
@@ -86,8 +84,8 @@ public class ItemGet : MonoBehaviour
 
         if (objectName == "S4 Face Shield")
         {
-            saveManager.ObtainMainItem("Face Shield");
-            saveManager.SetCurrrentImmunity(50);
+            SaveManager.ObtainMainItem("Face Shield");
+            SaveManager.SetCurrrentImmunity(50);
             immunityController.CheckImmunity();
             stageExit[3].SetActive(true);
             noteController.ShowNote(TextManager.gotFaceShield, 5.0f);
@@ -97,8 +95,8 @@ public class ItemGet : MonoBehaviour
 
         if (objectName == "S5 Vaccine")
         {
-            saveManager.ObtainMainItem("Vaccine");
-            saveManager.SetCurrrentImmunity(100);
+            SaveManager.ObtainMainItem("Vaccine");
+            SaveManager.SetCurrrentImmunity(100);
             immunityController.CheckImmunity();
             stageExit[4].SetActive(true);
             noteController.ShowNote(TextManager.gotVaccine, 5.0f);
@@ -115,7 +113,7 @@ public class ItemGet : MonoBehaviour
 
         if (objectName.Contains("Special Syrup"))
         {
-            saveManager.SetSpecialSyrup();
+            SaveManager.SetSpecialSyrup();
             toggleObjectives[1].isOn = true;
             audioManager.PlayAudioPickUpBottle();
         }
@@ -123,14 +121,13 @@ public class ItemGet : MonoBehaviour
         if (objectName.Contains("Coin"))
         {
             noteController.ShowNote(TextManager.coinAdded, 1.5f);
-            saveManager.SetCoin();
+            SaveManager.SetCoin();
             audioManager.PlayAudioPickUpCoin();
         }
 
         inventory.ReloadInventory();
-        saveManager.GetCurrentStage();
-        int currentStage = SaveManager.currentStage;
-        GameObject detectedObject = GameObject.Find("Item/Stage" + currentStage + "/" + objectName);
+        SaveManager.GetCurrentStage();
+        GameObject detectedObject = GameObject.Find("Item/Stage" + SaveManager.currentStage.ToString() + "/" + objectName);
         detectedObject.SetActive(false);
         gameObject.SetActive(false);
         Debug.Log("<color=white>ItemGet</color> - Added to inventory: " + objectName);
@@ -145,14 +142,13 @@ public class ItemGet : MonoBehaviour
 
     void SaveKey(string KeyName, string KeyNote)
     {
-        saveManager.SetKeyName(KeyName, 1);
-        saveManager.SetKeyCount();
-        saveManager.GetKeyCount();
-        int keyCount = SaveManager.keyCount;
-        taskKeyText.text = "Keys (" + keyCount + " of 6)";
+        SaveManager.SetKeyName(KeyName, 1);
+        SaveManager.SetKeyCount();
+        SaveManager.GetKeyCount();
+        taskKeyText.text = "Keys (" + SaveManager.keyCount + " of 6)";
         noteController.ShowNote(KeyNote + "</color> " + TextManager.addedToInventory, 3.0f);
         audioManager.PlayAudioPickUpKey();
-        if (keyCount == 6)
+        if (SaveManager.keyCount == 6)
             toggleObjectives[0].isOn = true;
     }
 }

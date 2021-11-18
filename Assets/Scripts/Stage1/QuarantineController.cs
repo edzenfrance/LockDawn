@@ -27,7 +27,6 @@ public class QuarantineController : MonoBehaviour
     [SerializeField] private GameObject canvasTouchZoneSprint;
 
     [Header("Scripts")]
-    [SerializeField] private SaveManager saveManager;
     [SerializeField] private HealthController healthController;
 
     [Header("Watch Advertisement")]
@@ -64,7 +63,7 @@ public class QuarantineController : MonoBehaviour
 
     void Start()
     {
-        saveManager.SetQuarantine(1);
+        SaveManager.SetQuarantine(1);
         playerMessage.SetActive(true);
         quarantineStart.SetActive(true);
 
@@ -126,11 +125,9 @@ public class QuarantineController : MonoBehaviour
         }
         else
         {
-            saveManager.SetCurrentLife(3);
-            saveManager.GetCurrentStage();
-            int currentStagePosition = SaveManager.currentStage;
-            currentStagePosition -= 1;
-            character.transform.position = stageSpawnPoint[currentStagePosition].transform.position;
+            SaveManager.SetCurrentLife(3);
+            SaveManager.GetCurrentStage();
+            character.transform.position = stageSpawnPoint[SaveManager.currentStage - 1].transform.position;
             character.SetActive(false);
             character.SetActive(true);
             healthController.RespawnCharacter();
@@ -189,7 +186,7 @@ public class QuarantineController : MonoBehaviour
 
     void QuarantineFinish()
     {
-        saveManager.SetQuarantine(0);
+        SaveManager.SetQuarantine(0);
         playerMessage.SetActive(true);
         quarantineFinish.SetActive(true);
         okayButton.SetActive(true);

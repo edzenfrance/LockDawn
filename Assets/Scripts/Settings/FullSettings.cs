@@ -10,7 +10,6 @@ public class FullSettings : MonoBehaviour
     [Header("FrameRate")]
     [SerializeField] private Toggle framerateToggle;
     [SerializeField] private GameObject framerateCounter;
-    [SerializeField] private SaveManager saveManager;
 
     bool GamePaused = false;
 
@@ -53,14 +52,14 @@ public class FullSettings : MonoBehaviour
         bool MusicToggleSwitch = framerateToggle.isOn;
         if (MusicToggleSwitch)
         {
-            saveManager.SetShowFramerate(0);
+            SaveManager.SetShowFramerate(0);
             framerateCounter.SetActive(true);
             Debug.Log("<color=white>FullSettings</color> - Frame Rate: ON");
 
         }
         else
         {
-            saveManager.SetShowFramerate(1);
+            SaveManager.SetShowFramerate(1);
             framerateCounter.SetActive(false);
             Debug.Log("<color=white>FullSettings</color> - Frame Rate: OFF");
         }

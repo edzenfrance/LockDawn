@@ -30,7 +30,6 @@ public class HealthController : MonoBehaviour
 
     [Header("Script")]
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] private SaveManager saveManager;
     [SerializeField] private Inventory inventory;
     [SerializeField] private NoteController noteController;
 
@@ -68,7 +67,7 @@ public class HealthController : MonoBehaviour
     {
         character = GameObject.FindGameObjectWithTag("Player");
         animator = character.GetComponent<Animator>();
-        saveManager.SetAchievement(1, 1);
+        SaveManager.SetAchievement(1, 1);
     }
 
     public void ChangeHealthPoint(int dmgAmount, bool dmgNpc)
@@ -89,7 +88,7 @@ public class HealthController : MonoBehaviour
             {
                 if (currentHP < 100)
                 {
-                    saveManager.SetAchievement(1, 0);
+                    SaveManager.SetAchievement(1, 0);
                     achievementA = false;
                 }
             }
@@ -105,7 +104,7 @@ public class HealthController : MonoBehaviour
         audioManager.PlayAudioHeartBeat();
         infectedNote.SetActive(true);
         bloodSmear.SetActive(true);
-        saveManager.GetCurrentImmunity();
+        SaveManager.GetCurrentImmunity();
         float immunityNum = (float)SaveManager.currentImmunity;
         float damagePerSecond = damageEverySecond - ((immunityNum / 100f) * 3f);
         while (true)
@@ -138,11 +137,11 @@ public class HealthController : MonoBehaviour
         healthCountText.text = "0";
         infectedNote.SetActive(false);
         ObjectSetActive(false);
-        saveManager.GetCurrentLife();
+        SaveManager.GetCurrentLife();
         int currentLife = SaveManager.currentLife;
         if (currentLife > 0)
             currentLife -= 1;
-        saveManager.SetCurrentLife(currentLife);
+        SaveManager.SetCurrentLife(currentLife);
         lifeText.text = "Life: " + currentLife;
         Debug.Log("<color=white>HealthController</color> - Life: " + currentLife);
         if (currentLife <= 0)
@@ -197,7 +196,7 @@ public class HealthController : MonoBehaviour
             isInfected = false;
             bloodSmear.SetActive(false);
             infectedNote.SetActive(false);
-            saveManager.UseSpecialSyrup();
+            SaveManager.UseSpecialSyrup();
             inventory.ReloadInventory();
             audioManager.StopAudioLoop();
             noteController.ShowNote(TextManager.stopInfection, 2);

@@ -74,7 +74,7 @@ public class UIVirtualTouchZoneFootstep : MonoBehaviour, IPointerDownHandler, ID
         {
             audioManager.PlayAudioFootstep();
             if (run)
-                 wfs = 0.26f;
+                 wfs = 0.46f;
             else
                 wfs = 0.51f;
             yield return new WaitForSeconds(wfs);

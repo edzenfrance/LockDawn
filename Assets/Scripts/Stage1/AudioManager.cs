@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -23,24 +22,22 @@ public class AudioManager : MonoBehaviour
     public AudioClip pickUpPaper;
     public AudioClip pickUpCoin;
     public AudioClip woodBreak;
+
     void Awake()
     {
         audioSource = GetComponents<AudioSource>();
         sounds = audioSource[0];
         heart = audioSource[1];
 
-        float isMusicMuted = PlayerPrefs.GetInt("Music Mute", 0);
-        float isSoundMuted = PlayerPrefs.GetInt("Sound Mute", 0);
-        float musicVolume = PlayerPrefs.GetFloat("Music Volume", 1);
-        float soundVolume = PlayerPrefs.GetFloat("Music Volume", 1);
+        SaveManager.GetSoundMusic();
 
-        if (isMusicMuted == 1)
+        if (SaveManager.musicMute == 1)
             sounds.mute = true;
-        if (isSoundMuted == 1)
+        if (SaveManager.soundMute == 1)
             heart.mute = true;
 
-        sounds.volume = soundVolume;
-        heart.volume = musicVolume;
+        sounds.volume = SaveManager.soundVolume;
+        heart.volume = SaveManager.musicVolume;
     }
 
     public void PlayAudioFootstep()
@@ -72,7 +69,6 @@ public class AudioManager : MonoBehaviour
     {
         PlaySounds(zombieAttack);
     }
-
 
     public void PlayAudioHeartBeat()
     {
@@ -121,8 +117,8 @@ public class AudioManager : MonoBehaviour
 
     public void Psounds(AudioClip aClip)
     {
-      sounds.clip = aClip;
-      sounds.Play();
+        sounds.clip = aClip;
+        sounds.Play();
     }
 
     public void PlaySounds(AudioClip aClip)
