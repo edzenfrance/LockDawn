@@ -7,6 +7,7 @@ public class StartManager : MonoBehaviour
 {
     [SerializeField] private UIVirtualTouchZone UIVirtualTouchZoneLook;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private EnvironmentController environmentController;
     [SerializeField] private GameObject framerateCounter;
     [SerializeField] private Slider immunityBar;
     [SerializeField] private GameObject immunityFill;

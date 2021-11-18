@@ -6,6 +6,7 @@ public class FullSettings : MonoBehaviour
     public GameObject PauseScreen;
     public Transform box;
     public CanvasGroup background;
+    public Canvas canvasSettings;
 
     [Header("FrameRate")]
     [SerializeField] private Toggle framerateToggle;
@@ -23,6 +24,7 @@ public class FullSettings : MonoBehaviour
 
     public void OnEnable()
     {
+        canvasSettings.sortingOrder = 8;
         background.alpha = 0;
         background.LeanAlpha(1, 0.5f);
         box.localPosition = new Vector2(0, -Screen.height);
@@ -43,6 +45,7 @@ public class FullSettings : MonoBehaviour
 
     void OnBackComplete()
     {
+        canvasSettings.sortingOrder = 5;
         gameObject.SetActive(false);
         PauseScreen.SetActive(true);
     }

@@ -8,6 +8,7 @@ public class SaveManager : MonoBehaviour
     public static int currentCoin;
     public static int currentImmunity;
     public static int currentStage;
+    public static int isQuarantine;
     public static int gameDifficulty;
     public static int keyCount;
     public static int keyName;
@@ -144,6 +145,12 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("Quarantine", num);
     }
     
+    public static void GetQuarantine()
+    {
+        isQuarantine = PlayerPrefs.GetInt("Quarantine", 0);
+    }
+
+
     public static void SetDoorAccess(int num)
     {
         PlayerPrefs.SetInt("Door Access", num);
