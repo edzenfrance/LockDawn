@@ -1,6 +1,6 @@
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/edzenfrance/LockDawn">
     <img src="images/logo.jpg" alt="Logo" width="150" height="150">
   </a>
   <h3 align="center">LockDawn</h3>
